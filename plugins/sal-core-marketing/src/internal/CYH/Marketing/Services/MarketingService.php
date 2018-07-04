@@ -104,6 +104,7 @@ class MarketingService extends CacheableService
             session_start();
         }
         $products = json_decode($_SESSION['productsForBrand']);
+        $hideTab = '';
 
         $html = '<div id="internetOffers" class="tab-pane fade in active">
             <table class="table providers-table offers-table hidden-xs">
@@ -127,11 +128,16 @@ class MarketingService extends CacheableService
                 if($tempCounter > 0){
                      foreach($products as $prod){
                          if($prod->ServiceProviderCategory->Provider->Id != $brandId){continue;}
+                         if(in_array($prod->ServiceProviderCategory->Category->Id, [4,5])){
+                             $hideTab = 'allBrandsTab2';
+                         } else {
+                             $hideTab = 'allBrandsTab1';
+                         }
                          $html.='<tr>
                             <td><img src="'.$prod->ServiceProviderCategory->Provider->Logo.'"></td>
                          <td class="slide-cell"><span class="middle-text arrow-up">'.$prod->Name.' </span></td>
                          <td><span class="big-text"><span class="number">50</span> Mbps</span></td>
-                         <td><span class="big-text"><span class="number">'.$prod->Price .'</span></span> '.$prod->PriceDescriptionEnd.'</td>
+                         <td><span class="big-text"><span class="number">$'.$prod->Price .'</span></span> '.$prod->PriceDescriptionEnd.'</td>
                          <td class="hidden-xs hidden-sm">
                              <a href="tel:'.\CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'"
                                 onclick="ga(\'send\', \'event\', \'Call\', \'ClicktoCall - Header\');" class="btn btn-orange">'.
@@ -185,6 +191,11 @@ class MarketingService extends CacheableService
              if($tempCounter > 0) {$html.='<ul class="providers-table-slider hidden-sm hidden-md hidden-lg">';
              foreach($products as $prod){
                  if($prod->ServiceProviderCategory->Provider->Id != $brandId){continue;}
+                     if(in_array($prod->ServiceProviderCategory->Category->Id, [4,5])){
+                         $hideTab = 'allBrandsTab2';
+                     } else {
+                         $hideTab = 'allBrandsTab1';
+                     }
                      $html.='<li>
                          <table class="table providers-table tablet">
                              <thead>
@@ -222,7 +233,7 @@ class MarketingService extends CacheableService
                              </tr>
                              <tr>
                                  <td><span class="big-text"><span class="number">50</span> Mbps</span></td>
-                                 <td><span class="big-text"><span class="number">'.$prod->Price.'</span></span> '.$prod->PriceDescriptionEnd.'</td>
+                                 <td><span class="big-text"><span class="number">$'.$prod->Price.'</span></span> '.$prod->PriceDescriptionEnd.'</td>
                              </tr>
                              <tr class="btn-row">
                                  <td colspan="2">
@@ -248,7 +259,7 @@ class MarketingService extends CacheableService
                                  <th >Price From</th>
                              </tr>
                              <tr>
-                                 <td><span class="big-text"><span class="number">'.$prod->Price .'</span> '.$prod->PriceDescriptionEnd.'</span></td>
+                                 <td><span class="big-text"><span class="number">$'.$prod->Price .'</span> '.$prod->PriceDescriptionEnd.'</span></td>
                              </tr>
                              <tr class="thead-row thead-simple">
                                  <th>Max Speed</th>
@@ -272,6 +283,6 @@ class MarketingService extends CacheableService
 
         $html.='</div>';
 
-       return $html;
+       return ['html'=>$html, 'hideTab' => $hideTab];
     }
 }

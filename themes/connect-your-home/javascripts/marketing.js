@@ -155,6 +155,10 @@ $(document).on('ready', function() {
         if (brand == 'all') {
             $('#allBrandsTab').show();
             $('#oneBrandTab').hide();
+            $('#allBrandsTab1').show();
+            $('#allBrandsTab1').addClass('active');
+            $('#allBrandsTab2').removeClass('active');
+            $('#allBrandsTab2').show();
             $('.providers-table-slider').slick();
         } else {
             var data = {
@@ -166,8 +170,13 @@ $(document).on('ready', function() {
                 var response = $.parseJSON(resp);
                 if(response.result == 'success') {
                     $('#allBrandsTab').hide();
-                    document.getElementById('oneBrandTab').innerHTML = response.data;
+                    document.getElementById('oneBrandTab').innerHTML = response.data.html;
                     $('#oneBrandTab').show();
+                    $('#allBrandsTab1').show();
+                    $('#allBrandsTab2').show();
+                    $('#allBrandsTab1').addClass('active');
+                    $('#allBrandsTab2').addClass('active');
+                    $('#'+response.data.hideTab).hide();
                     $('.providers-table-slider').slick();
 
                 }

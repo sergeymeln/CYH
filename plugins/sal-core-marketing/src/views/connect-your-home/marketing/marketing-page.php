@@ -625,7 +625,7 @@
                 <div class="row">
                     <h2><?php echo ($city->SectionOneText != '') ? $city->SectionOneText : 'Looking for an Internet Bundle'?></h2>
                     <?php
-                    $secContent = str_replace("�","'", $city->SectionOne);
+                    $secContent = str_replace("{q}","'", $city->SectionOne);
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
@@ -634,13 +634,13 @@
                     </p>
                     <h2><?php echo ($city->SectionTwoText != '') ? $city->SectionTwoText : 'We recommend Spectrum Bundles. Why?'?></h2>
                     <?php
-                    $secContent = str_replace("�","'", $city->SectionTwo);
+                    $secContent = str_replace("{q}","'", $city->SectionTwo);
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
                     <h2><?php echo ($city->SectionThreeText != '') ? $city->SectionThreeText : 'Consider switching providers?'?></h2>
                     <?php
-                    $secContent = str_replace("�","'", $city->SectionThree);
+                    $secContent = str_replace("{q}","'", $city->SectionThree);
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
@@ -658,8 +658,8 @@
             <h2 id="all-available-offers">All Available Internet Offers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?></h2>
             <div class="offers-navigation">
                 <ul class="nav nav-pills tab-offers">
-                    <li class="active"><a href="#internetOffers" data-toggle="tab" class="btn btn-white">Internet</a></li>
-                    <li><a href="#internetTvOffers" data-toggle="tab" class="btn btn-white">Internet + TV</a></li>
+                    <li class="active" id="allBrandsTab1"><a href="#internetOffers" data-toggle="tab" class="btn btn-white">Internet</a></li>
+                    <li id="allBrandsTab2"><a href="#internetTvOffers" data-toggle="tab" class="btn btn-white">Internet + TV</a></li>
                     <!--<li><a href="#internetTvVoiceOffers" data-toggle="tab" class="btn btn-white">Internet + TV + Voice</a></li>-->
                 </ul>
                 <form class="form-inline">
