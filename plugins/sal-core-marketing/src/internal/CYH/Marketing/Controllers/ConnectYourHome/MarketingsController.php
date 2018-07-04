@@ -90,7 +90,6 @@ class MarketingsController extends GenericController
         $_SESSION['productsForBrand'] = json_encode($preparedData['productListSorted']);
 
         $preparedData['topProvidersData'] = $this->getTopProvidersDataFromProducts($preparedData['productList']);
-        //echo '<pre>'; print_r($preparedData['providers']);exit;
 
         $this->View('marketing/marketing-page', [
             'city' => $city,

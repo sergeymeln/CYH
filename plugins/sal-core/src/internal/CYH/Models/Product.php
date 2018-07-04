@@ -23,6 +23,7 @@ class Product extends Model
     public $Logo;
     public $HeroImage;
     public $IsActive;
+    public $DownloadSpeed;
 
     /* @var $Phone \CYH\Models\Phone */
     public $Phone;
