@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEE,mCAAgB;EACd,YAAY,EAAE,GAAG;AAGnB,gCAAa;EACX,WAAW,EAAE,IAAI;AAGnB,mCAAgB;EACd,UAAU,EAAE,GAAG;AAGjB,sBAAG;EACD,aAAa,EAAE,GAAG;AAGpB,0BAAO;EACL,aAAa,EAAE,GAAG;AAGpB,mCAAgB;EACd,OAAO,EAAE,YAAY;EACrB,KAAK,EAAE,GAAG",
+"sources": ["availabilityPrice.scss"],
+"names": [],
+"file": "availabilityPrice.css"
+}

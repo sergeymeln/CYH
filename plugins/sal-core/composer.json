@@ -1,0 +1,31 @@
+{
+  "name": "apriorit/cyh",
+  "description": "SAL Core class library",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Mykola Piatkovskyi",
+      "email": "npyat@apriorit.com"
+    }
+  ],
+  "config": {
+    "process-timeout":600,
+    "vendor-dir": "src/vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "CYH\\": "src/internal/CYH/"
+    },
+    "classmap": [
+      "src/external/classes/"
+    ]
+  },
+  "require":{
+    "phpseclib/phpseclib": "2.0.6",
+    "google/recaptcha": "~1.1",
+    "wsdltophp/packagebase" : "1.0.10",
+    "respect/validation" : "1.1.14",
+    "ramsey/uuid" : "3.7.1"
+  }
+}

@@ -1,0 +1,216 @@
+$navbar-cyh-base-color:                 #6CB33F;
+$navbar-cyh-dropdown-link-color:        #fff;
+//-----------------------------------------CYH Custom----------------------------------------------
+$navbar-cyh-color:             #777 !default;
+$navbar-cyh-bg:                transparent !default;
+$navbar-cyh-border:            darken($navbar-cyh-bg, 6.5%) !default;
+
+// Navbar links
+$navbar-cyh-link-color:                #333132 !default;
+$navbar-cyh-link-hover-color:          #333 !default;
+$navbar-cyh-link-hover-bg:             transparent !default;
+$navbar-cyh-link-active-color:         initial !default;
+$navbar-cyh-link-active-bg:            darken($navbar-cyh-bg, 6.5%) !default;
+$navbar-cyh-link-disabled-color:       #ccc !default;
+$navbar-cyh-link-disabled-bg:          transparent !default;
+
+// Navbar brand label
+$navbar-cyh-brand-color:               $navbar-cyh-link-color !default;
+$navbar-cyh-brand-hover-color:         darken($navbar-cyh-brand-color, 10%) !default;
+$navbar-cyh-brand-hover-bg:            transparent !default;
+
+// Navbar toggle
+$navbar-cyh-toggle-hover-bg:           $navbar-cyh-base-color !default;
+$navbar-cyh-toggle-icon-bar-bg:        $navbar-cyh-dropdown-link-color !default;
+$navbar-cyh-toggle-border-color:       transparent !default;
+//---------------------------------------CYH Custom End--------------------------------------------
+
+.navbar
+{
+  &.navbar-cyh{
+    @media (max-width: $grid-float-breakpoint)
+    {
+      margin-bottom: 10px;
+    }
+    margin-bottom: 0px;
+    min-height: inherit;
+
+    .dropdown{
+      .divider{
+        margin: 0;
+      }
+    }
+  }
+}
+// CYH navbar
+.navbar-cyh {
+  background-color: $navbar-cyh-bg;
+  border-color: $navbar-cyh-border;
+  @media (max-width: $grid-float-breakpoint)
+  {
+    background-color: $navbar-cyh-base-color;
+    border-color: darken($navbar-cyh-base-color, 5%);
+  }
+
+  .navbar-brand {
+    color: $navbar-cyh-brand-color;
+    &:hover,
+    &:focus {
+      color: $navbar-cyh-brand-hover-color;
+      background-color: $navbar-cyh-brand-hover-bg;
+    }
+  }
+
+  .navbar-text {
+    color: $navbar-cyh-color;
+  }
+
+  .navbar-nav {
+    > li > a {
+      @media (max-width: $grid-float-breakpoint) {
+        color: $navbar-cyh-dropdown-link-color;
+      }
+      color: $navbar-cyh-link-color;
+      font-family: gotham_boldregular;
+      border-bottom: 4px solid transparent;
+      padding: 5px 10px;
+
+      &:hover,
+      &:focus {
+        color: $navbar-cyh-link-hover-color;
+        background-color: $navbar-cyh-link-hover-bg;
+        border-bottom: 4px solid $navbar-cyh-base-color;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: $navbar-cyh-link-active-color;
+        background-color: $navbar-cyh-link-active-bg;
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: $navbar-cyh-link-disabled-color;
+        background-color: $navbar-cyh-link-disabled-bg;
+      }
+    }
+    .dropdown-menu{
+      background-color: $navbar-cyh-base-color;
+      > li > a{
+        color: $navbar-cyh-dropdown-link-color;
+        padding: 7px 30px;
+
+        &:hover,
+        &:focus {
+          background-color: darken($navbar-cyh-base-color, 5%) ;
+        }
+      }
+
+      > li
+      {
+        &.active > a{
+          background-color: darken($navbar-cyh-base-color, 5%) ;
+        }
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: $navbar-cyh-toggle-border-color;
+    &:hover,
+    &:focus {
+      background-color: darken($navbar-cyh-toggle-hover-bg, 5%);
+    }
+    .icon-bar {
+      background-color: $navbar-cyh-toggle-icon-bar-bg;
+    }
+  }
+
+  .navbar-collapse{
+    padding-left: 0px;
+    padding-right: 0px;
+    @media (max-width: $grid-float-breakpoint){
+      padding-left: inherit;
+      padding-right: inherit;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $navbar-cyh-border;
+  }
+
+  // Dropdown menu items
+  .navbar-nav {
+    // Remove background color from open dropdown
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: $navbar-cyh-link-active-bg;
+        color: $navbar-cyh-link-active-color;
+      }
+    }
+
+    @media (max-width: $grid-float-breakpoint-max) {
+      // Dropdowns get custom display when collapsed
+      .open .dropdown-menu {
+        > li > a {
+          color: $navbar-cyh-dropdown-link-color;
+          &:hover,
+          &:focus {
+            color: $navbar-cyh-link-hover-color;
+            background-color: $navbar-cyh-link-hover-bg;
+          }
+        }
+        > .active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: $navbar-cyh-link-active-color;
+            background-color: $navbar-cyh-link-active-bg;
+          }
+        }
+        > .disabled > a {
+          &,
+          &:hover,
+          &:focus {
+            color: $navbar-cyh-link-disabled-color;
+            background-color: $navbar-cyh-link-disabled-bg;
+          }
+        }
+      }
+    }
+  }
+
+
+  // Links in navbars
+  //
+  // Add a class to ensure links outside the navbar nav are colored correctly.
+
+  .navbar-link {
+    color: $navbar-cyh-link-color;
+    &:hover {
+      color: $navbar-cyh-link-hover-color;
+    }
+  }
+
+  .btn-link {
+    color: $navbar-cyh-link-color;
+    &:hover,
+    &:focus {
+      color: $navbar-cyh-link-hover-color;
+    }
+    &[disabled],
+    fieldset[disabled] & {
+      &:hover,
+      &:focus {
+        color: $navbar-cyh-link-disabled-color;
+      }
+    }
+  }
+}

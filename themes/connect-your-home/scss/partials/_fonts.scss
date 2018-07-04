@@ -1,0 +1,59 @@
+$cyhFontBasePath: '../connect-your-home/fonts/';
+@font-face {
+  font-family: "responsivenav";
+  src:url($cyhFontBasePath + "responsivenav.eot");
+  src:url($cyhFontBasePath + "responsivenav.eot?#iefix") format("embedded-opentype"),
+    url($cyhFontBasePath + "responsivenav.ttf") format("truetype"),
+    url($cyhFontBasePath + "responsivenav.woff") format("woff"),
+    url($cyhFontBasePath + "responsivenav.svg#responsivenav") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+    font-family: 'gotham_boldregular';
+    src: url($cyhFontBasePath + 'gotham-bold-webfont.eot');
+    src: url($cyhFontBasePath + 'gotham-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url($cyhFontBasePath + 'gotham-bold-webfont.woff') format('woff'),
+         url($cyhFontBasePath + 'gotham-bold-webfont.ttf') format('truetype'),
+         url($cyhFontBasePath + 'gotham-bold-webfont.svg#gotham_boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'gotham_blackregular';
+    src: url($cyhFontBasePath + 'gotham-black-webfont.eot');
+    src: url($cyhFontBasePath + 'gotham-black-webfont.eot?#iefix') format('embedded-opentype'),
+         url($cyhFontBasePath + 'gotham-black-webfont.woff2') format('woff2'),
+         url($cyhFontBasePath + 'gotham-black-webfont.woff') format('woff'),
+         url($cyhFontBasePath + 'gotham-black-webfont.ttf') format('truetype'),
+         url($cyhFontBasePath + 'gotham-black-webfont.svg#gotham_blackregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'gotham_bookregular';
+    src: url($cyhFontBasePath + 'gotham-book.eot');
+    src: url($cyhFontBasePath + 'gotham-book.eot?#iefix') format('embedded-opentype'),
+         url($cyhFontBasePath + 'gotham-book.woff') format('woff'),
+         url($cyhFontBasePath + 'gotham-book.ttf') format('truetype'),
+         url($cyhFontBasePath + 'gotham-book.svg#gotham_bookregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'gotham_bookitalic';
+    src: url($cyhFontBasePath + 'gotham-bookitalic.eot');
+    src: url($cyhFontBasePath + 'gotham-bookitalic.eot?#iefix') format('embedded-opentype'),
+         url($cyhFontBasePath + 'gotham-bookitalic.woff') format('woff'),
+         url($cyhFontBasePath + 'gotham-bookitalic.ttf') format('truetype'),
+         url($cyhFontBasePath + 'gotham-bookitalic.svg#gotham_bookitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

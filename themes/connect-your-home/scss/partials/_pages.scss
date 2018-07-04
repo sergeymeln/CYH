@@ -1,0 +1,187 @@
+/* Extra small devices (phones, less than 768px) */
+
+
+/* No media query since this is the default in Sass Bootstrap */
+
+.index-page {
+    padding-top: 4rem;
+    article {
+        padding-bottom: 4rem;
+        .entry-content{
+            h2{
+                width: 100%;
+                a{
+                    &:hover {
+                        color: #4a7b2b;
+                    }
+                }
+            }
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 1.9rem;
+            line-height: 2.6rem;
+            width: 65%;
+            float: left;
+            display: inline-block;
+            margin-bottom: 2rem;
+            a {
+                &:hover {
+                    color: darken($green, 15%);
+                    text-decoration: none;
+                }
+            }
+        }
+        header {
+            .entry-meta {
+                float: right;
+                display: inline-block;
+                .entry-date,
+                .entry-author {
+                    display: block;
+                }
+                .entry-date {
+                    font-size: 1.5rem;
+                    color: #fff;
+                    background: $green;
+                    padding: 6px 10px;
+                }
+            }
+            .post-edit-link {
+                display: block;
+            }
+        }
+    }
+    .sidebar {
+        h3 {
+            color: $dark-grey;
+            border-bottom: 2px solid $dark-grey;
+            padding-bottom: 0.8rem;
+            font-family: $bold;
+        }
+        #searchsubmit {
+            padding: 7px 20px;
+            position: relative;
+            text-transform: uppercase;
+            color: #fff;
+            border-radius: 4px;
+            border: none;
+            text-indent: -9999px;
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='475.1' height='475.1' viewBox='0 0 475.1 475.1'%3E%3Cstyle%3E.st0{fill:%23FFFFFF;}%3C/style%3E%3Cpath class='st0' d='M464.5 412.8l-97.9-97.9c23.6-34.1 35.4-72 35.4-113.9 0-27.2-5.3-53.2-15.9-78.1-10.6-24.8-24.8-46.3-42.8-64.2s-39.4-32.3-64.2-42.8C254.2 5.3 228.2 0 201 0c-27.2 0-53.2 5.3-78.1 15.8-24.8 10.6-46.2 24.9-64.2 42.9s-32.3 39.4-42.8 64.2C5.3 147.8 0 173.8 0 201c0 27.2 5.3 53.2 15.8 78.1 10.6 24.8 24.8 46.2 42.8 64.2 18 18 39.4 32.3 64.2 42.8 24.8 10.6 50.9 15.8 78.1 15.8 41.9 0 79.9-11.8 113.9-35.4l97.9 97.6c6.9 7.2 15.4 10.8 25.7 10.8 9.9 0 18.5-3.6 25.7-10.8 7.2-7.2 10.8-15.8 10.8-25.7.2-9.9-3.3-18.5-10.4-25.6zM291.4 291.4c-25 25-55.1 37.5-90.4 37.5-35.2 0-65.3-12.5-90.4-37.5-25-25-37.5-55.1-37.5-90.4 0-35.2 12.5-65.3 37.5-90.4 25-25 55.1-37.5 90.4-37.5 35.2 0 65.3 12.5 90.4 37.5 25 25 37.5 55.1 37.5 90.4 0 35.2-12.5 65.3-37.5 90.4z'/%3E%3C/svg%3E") no-repeat center center #6CB33F;
+            background-size: 43%;
+            width: 18%;
+        }
+        #s {
+            padding: 5px;
+            width: 80%;
+        }
+        .textwidget {
+            h3 {
+                margin-top: 0;
+            }
+        }
+        ul {
+            li {
+                padding-bottom: 0.3rem;
+                a {
+                    &:hover {
+                        color: darken($green, 15%);
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.results-page {
+    h1 {
+        margin-top: 9px;
+        margin-bottom: 15px;
+    }
+}
+
+.page-404 {
+    h1.entry-title {
+        color: $green;
+    }
+    .disclaimer {
+        text-align: center;
+        font-size: 11px;
+    }
+}
+
+blockquote {
+    font-family: "Times New Roman", Georgia, Serif;
+    font-size: 45px;
+    color: #6cb33f;
+    text-align: center;
+    font-style: italic;
+    position: relative;
+}
+
+blockquote:before {
+    content: "\201C";
+    position: absolute;
+    top: 0;
+    left: -41px;
+    font-family: Georgia;
+}
+
+blockquote:after {
+    content: "\201D";
+    position: absolute;
+    bottom: 0;
+    right: -12px;
+    font-family: Georgia;
+}
+
+
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width: $screen-sm-min) {
+    .contact,
+    .terms-page,
+    .channel-list {
+        position: relative;
+        margin-top: 1px;
+        .bg-left {
+            background: url(./images/bg-pattern-left.jpg) repeat-y 15px top;
+        }
+        .bg-right {
+            background: url(./images/bg-pattern-right.jpg) repeat-y -20px top;
+        }
+    }
+    .page-template-narrow-column {
+        position: relative;
+        .row.terms {
+            position: absolute;
+            right: 125px;
+            bottom: 147px;
+            width: 100%;
+            display: block;
+        }
+    }
+    .masthead .masthead-widget .btn{
+        width: 81%;
+    }
+} // MQ
+
+@media(max-width: 992px){
+    .ticker{
+        display: none;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (min-width: $screen-md-min) {
+    .masthead .masthead-widget .btn{
+        width: 12%;
+        top: 1%;
+    }
+} // screen-md-mid 
+
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width: $screen-lg-min) {}

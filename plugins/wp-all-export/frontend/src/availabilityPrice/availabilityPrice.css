@@ -1,0 +1,15 @@
+#availability-price .input.checkbox {
+  padding-left: 4px; }
+#availability-price .input.inner {
+  margin-left: 10px; }
+#availability-price .input.inner h4 {
+  margin-top: 5px; }
+#availability-price h4 {
+  margin-bottom: 5px; }
+#availability-price .input {
+  margin-bottom: 5px; }
+#availability-price .open-indicator {
+  display: inline-block;
+  width: 7px; }
+
+/*# sourceMappingURL=availabilityPrice.css.map */

@@ -1,0 +1,39 @@
+@mixin margin-generator($direction, $maxNumber, $i: 1, $className: '')
+{
+   @while $i <= $maxNumber
+   {
+      @if $className == ''{
+         .m#{$direction}#{$i*5}
+         {
+            margin-#{$direction}: ($i*5) * 1px;
+         }
+      } @else {
+         .#{$className}#{$i*5}
+         {
+            margin-#{$direction}: ($i*5) * 1px;
+         }
+      }
+
+      $i: $i + 1;
+   }
+}
+
+@mixin padding-generator($direction, $maxNumber, $i: 1, $className: '')
+{
+   @while $i <= $maxNumber
+   {
+      @if $className == ''{
+         .p#{$direction}#{$i*5}
+         {
+            padding-#{$direction}: ($i*5) * 1px;
+         }
+      } @else {
+         .#{$className}#{$i*5}
+         {
+            padding-#{$direction}: ($i*5) * 1px;
+         }
+      }
+
+      $i: $i + 1;
+   }
+}

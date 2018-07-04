@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEE,mCAAgB;EACd,YAAY,EAAE,GAAG;AAGnB,mCAAgB;EACd,UAAU,EAAE,GAAG;AAGjB,sBAAG;EACD,aAAa,EAAE,GAAG;AAGpB,0BAAO;EACL,aAAa,EAAE,GAAG",
+"sources": ["uniqueIdentifiers.scss"],
+"names": [],
+"file": "uniqueIdentifiers.css"
+}

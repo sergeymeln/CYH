@@ -1,0 +1,25 @@
+{
+  "name": "apriorit/cyh",
+  "description": "SAL Home Connection Guru class library",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Mykola Piatkovskyi",
+      "email": "npyat@apriorit.com"
+    }
+  ],
+  "config": {
+    "process-timeout":600,
+    "vendor-dir": "src/vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "CYH\\SimpleGroupPortal\\": "src/internal/CYH/SimpleGroupPortal"
+    },
+    "classmap": [
+    ]
+  },
+  "require":{
+  }
+}

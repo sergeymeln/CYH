@@ -1,0 +1,26 @@
+{
+  "name": "apriorit/cyh",
+  "description": "CYL class library",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Mykola Piatkovskyi",
+      "email": "npyat@apriorit.com"
+    }
+  ],
+  "config": {
+    "process-timeout":600,
+    "vendor-dir": "src/vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "CYH\\Marketing\\": "src/internal/CYH/Marketing/"
+    },
+    "classmap": [
+    ]
+  },
+  "require":{
+    "zendframework/zend-db": "^2.9"
+  }
+}
