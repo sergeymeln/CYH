@@ -254,6 +254,7 @@ class MarketingsController extends GenericController
         $data['internetPlansCount'] = 0;
         $data['internetSecurityCount'] = 0;
         $data['cityInternetUsers'] = round(((int)$city->Population * self::INTERNET_USERS_IN_USA)/100/1000000,1);
+        $data['bestTvValues'] = [];
         $index = 0;
         foreach($products as $prod) {
             if(in_array($prod->ServiceProviderCategory->Category->Id, [4,5])) {
@@ -301,9 +302,19 @@ class MarketingsController extends GenericController
             return $element['price'];
         }, $data['allBestValues']), SORT_ASC, $data['allBestValues']);
 
-        array_multisort(array_map(function($element) {
-            return $element['price'];
-        }, $data['bestTvValues']), SORT_ASC, $data['bestTvValues']);
+        if(count($data['bestTvValues'])> 0) {
+            array_multisort(array_map(function($element) {
+                return $element['price'];
+            }, $data['bestTvValues']), SORT_ASC, $data['bestTvValues']);
+
+            $sum=0;
+            foreach($data['bestTvValues'] as $val) {
+                $sum+= $val['price'];
+            }
+            $avg = $sum/count($data['bestTvValues']);
+            $data['bestOfferTvAvgPrice'] = '$'.round($avg,2);
+        }
+
 
         $sum=0;
         foreach($data['bestValues'] as $val) {
@@ -311,13 +322,6 @@ class MarketingsController extends GenericController
         }
         $avg = $sum/count($data['bestValues']);
         $data['bestOfferAvgPrice'] = '$'.round($avg,2);
-
-        $sum=0;
-        foreach($data['bestTvValues'] as $val) {
-            $sum+= $val['price'];
-        }
-        $avg = $sum/count($data['bestTvValues']);
-        $data['bestOfferTvAvgPrice'] = '$'.round($avg,2);
 
         $sum=0;
         foreach($data['allBestValues'] as $val) {
