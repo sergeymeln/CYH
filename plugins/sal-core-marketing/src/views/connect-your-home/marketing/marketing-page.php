@@ -1,14 +1,3 @@
-<?php
-//get_header('sal');
-//global $wp_query;
-//print_r($wp_query->virtual_page);
-?>
-
-<?php
-
-//do_action('\\' . CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::class . '::RenderMarketing');
-?>
-
 
 <section class="intro-section">
     <div class="container-fluid">
@@ -48,7 +37,7 @@
             <h2>In <?php echo $city->NormalName?> There Are offers from <?php echo count($cityData['providers']);?> providers </h2>
             <ul class="providers-slider">
                 <?php foreach ($cityData['providers'] as $provider):?>
-                    <li><a href="#"><img src="<?php echo $provider->Logo; ?>" ></a></li>
+                    <li><a target="_blank" href="<?php echo $provider->OrderUrl?>"><img src="<?php echo $provider->Logo; ?>" ></a></li>
                 <?php endforeach;?>
             </ul>
 
@@ -91,7 +80,7 @@
                         <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></span></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> Mbps</span></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
-                        <td class="hidden-xs hidden-sm"><button class="btn btn-orange">See all packages</button></td>
+                        <td class="hidden-xs hidden-sm"><a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange">See all packages</a></td>
                     </tr>
                     <tr class="hidden-md hidden-lg">
                         <td colspan="4"><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
@@ -140,8 +129,8 @@
                                 <th>Max Speed</th>
                             </tr>
                             <tr>
-                                <td><span class="big-text"><span class="number">55</span> Mbps</span></td>
-                                <td><span class="big-text"><span class="number">100</span> Mbps</span> </td>
+                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
                             </tr>
                             <tr class="btn-row">
                                 <td colspan="2"><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
@@ -173,7 +162,7 @@
                                 <th>Max Speed</th>
                             </tr>
                             <tr>
-                                <td><span class="big-text"><span class="number">100</span> Mbps</span> </td>
+                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
                             </tr>
                             <tr class="btn-row">
                                 <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
@@ -275,7 +264,7 @@
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                                 <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                                 <td class="hidden-xs hidden-sm">
                                     <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -360,7 +349,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                                         <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                                     </tr>
                                     <tr class="btn-row">
@@ -394,7 +383,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -444,7 +433,7 @@
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                                 <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                                 <td class="hidden-xs hidden-sm">
                                     <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -529,7 +518,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                                         <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                                     </tr>
                                     <tr class="btn-row">
@@ -563,7 +552,7 @@
                                     <th>Max Speed</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span> </td>
+                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
                                 </tr>
                                 <tr class="btn-row">
                                     <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -683,7 +672,7 @@
                         <tr>
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                             <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                            <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span></td>
+                            <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                             <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                             <td class="hidden-xs hidden-sm">
                                 <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -766,7 +755,7 @@
                                     <th>Price</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span></td>
+                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                                     <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                                 </tr>
                                 <tr class="btn-row">
@@ -800,7 +789,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -848,7 +837,7 @@
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                                 <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                                 <td class="hidden-xs hidden-sm"><button class="btn btn-orange"><?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?></button></td>
                             </tr>
@@ -927,7 +916,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
                                         <td><span class="big-text"><span class="number"><?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?></td>
                                     </tr>
                                     <tr class="btn-row">
@@ -961,7 +950,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 'NA';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
