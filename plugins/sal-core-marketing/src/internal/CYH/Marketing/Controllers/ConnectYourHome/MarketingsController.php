@@ -84,9 +84,12 @@ class MarketingsController extends GenericController
         if(count($productList) ==0) {
             return false;
         }
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['productsForBrand'] = null;
 
         $preparedData['productList'] = $this->filterProducts($productList);
-        //echo '<pre>'; print_r($preparedData['productList']);exit;
         $preparedData['providers'] = $this->getProvidersFromProducts($preparedData['productList']);
         $preparedData['productListSorted'] = $this->sortProducts($preparedData['productList']);
         if (session_status() == PHP_SESSION_NONE) {
@@ -95,6 +98,7 @@ class MarketingsController extends GenericController
         $_SESSION['productsForBrand'] = json_encode($preparedData['productListSorted']);
 
         $preparedData['topProvidersData'] = $this->getTopProvidersDataFromProducts($preparedData['productList']);
+        //echo '<pre>'; print_r($preparedData['topProvidersData']);exit;
 
         $city->Bullets = $this->getBulletsData($preparedData['productList'], $city);
         $this->View('marketing/marketing-page', [
@@ -178,7 +182,7 @@ class MarketingsController extends GenericController
     private function sortProducts($products)
     {
         array_multisort(array_map(function($element) {
-            return $element->ServiceProviderCategory->Provider->Rank;
+            return $element->Price;
         }, $products), SORT_ASC, $products);
 
         return $products;
@@ -203,15 +207,16 @@ class MarketingsController extends GenericController
                 if($product->ServiceProviderCategory->Provider->Id == $provider->Id) {
                     $result[$providerId]['products'][] = $product;
                     $result[$providerId]['speeds'][] = ($product->DownloadSpeed) ? $product->DownloadSpeed : 0;
+                    $result[$providerId]['spCategoryUrl'] = $product->ServiceProviderCategory->NavigationLink->LinkUrl;
                 }
             }
-            $result[$providerId]['maxSpeed'] = max($result[$providerId]['speeds']);
+            $result[$providerId]['maxSpeed'] = max($result[$providerId]['speeds'])*1000;
             $sum=0;
             foreach($result[$providerId]['speeds'] as $val) {
                 $sum+= $val;
             }
             $avg = $sum/count($result[$providerId]['speeds']);
-            $result[$providerId]['avgSpeed'] = round($avg,2);
+            $result[$providerId]['avgSpeed'] = $avg*1000;
             array_multisort(array_map(function($element) {
                 return $element->Price;
             }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
@@ -342,7 +347,7 @@ class MarketingsController extends GenericController
             $sum+= $val;
         }
         $avg = $sum/count($data['allSpeeds']);
-        $data['avgSpeeds'] = round($avg,2);
+        $data['avgSpeeds'] = $avg*1000;
 
         $sum=0;
         foreach($data['internetPrices'] as $val) {
@@ -356,7 +361,7 @@ class MarketingsController extends GenericController
             $sum+= $val;
         }
         $avg = $sum/count($data['internetSpeeds']);
-        $data['avgInternetSpeed'] = round($avg,2);
+        $data['avgInternetSpeed'] = $avg*1000;
 
         $data['bestOfferLowestPrice'] = '$'.$data['bestValues'][0]['price'];
         $data['bestOfferName'] = $data['bestValues'][0]['offer'];
@@ -364,21 +369,21 @@ class MarketingsController extends GenericController
         $data['allBestOfferLowestPrice'] = '$'.$data['allBestValues'][0]['price'];
         $data['allBestOfferName'] = $data['allBestValues'][0]['offer'];
 
-        $data['lowestInternetPrice'] = min($data['internetPrices']);
-        $data['lowestTvPrice'] = min($data['tvPrices']);
+        $data['lowestInternetPrice'] = '$'.min($data['internetPrices']);
+        $data['lowestTvPrice'] = '$'.min($data['tvPrices']);
 
         array_multisort(array_map(function($element) {
             return $element['speed'];
         }, $data['allData']), SORT_ASC, $data['allData']);
 
-        $data['bestAllSpeed'] = '$'.$data['allData'][0]['speed'];
+        $data['bestAllSpeed'] = $data['allData'][0]['speed']*1000;
         $data['bestAllOfferName'] = $data['allData'][0]['offer'];
-        $data['bestAllPrice'] = $data['allData'][0]['price'];
+        $data['bestAllPrice'] = '$'.$data['allData'][0]['price'];
 
-        $data['allInternetRangePriceMin'] = min($data['internetPrices']);
-        $data['allInternetRangePriceMax'] = max($data['internetPrices']);
-        $data['allInternetRangeSpeedMin'] = min($data['internetSpeeds']);
-        $data['allInternetRangeSpeedMax'] = max($data['internetSpeeds']);
+        $data['allInternetRangePriceMin'] = '$'.min($data['internetPrices']);
+        $data['allInternetRangePriceMax'] = '$'.max($data['internetPrices']);
+        $data['allInternetRangeSpeedMin'] = min($data['internetSpeeds'])*1000;
+        $data['allInternetRangeSpeedMax'] = max($data['internetSpeeds'])*1000;
 
         return $this->prepareBullets($data, $city->Bullets);
     }
