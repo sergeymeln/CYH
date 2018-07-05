@@ -219,7 +219,6 @@ class MarketingsController extends GenericController
             $top++;
         }
 
-        echo '<pre>'; print_r($result);exit;
         return $result;
     }
 
