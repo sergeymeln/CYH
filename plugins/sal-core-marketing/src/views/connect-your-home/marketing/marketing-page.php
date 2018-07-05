@@ -289,12 +289,10 @@
                                 <td colspan="3">
                                     <div class="hidden-content">
                                         <ul class="plan-description">
-                                            <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                            <?php $descr = explode('~~', $descr)?>
-                                            <?php  foreach ($descr as $item):?>
-                                                <?php if($item ==''){continue;}?>
-                                            <li><?php echo $item;?></li>
-                                        <?php endforeach;?>
+                                            <?php
+                                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                            do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                            ?>
                                         </ul>
                                     </div>
                                 </td>
@@ -349,12 +347,10 @@
                                         <td>
                                             <div class="hidden-content">
                                                 <ul class="plan-description">
-                                                    <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                                    <?php $descr = explode('~~', $descr)?>
-                                                    <?php  foreach ($descr as $item):?>
-                                                        <?php if($item ==''){continue;}?>
-                                                        <li><?php echo $item;?></li>
-                                                    <?php endforeach;?>
+                                                    <?php
+                                                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                                    do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                    ?>
                                                 </ul>
                                             </div>
                                         </td>
@@ -462,12 +458,10 @@
                                 <td colspan="3">
                                     <div class="hidden-content">
                                         <ul class="plan-description">
-                                            <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                            <?php $descr = explode('~~', $descr)?>
-                                            <?php  foreach ($descr as $item):?>
-                                                <?php if($item ==''){continue;}?>
-                                                <li><?php echo $item;?></li>
-                                            <?php endforeach;?>
+                                            <?php
+                                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                            do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                            ?>
                                         </ul>
                                     </div>
                                 </td>
@@ -522,12 +516,10 @@
                                         <td>
                                             <div class="hidden-content">
                                                 <ul class="plan-description">
-                                                    <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                                    <?php $descr = explode('~~', $descr)?>
-                                                    <?php  foreach ($descr as $item):?>
-                                                        <?php if($item ==''){continue;}?>
-                                                        <li><?php echo $item;?></li>
-                                                    <?php endforeach;?>
+                                                    <?php
+                                                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                                    do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                    ?>
                                                 </ul>
                                             </div>
                                         </td>
@@ -705,12 +697,10 @@
                             <td colspan="3">
                                 <div class="hidden-content">
                                     <ul class="plan-description">
-                                        <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                        <?php $descr = explode('~~', $descr)?>
-                                        <?php  foreach ($descr as $item):?>
-                                            <?php if($item ==''){continue;}?>
-                                            <li><?php echo $item;?></li>
-                                        <?php endforeach;?>
+                                        <?php
+                                        $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                        do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                        ?>
                                     </ul>
                                 </div>
                             </td>
@@ -763,12 +753,10 @@
                                     <td>
                                         <div class="hidden-content">
                                             <ul class="plan-description">
-                                                <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                                <?php $descr = explode('~~', $descr)?>
-                                                <?php  foreach ($descr as $item):?>
-                                                    <?php if($item ==''){continue;}?>
-                                                    <li><?php echo $item;?></li>
-                                                <?php endforeach;?>
+                                                <?php
+                                                $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                                do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                ?>
                                             </ul>
                                         </div>
                                     </td>
@@ -869,12 +857,10 @@
                                 <td colspan="3">
                                     <div class="hidden-content">
                                         <ul class="plan-description">
-                                            <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                            <?php $descr = explode('~~', $descr)?>
-                                            <?php  foreach ($descr as $item):?>
-                                                <?php if($item ==''){continue;}?>
-                                                <li><?php echo $item;?></li>
-                                            <?php endforeach;?>
+                                            <?php
+                                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                            do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                            ?>
                                         </ul>
                                     </div>
                                 </td>
@@ -928,12 +914,10 @@
                                         <td>
                                             <div class="hidden-content">
                                                 <ul class="plan-description">
-                                                    <?php $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description)?>
-                                                    <?php $descr = explode('~~', $descr)?>
-                                                    <?php  foreach ($descr as $item):?>
-                                                        <?php if($item ==''){continue;}?>
-                                                        <li><?php echo $item;?></li>
-                                                    <?php endforeach;?>
+                                                    <?php
+                                                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                                    do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                    ?>
                                                 </ul>
                                             </div>
                                         </td>

@@ -84,6 +84,10 @@ class MarketingsController extends GenericController
         if(count($productList) ==0) {
             return false;
         }
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['productsForBrand'] = null;
 
         $preparedData['productList'] = $this->filterProducts($productList);
         //echo '<pre>'; print_r($preparedData['productList']);exit;
@@ -364,19 +368,19 @@ class MarketingsController extends GenericController
         $data['allBestOfferLowestPrice'] = '$'.$data['allBestValues'][0]['price'];
         $data['allBestOfferName'] = $data['allBestValues'][0]['offer'];
 
-        $data['lowestInternetPrice'] = min($data['internetPrices']);
-        $data['lowestTvPrice'] = min($data['tvPrices']);
+        $data['lowestInternetPrice'] = '$'.min($data['internetPrices']);
+        $data['lowestTvPrice'] = '$'.min($data['tvPrices']);
 
         array_multisort(array_map(function($element) {
             return $element['speed'];
         }, $data['allData']), SORT_ASC, $data['allData']);
 
-        $data['bestAllSpeed'] = '$'.$data['allData'][0]['speed'];
+        $data['bestAllSpeed'] = $data['allData'][0]['speed'];
         $data['bestAllOfferName'] = $data['allData'][0]['offer'];
-        $data['bestAllPrice'] = $data['allData'][0]['price'];
+        $data['bestAllPrice'] = '$'.$data['allData'][0]['price'];
 
-        $data['allInternetRangePriceMin'] = min($data['internetPrices']);
-        $data['allInternetRangePriceMax'] = max($data['internetPrices']);
+        $data['allInternetRangePriceMin'] = '$'.min($data['internetPrices']);
+        $data['allInternetRangePriceMax'] = '$'.max($data['internetPrices']);
         $data['allInternetRangeSpeedMin'] = min($data['internetSpeeds']);
         $data['allInternetRangeSpeedMax'] = max($data['internetSpeeds']);
 
