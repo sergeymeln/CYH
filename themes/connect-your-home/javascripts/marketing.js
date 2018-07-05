@@ -1,62 +1,62 @@
 $(document).on('ready', function() {
 
-    $(".providers-slider").slick({
-        dots: false,
-        accessibility: true,
-        adaptiveHeight: true,
-        centerMode: true,
-        centerPadding: '0px',
-        arrows: true,
-        slidesToShow: 4,
-        adaptiveHeight:true,
-        mobileFirst:true,
-        slidesToScroll: 2,
-        customPaging :  getSlideAmount( '.providers-slider'),
-        responsive: [
-            {
-                breakpoint: 1020,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 2,
-                }
-            },
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 318,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    });
-    $('.providers-table-slider').slick({
-      dots: false,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      customPaging :  getSlideAmount( '.providers-table-slider'),
-    })
+  let slidersAmount = $('.providers-slider li').length;
+  let amount = slidersAmount;
 
+  if(slidersAmount > 5) {
+    amount = 5;
+  }
+
+  $(".providers-slider").slick({
+    dots: false,
+    accessibility: true,
+    adaptiveHeight: true,
+    centerMode: true,
+    centerPadding: '0px',
+    arrows: true,
+    slidesToShow: amount,
+    adaptiveHeight: true,
+    mobileFirst:true,
+    slidesToScroll: 1,
+    customPaging :  getSlideAmount( '.providers-slider'),
+    responsive: [
+      {
+        breakpoint: 1020,
+        settings: {
+          slidesToShow: amount,
+          slidesToScroll: 1
+        }
+      },
+      {
+          breakpoint: 991,
+          settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+          }
+      },
+      {
+          breakpoint: 600,
+          settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+          }
+      },
+      {
+          breakpoint: 480,
+          settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+          }
+      },
+      {
+          breakpoint: 318,
+          settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+          }
+      }
+    ]
+});
     function getSlideAmount(currentSlickElement) {
       const $slickElement = $(currentSlickElement);
       const $currentNumber = $slickElement.next('.provider-count').find('.current-slide');
@@ -69,6 +69,22 @@ $(document).on('ready', function() {
         $slideCount.text(slick.slideCount);
       });
     }
+
+    function tableSliderInit() {
+      $('.providers-table-slider').slick({
+        dots: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        customPaging :  getSlideAmount('.providers-table-slider')
+      });
+    }
+
+    function tableSliderDestroy() {
+      $('.providers-table-slider.slick-initialized').slick('unslick');
+    }
+
+    tableSliderInit();
+
 
     $(document).on('click', '.providers-table .slide-cell', function () {
         const $hiddenRow = $(this).parent().next('.hidden-row ');
@@ -84,10 +100,21 @@ $(document).on('ready', function() {
         $hiddenRow.find('td .hidden-content').slideToggle();
     });
 
+    // Tabs
     $('.tab-offers a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
         $('.providers-table-slider').slick("refresh");
+    });
+
+    $('.map-section a').on('click', function (e) {
+      let currentTab = $('.tab-offers a[href=' + e.target.hash + ']');
+
+      $('html, body').animate({
+        scrollTop: (currentTab.offset().top)
+      },500);
+      currentTab.tab('show');
+      $('.providers-table-slider').slick("refresh");
     });
 
     //AJAX to find city
@@ -151,7 +178,11 @@ $(document).on('ready', function() {
     }
 
     $('#selectBrand').on('click', function(e) {
+        let brandLoader = $(this).prev('.loader');
         let brand = $('#brandsList').val();
+
+        brandLoader.addClass('loading');
+
         if (brand == 'all') {
             $('#allBrandsTab').show();
             $('#oneBrandTab').hide();
@@ -169,6 +200,7 @@ $(document).on('ready', function() {
             postAjax(ajax_object.ajax_url, data, function(resp){
                 var response = $.parseJSON(resp);
                 if(response.result == 'success') {
+                    brandLoader.removeClass('loading');
                     $('#allBrandsTab').hide();
                     document.getElementById('oneBrandTab').innerHTML = response.data.html;
                     $('#oneBrandTab').show();
@@ -177,8 +209,8 @@ $(document).on('ready', function() {
                     $('#allBrandsTab1').addClass('active');
                     $('#allBrandsTab2').addClass('active');
                     $('#'+response.data.hideTab).hide();
-                    $('.providers-table-slider').slick();
-
+                    tableSliderDestroy();
+                    tableSliderInit();
                 }
             });
         }

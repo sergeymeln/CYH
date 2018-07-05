@@ -651,6 +651,7 @@
                     <!--<li><a href="#internetTvVoiceOffers" data-toggle="tab" class="btn btn-white">Internet + TV + Voice</a></li>-->
                 </ul>
                 <form class="form-inline">
+                    <span class="loader"></span>
                     <button type="button" class="btn btn-white" id="selectBrand">Select Brand</button>
                     <div class="form-group">
                         <label for="brandsList" class="sr-only">List of brands</label>

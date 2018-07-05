@@ -221,6 +221,24 @@ section {
   margin-left: 10px;
   padding: 14px 25px; }
 
+.error-message {
+  color: #ff0000; }
+
+.process-status {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 0px;
+  margin-top: 15px; }
+
+.loader {
+  margin-right: 15px; }
+
+.loading {
+  background: url("../images/loader.svg");
+  width: 32px;
+  height: 32px; }
+
 .breadcrumb {
   background-color: transparent; }
   .breadcrumb li a {
@@ -483,6 +501,12 @@ section {
       -webkit-transform: rotate(180deg);
               transform: rotate(180deg); }
 
+.not-found-items {
+  text-align: center; }
+
+p.not-found-items {
+  margin: 30px 0; }
+
 .offers-table tbody > tr > td {
   padding: 15px 25px; }
 
@@ -509,6 +533,13 @@ section {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between; }
+  .offers-navigation .form-inline {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
 
 .tab-offers li {
   border-radius: 3px;
@@ -582,12 +613,12 @@ section {
     line-height: 45px;
     letter-spacing: 0.4px;
     /* &:after {
-      content: '●';
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-size: 12px;
-    }*/ }
+       content: '●';
+       position: absolute;
+       left: 0;
+       top: 0;
+       font-size: 12px;
+     }*/ }
     .flex-list li a {
       font-family: "RobotoMedium";
       color: #484848;
@@ -689,7 +720,12 @@ section {
       padding-bottom: 25px;
       border-bottom: 1px solid #d7d7d7; }
       .offers-navigation .tab-offers li:last-child {
-        margin-right: 0; } }
+        margin-right: 0; }
+    .offers-navigation .loader {
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1;
+      margin-left: 15px; } }
 
 @media (max-width: 767px) {
   body {
@@ -750,7 +786,15 @@ section {
     .offers-navigation .form-inline {
       margin: 0 63px; }
       .offers-navigation .form-inline .form-group {
-        display: inline-table; }
+        display: inline-table;
+        -webkit-box-ordinal-group: 2;
+            -ms-flex-order: 1;
+                order: 1;
+        margin-top: 20px; }
+    .offers-navigation .loader {
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1; }
   .nearby-offers .offers-list-wrap {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -795,7 +839,10 @@ section {
       height: 1px;
       width: 30%;
       bottom: 0;
-      background-color: #d7d7d7; }
+      background-color: #d7d7d7;
+      margin: 0 auto;
+      left: 0;
+      right: 0; }
   .offers-navigation .form-inline {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -920,33 +967,3 @@ section {
   .nearby-offers .flex-list li a {
     font-size: 14px;
     line-height: 38px; } }
-.error-message {
-  color:red;
-}
-.process-status {
-  display: block;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 0px;
-  margin-top: 15px;
-}
-.loading {
-  background: url('../images/loader.gif');
-  width: 32px;
-  height: 32px;
-
-}
-.not-found-items {
-  text-align: center;
-}
-p.not-found-items {
-  margin: 30px 0;
-}
-
-@media (max-width: 748px) {
-  .offers-navigation .tab-offers:after {
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-  }
-}
