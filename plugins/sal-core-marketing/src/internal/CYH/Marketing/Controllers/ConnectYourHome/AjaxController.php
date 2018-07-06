@@ -2,135 +2,48 @@
 
 namespace CYH\Marketing\Controllers\ConnectYourHome;
 
-
 use CYH\Context\Base\ControllerContext;
 use CYH\Controllers\Core\GenericController;
-use CYH\Helpers\ContentDeserializeHelper;
-use CYH\Helpers\FormatHelper;
-use CYH\Helpers\HtmlHelper;
-use CYH\Models\Filters\ProductFilter;
-use CYH\Models\Filters\CategoryFilter;
-use CYH\Models\Filters\ServiceProviderFilter;
-use CYH\Models\Filters\SPCategoriesFilter;
-use CYH\Models\Filters\TopOfferFilter;
-use CYH\Models\LinkDestination;
-use CYH\Models\Product;
-use CYH\Models\ServiceProvider;
-use CYH\Sal\Services\CacheSettingsProvider;
-use CYH\Sal\Services\CategoriesService;
 use CYH\Sal\Services\ProductsService;
-use CYH\Sal\Services\SpCategoriesService;
-use CYH\Sal\Services\TopOffersService;
-use CYH\Marketing\ViewModels\CYH\AddressSearchResults;
-use CYH\Marketing\ViewModels\CYH\ResultsHeaderSection;
-use CYH\Marketing\ViewModels\CYH\ResultsTableListItem;
-use CYH\Marketing\ViewModels\HeroMsgRenderMode;
-use CYH\ViewModels\RenderMode;
-use CYH\Marketing\ViewModels\UI\AdditionalDetailsItem;
-use CYH\Marketing\ViewModels\UI\Address;
-use CYH\Marketing\ViewModels\UI\AddressSearchEmbedded;
-use CYH\Marketing\ViewModels\UI\Button;
-use CYH\Marketing\ViewModels\UI\DisclaimerItem;
-use CYH\ViewModels\UI\GridItem;
-use CYH\Marketing\ViewModels\UI\HeaderLink;
-use CYH\Marketing\ViewModels\UI\HeaderSectionItem;
-use CYH\Marketing\ViewModels\UI\HeroItem;
-use CYH\ViewModels\UI\LegalModal;
-use CYH\ViewModels\UI\ListItem;
-use CYH\Marketing\ViewModels\UI\SimpleListItem;
-use CYH\Marketing\ViewModels\UI\TableHeaderItem;
-use CYH\Marketing\ViewModels\UI\CityItem;
-
-use CYH\Marketing\Helpers\UrlHelper;
+use CYH\Sal\Services\CacheSettingsProvider;
+use CYH\Models\Filters\ProductFilter;
 use CYH\Marketing\Services\MarketingService;
+
 
 class AjaxController extends GenericController
 {
-    protected $spCategoriesService = null;
     protected $prodService = null;
-    protected $topOffersService = null;
-    protected $categoriesService = null;
-    protected $dataTransformerHelper;
     protected $marketingService = null;
-    protected $urlHelper = null;
+    const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
+    const INTERNET_CATEGORIES = [4,5];
 
     public function __construct(ControllerContext $context)
     {
         parent::__construct($context);
-        $this->spCategoriesService = new SpCategoriesService();
         $this->prodService = new ProductsService();
-        $this->topOffersService = new TopOffersService();
-        $this->categoriesService = new CategoriesService();
-        $this->urlHelper = new UrlHelper();
         $this->marketingService = new MarketingService();
     }
 
-    public function RenderMarketing()
+    public function GetBrandHtml()
     {
-        $data = $this->urlHelper->getCityFromUrl();
-        $cityData = $this->marketingService->GetCitiesData($data);
-        $city = $this->getCityFromData($cityData);
-
-        $preparedData = [];
+        $brandId = (int)$_POST['brand_id'];
+        $zip = $_POST['zip'];
 
         $productFilter = new ProductFilter();
-        $productFilter->Zip = $city->Zip;
+        $productFilter->Zip = $zip;
         $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheDisabledSettings());
-        if(count($productList) ==0) {
+        $productList = $this->filterProducts($productList);
+        $productList = $this->sortProducts($productList);
+
+        if(count($productList) == 0) {
             return false;
         }
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        $_SESSION['productsForBrand'] = null;
 
-        $preparedData['productList'] = $this->filterProducts($productList);
-        $preparedData['providers'] = $this->getProvidersFromProducts($preparedData['productList']);
-        $preparedData['productListSorted'] = $this->sortProducts($preparedData['productList']);
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        $_SESSION['productsForBrand'] = json_encode($preparedData['productListSorted']);
-        //echo '<pre>'; print_r($preparedData['productList']);exit;
-
-        $preparedData['topProvidersData'] = $this->getTopProvidersDataFromProducts($preparedData['productList']);
-
-        $city->Bullets = $this->getBulletsData($preparedData['productList'], $city);
-        $this->View('marketing/marketing-page', [
-            'city' => $city,
-            'cityData' => $preparedData
+        $this->View('marketing/one-brand', [
+            'products' => $productList,
+            'brandId' => $brandId,
+            'catIds' => self::INTERNET_CATEGORIES
         ]);
-    }
-
-    /**
-     * @param $data
-     * @return CityItem
-     */
-    private function getCityFromData($data)
-    {
-        $cityItem = new CityItem();
-        $cityItem->Name = $data['city_name'];
-        $cityItem->NormalName = $data['city_normal_name'];
-        $cityItem->Latitude = $data['latitude'];
-        $cityItem->Longitude = $data['longitude'];
-        $cityItem->StateCode = $data['state_code'];
-        $cityItem->StateName = $data['state_name'];
-        $cityItem->Population = $data['population'];
-        $cityItem->Zip = trim($data['zip_code']);
-        $cityItem->SectionOne = $data['section_one'];
-        $cityItem->SectionTwo = $data['section_two'];
-        $cityItem->SectionThree = $data['section_three'];
-        $cityItem->SectionOneText = $data['section_one_text'];
-        $cityItem->SectionTwoText = $data['section_two_text'];
-        $cityItem->SectionThreeText = $data['section_three_text'];
-        $cityItem->TagLine = str_replace(['$city', '$state'],[$cityItem->NormalName, $cityItem->StateName],$data['tag_lines_content']);
-        foreach ($data['bullets'] as $bullet) {
-            $cityItem->Bullets[] = str_replace(['$city', '$state'],[$cityItem->NormalName, $cityItem->StateCode],$bullet['content']);
-        }
-
-        $cityItem->RelatedCities = $data['related_cities'];
-
-        return $cityItem;
     }
 
     /**
@@ -139,35 +52,16 @@ class AjaxController extends GenericController
      */
     private function filterProducts($allProducts)
     {
-        $categoryIds = [4,5,7];
         $filteredProducts = [];
         if (count($allProducts) > 0) {
             foreach ($allProducts as $product) {
-                if(in_array($product->ServiceProviderCategory->Category->Id, $categoryIds)) {
+                if(in_array($product->ServiceProviderCategory->Category->Id, self::INTERNET_AND_BUNDLES_CATEGORIES)) {
                     $filteredProducts[] = $product;
                 }
             }
         }
 
         return $filteredProducts;
-    }
-
-    /**
-     * @param $products
-     * @return array
-     */
-    private function getProvidersFromProducts($products)
-    {
-        $uniqueProviderIds = [];
-        $providers = [];
-        foreach ($products as $product) {
-            if(!in_array($product->ServiceProviderCategory->Provider->Id, $uniqueProviderIds)) {
-                $providers[] = $product->ServiceProviderCategory->Provider;
-                array_push($uniqueProviderIds, $product->ServiceProviderCategory->Provider->Id);
-            }
-        }
-
-        return $providers;
     }
 
     /**
@@ -183,86 +77,18 @@ class AjaxController extends GenericController
         return $products;
     }
 
-    /**
-     * @param $products
-     * @return array
-     */
-    private function getTopProvidersDataFromProducts($products)
+    public function GetCityByZip()
     {
-        $result = [];
-        $providers = $this->getTopInternetProvidersFromProducts($products);
-        $top = 0;
-        foreach ($providers as $provider) {
-            if($top ==5) {
-                break;
-            }
-            $result[$provider->Id]['provider'] = $provider;
-            $providerId = $provider->Id;
-            foreach ($products as $product) {
-                if($product->ServiceProviderCategory->Provider->Id == $provider->Id) {
-                    $result[$providerId]['products'][] = $product;
-                    $result[$providerId]['speeds'][] = ($product->DownloadSpeed) ? $product->DownloadSpeed : 0;
-                    $result[$providerId]['spCategoryUrl'] = $product->ServiceProviderCategory->NavigationLink->LinkUrl;
-                }
-            }
-            $result[$providerId]['maxSpeed'] = max($result[$providerId]['speeds'])*1000;
-            if($result[$providerId]['maxSpeed'] == 0) {
-                $result[$providerId]['maxSpeed'] = '-';
-                $result[$providerId]['avgSpeed'] = '-';
+        if (array_key_exists('zip_code', $_POST)) {
+            $result = $this->marketingService->getCityByZip($_POST['zip_code']);
+            if(is_array($result) && count($result)> 0) {
+                $data = ['result' => 'success', 'link' => '/internet/'.strtolower($result['state_code']).'/'.$result['city_name']];
             } else {
-                $sum=0;
-                $cnt = 0;
-                foreach($result[$providerId]['speeds'] as $val) {
-                    if($val == 0) {
-                        continue;
-                    }
-                    $sum+= $val;
-                    $cnt++;
-                }
-                if($cnt > 0) {
-                    $avg = $sum/$cnt;
-                    $result[$providerId]['avgSpeed'] = $avg*1000;
-                }
+                $data = ['result' => 'failure', 'link' => ''];
             }
 
-            array_multisort(array_map(function($element) {
-                return $element->Price;
-            }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
-
-            $top++;
+            echo wp_json_encode($data);
+            wp_die();
         }
-
-        return $result;
-    }
-
-    /**
-     * @param $products
-     * @return array
-     */
-    private function getTopInternetProvidersFromProducts($products)
-    {
-        $categoryIds = [4,5];
-        $uniqueProviderIds = [];
-        $providers = [];
-        foreach ($products as $product) {
-            if(!in_array($product->ServiceProviderCategory->Provider->Id, $uniqueProviderIds) &&
-                in_array($product->ServiceProviderCategory->Category->Id, $categoryIds)
-            ) {
-                $providers[] = $product->ServiceProviderCategory->Provider;
-                array_push($uniqueProviderIds, $product->ServiceProviderCategory->Provider->Id);
-            }
-        }
-
-        return $providers;
-    }
-
-    /**
-     * @param $products
-     * @param $city
-     * @return array
-     */
-    private function getBulletsData($products, $city)
-    {
-        return $this->marketingService->getBulletsData($products, $city);
     }
 }

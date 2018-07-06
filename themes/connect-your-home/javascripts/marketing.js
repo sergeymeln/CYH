@@ -180,6 +180,8 @@ $(document).on('ready', function() {
     $('#selectBrand').on('click', function(e) {
         let brandLoader = $(this).prev('.loader');
         let brand = $('#brandsList').val();
+        let zip = $('#currentZipCode').val();
+        let hideTab = $('#brandsList option:selected').attr('data-hideTab');
 
         brandLoader.addClass('loading');
 
@@ -196,21 +198,21 @@ $(document).on('ready', function() {
         } else {
             var data = {
                 'action': 'cyh_show_brand_data',
-                'brand_id': brand
+                'brand_id': brand,
+                'zip':zip
             };
 
             postAjax(ajax_object.ajax_url, data, function(resp){
-                var response = $.parseJSON(resp);
-                if(response.result == 'success') {
+                if(resp.length > 0) {
                     brandLoader.removeClass('loading');
                     $('#allBrandsTab').hide();
-                    document.getElementById('oneBrandTab').innerHTML = response.data.html;
+                    document.getElementById('oneBrandTab').innerHTML = resp;
                     $('#oneBrandTab').show();
                     $('#allBrandsTab1').show();
                     $('#allBrandsTab2').show();
                     $('#allBrandsTab1').addClass('active');
                     $('#allBrandsTab2').addClass('active');
-                    $('#'+response.data.hideTab).hide();
+                    $('#'+hideTab).hide();
                     tableSliderDestroy();
                     tableSliderInit();
                 }

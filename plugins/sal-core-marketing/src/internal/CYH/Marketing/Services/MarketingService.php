@@ -6,11 +6,16 @@ namespace CYH\Marketing\Services;
 use CYH\Marketing\Repositories\MarketingRepository;
 use CYH\Sal\Services\Base\CacheableService;
 use CYH\Marketing\Helpers\UrlHelper;
+use CYH\Marketing\ViewModels\UI\CityItem;
 
 class MarketingService extends CacheableService
 {
     protected $marketingRepository = null;
     const INTERNET_USERS_IN_USA = 78.2;
+    const TOP_PROVIDERS_COUNT = 5;
+    const GBPS_TO_MBPS_MULTIPLIER = 1000;
+    const INTERNET_CATEGORIES = [4,5];
+    const INTERNET_TV_CATEGORIES = [7];
 
     public function __construct()
     {
@@ -34,7 +39,7 @@ class MarketingService extends CacheableService
             $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
         }
 
-        return $citiesData;
+        return $this->getCityFromData($citiesData);
 
     }
 
@@ -96,198 +101,6 @@ class MarketingService extends CacheableService
     }
 
     /**
-     * @param $cityData
-     * @return string
-     */
-    public function getBrandHtml($brandId)
-    {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        $products = json_decode($_SESSION['productsForBrand']);
-        $hideTab = '';
-
-        $html = '<div id="internetOffers" class="tab-pane fade in active">
-            <table class="table providers-table offers-table hidden-xs">
-                <thead>
-                <tr class="thead-row">
-                    <th scope="col" class="col-sm-1 col-md-2">Brand</th>
-                    <th scope="col" class="col-sm-5 col-md-4">Product Description</th>
-                    <th scope="col" class="col-sm-3 col-md-2">Speed</th>
-                    <th scope="col" class="col-sm-3 col-md-2">Price</th>
-                    <th scope="col" class="hidden-xs hidden-sm">Call to Order</th>
-                </tr>
-                </thead>
-                <tbody>';
-
-                $tempCounter = 0;
-                foreach ($products as $prod) {
-                    if($prod->ServiceProviderCategory->Provider->Id != $brandId){continue;}
-                    $tempCounter++;
-                }
-
-                if($tempCounter > 0){
-                     foreach($products as $prod){
-                         if($prod->ServiceProviderCategory->Provider->Id != $brandId){continue;}
-                         if(in_array($prod->ServiceProviderCategory->Category->Id, [4,5])){
-                             $hideTab = 'allBrandsTab2';
-                         } else {
-                             $hideTab = 'allBrandsTab1';
-                         }
-                         $html.='<tr>
-                            <td><img src="'.$prod->ServiceProviderCategory->Provider->Logo.'"></td>
-                         <td class="slide-cell"><span class="middle-text arrow-up">'.$prod->Name.' </span></td>
-                         <td><span class="big-text"><span class="number">50</span> Mbps</span></td>
-                         <td><span class="big-text"><span class="number">$'.$prod->Price .'</span></span> '.$prod->PriceDescriptionEnd.'</td>
-                         <td class="hidden-xs hidden-sm">
-                             <a href="tel:'.\CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'"
-                                onclick="ga(\'send\', \'event\', \'Call\', \'ClicktoCall - Header\');" class="btn btn-orange">'.
-                                  \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'
-                             </a>
-                         </td>
-                         </tr>
-                         <tr class="hidden-row">
-                             <td></td>
-                             <td colspan="3">
-                                 <div class="hidden-content">
-                                     <ul class="plan-description">';
-                                         $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description);
-                                         $descr = explode('~~', $descr);
-                                         foreach ($descr as $item){
-                                             if($item ==''){
-                                                 continue;
-                                             }
-
-                                             $html.='<li>'.$item.'</li>';
-                                         }
-
-                                         $html.='</ul>
-                                 </div>
-                             </td>
-                             <td></td>
-                         </tr>
-                         <tr class="hidden-md hidden-lg">
-                             <td colspan="4">
-                                 <a href="tel:'.\CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'"
-                                    onclick="ga(\'send\', \'event\', \'Call\', \'ClicktoCall - Header\');" class="btn btn-orange">'.
-                                     \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'
-                                 </a>
-                             </td>
-                         </tr>';
-                     }
-                } else {
-                    $html.='<tr>
-                        <td colspan="5">No items found</td>
-                    </tr>';
-                }
-
-                $html.='</tbody>
-            </table>';
-            $tempCounter = 0;
-            foreach ($products as $prod) {
-                if($prod->ServiceProviderCategory->Provider->Id != $brandId){continue;}
-                $tempCounter++;
-            }
-
-             if($tempCounter > 0) {$html.='<ul class="providers-table-slider hidden-sm hidden-md hidden-lg">';
-             foreach($products as $prod){
-                 if($prod->ServiceProviderCategory->Provider->Id != $brandId){continue;}
-                     if(in_array($prod->ServiceProviderCategory->Category->Id, [4,5])){
-                         $hideTab = 'allBrandsTab2';
-                     } else {
-                         $hideTab = 'allBrandsTab1';
-                     }
-                     $html.='<li>
-                         <table class="table providers-table tablet">
-                             <thead>
-                             <tr class="thead-row">
-                                 <th scope="col" class="col-xs-6">Brand</th>
-                                 <th scope="col" class="col-xs-6">Product Description</th>
-                             </tr>
-                             </thead>
-                             <tbody>
-                             <tr>
-                                 <td><img src="'.$prod->ServiceProviderCategory->Provider->Logo.'"></td>
-                                 <td class="slide-cell"><span class="middle-text arrow-up">'.$prod->Name.'</span></td>
-                             </tr>
-                             <tr class="hidden-row">
-                                 <td></td>
-                                 <td>
-                                     <div class="hidden-content">
-                                         <ul class="plan-description">';
-                                             $descr = str_replace(['{bullets}','{/bullets}'],['',''], $prod->Description);
-                                             $descr = explode('~~', $descr);
-                                             foreach ($descr as $item){
-                                                 if($item ==''){
-                                                     continue;
-                                                 }
-
-                                                 $html.='<li>'.$item.'</li>';
-                                             }
-                                        $html.='</ul>
-                                     </div>
-                                 </td>
-                             </tr>
-                             <tr class="thead-row thead-simple">
-                                 <th>Speed</th>
-                                 <th>Price</th>
-                             </tr>
-                             <tr>
-                                 <td><span class="big-text"><span class="number">50</span> Mbps</span></td>
-                                 <td><span class="big-text"><span class="number">$'.$prod->Price.'</span></span> '.$prod->PriceDescriptionEnd.'</td>
-                             </tr>
-                             <tr class="btn-row">
-                                 <td colspan="2">
-                                     <a href="tel:'.\CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'"
-                                        onclick="ga(\'send\', \'event\', \'Call\', \'ClicktoCall - Header\');" class="btn btn-orange">'.
-                                            \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'
-                                    </a>
-                                 </td>
-                             </tr>
-                             </tbody>
-                         </table>
-                         <table class="table providers-table mobile">
-                             <thead>
-                             <tr class="thead-row">
-                                 <th>Brand</th>
-                             </tr>
-                             </thead>
-                             <tbody>
-                             <tr>
-                                 <td><img src="'.$prod->ServiceProviderCategory->Provider->Logo.'"></td>
-                             </tr>
-                             <tr class="thead-row thead-simple">
-                                 <th >Price From</th>
-                             </tr>
-                             <tr>
-                                 <td><span class="big-text"><span class="number">$'.$prod->Price .'</span></span> '.$prod->PriceDescriptionEnd.'</td>
-                             </tr>
-                             <tr class="thead-row thead-simple">
-                                 <th>Max Speed</th>
-                             </tr>
-                             <tr>
-                                 <td><span class="big-text"><span class="number">100</span> Mbps</span> </td>
-                             </tr>
-                             <tr class="btn-row">
-                                 <td><a href="tel:'.\CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'"
-                                        onclick="ga(\'send\', \'event\', \'Call\', \'ClicktoCall - Header\');" class="btn btn-orange">'.
-                                            \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number).'
-                                    </a></td>
-                             </tr>
-                             </tbody>
-                         </table>
-                     </li>';}
-
-        $html.='</ul>';} else {
-                 $html.='<p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>';
-             }
-
-        $html.='</div>';
-
-       return ['html'=>$html, 'hideTab' => $hideTab];
-    }
-
-    /**
      * @param $products
      * @param $city
      * @return array
@@ -301,7 +114,7 @@ class MarketingService extends CacheableService
         $data['bestTvValues'] = [];
         $index = 0;
         foreach($products as $prod) {
-            if(in_array($prod->ServiceProviderCategory->Category->Id, [4,5])) {
+            if(in_array($prod->ServiceProviderCategory->Category->Id, self::INTERNET_CATEGORIES)) {
                 $data['internetPlansCount']++;
                 $data['internetSpeeds'][]=($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
                 $data['internetPrices'][]=$prod->Price;
@@ -321,7 +134,7 @@ class MarketingService extends CacheableService
                 $data['allBestValues'][$index]['price'] = $prod->Price;
                 $data['allBestValues'][$index]['offer'] = $prod->ServiceProviderCategory->Provider->Name;
             }
-            if(in_array($prod->ServiceProviderCategory->Category->Id, [7])) {
+            if(in_array($prod->ServiceProviderCategory->Category->Id, self::INTERNET_TV_CATEGORIES)) {
                 $data['tvPlansCount']++;
                 $data['tvSpeeds'][]=($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
                 $data['tvPrices'][]=$prod->Price;
@@ -386,7 +199,7 @@ class MarketingService extends CacheableService
             $sum+= $val;
         }
         $avg = $sum/count($data['allSpeeds']);
-        $data['avgSpeeds'] = round($avg*1000, 2);
+        $data['avgSpeeds'] = round($avg*self::GBPS_TO_MBPS_MULTIPLIER, 2);
 
         $sum=0;
         foreach($data['internetPrices'] as $val) {
@@ -400,7 +213,7 @@ class MarketingService extends CacheableService
             $sum+= $val;
         }
         $avg = $sum/count($data['internetSpeeds']);
-        $data['avgInternetSpeed'] = round($avg*1000,2);
+        $data['avgInternetSpeed'] = round($avg*self::GBPS_TO_MBPS_MULTIPLIER,2);
 
         $data['bestOfferLowestPrice'] = '$'.$data['bestValues'][0]['price'];
         $data['bestOfferName'] = $data['bestValues'][0]['offer'];
@@ -413,16 +226,19 @@ class MarketingService extends CacheableService
 
         array_multisort(array_map(function($element) {
             return $element['speed'];
-        }, $data['allData']), SORT_ASC, $data['allData']);
+        }, $data['allData']), SORT_DESC, $data['allData']);
 
-        $data['bestAllSpeed'] = $data['allData'][0]['speed']*1000;
+        $data['bestAllSpeed'] = $data['allData'][0]['speed']*self::GBPS_TO_MBPS_MULTIPLIER;
+        if($data['bestAllSpeed'] == 0) {
+            $data['bestAllSpeed'] = '-';
+        }
         $data['bestAllOfferName'] = $data['allData'][0]['offer'];
         $data['bestAllPrice'] = '$'.$data['allData'][0]['price'];
 
         $data['allInternetRangePriceMin'] = '$'.min($data['internetPrices']);
         $data['allInternetRangePriceMax'] = '$'.max($data['internetPrices']);
-        $data['allInternetRangeSpeedMin'] = min($data['internetSpeeds'])*1000;
-        $data['allInternetRangeSpeedMax'] = max($data['internetSpeeds'])*1000;
+        $data['allInternetRangeSpeedMin'] = min($data['internetSpeeds'])*self::GBPS_TO_MBPS_MULTIPLIER;
+        $data['allInternetRangeSpeedMax'] = max($data['internetSpeeds'])*self::GBPS_TO_MBPS_MULTIPLIER;
 
         return $this->prepareBullets($data, $city->Bullets);
     }
@@ -460,5 +276,108 @@ class MarketingService extends CacheableService
         }
 
         return $prepared;
+    }
+
+    /**
+     * @param $data
+     * @return CityItem
+     */
+    private function getCityFromData($data)
+    {
+        $cityItem = new CityItem();
+        $cityItem->Name = $data['city_name'];
+        $cityItem->NormalName = $data['city_normal_name'];
+        $cityItem->Latitude = $data['latitude'];
+        $cityItem->Longitude = $data['longitude'];
+        $cityItem->StateCode = $data['state_code'];
+        $cityItem->StateName = $data['state_name'];
+        $cityItem->Population = $data['population'];
+        $cityItem->Zip = trim($data['zip_code']);
+        $cityItem->SectionOne = $data['section_one'];
+        $cityItem->SectionTwo = $data['section_two'];
+        $cityItem->SectionThree = $data['section_three'];
+        $cityItem->SectionOneText = $data['section_one_text'];
+        $cityItem->SectionTwoText = $data['section_two_text'];
+        $cityItem->SectionThreeText = $data['section_three_text'];
+        $cityItem->TagLine = str_replace(['$city', '$state'],[$cityItem->NormalName, $cityItem->StateName],$data['tag_lines_content']);
+        foreach ($data['bullets'] as $bullet) {
+            $cityItem->Bullets[] = str_replace(['$city', '$state'],[$cityItem->NormalName, $cityItem->StateCode],$bullet['content']);
+        }
+
+        $cityItem->RelatedCities = $data['related_cities'];
+
+        return $cityItem;
+    }
+
+    /**
+     * @param $products
+     * @return array
+     */
+    public function getTopProvidersDataFromProducts($products)
+    {
+        $result = [];
+        $providers = $this->getTopInternetProvidersFromProducts($products);
+        $top = 0;
+        foreach ($providers as $provider) {
+            if($top ==self::TOP_PROVIDERS_COUNT) {
+                break;
+            }
+            $result[$provider->Id]['provider'] = $provider;
+            $providerId = $provider->Id;
+            foreach ($products as $product) {
+                if($product->ServiceProviderCategory->Provider->Id == $provider->Id) {
+                    $result[$providerId]['products'][] = $product;
+                    $result[$providerId]['speeds'][] = ($product->DownloadSpeed) ? $product->DownloadSpeed : 0;
+                    $result[$providerId]['spCategoryUrl'] = $product->ServiceProviderCategory->NavigationLink->LinkUrl;
+                }
+            }
+            $result[$providerId]['maxSpeed'] = max($result[$providerId]['speeds'])*self::GBPS_TO_MBPS_MULTIPLIER;
+            if($result[$providerId]['maxSpeed'] == 0) {
+                $result[$providerId]['maxSpeed'] = '-';
+                $result[$providerId]['avgSpeed'] = '-';
+            } else {
+                $sum=0;
+                $cnt = 0;
+                foreach($result[$providerId]['speeds'] as $val) {
+                    if($val == 0) {
+                        continue;
+                    }
+                    $sum+= $val;
+                    $cnt++;
+                }
+                if($cnt > 0) {
+                    $avg = $sum/$cnt;
+                    $result[$providerId]['avgSpeed'] = $avg*self::GBPS_TO_MBPS_MULTIPLIER;
+                }
+            }
+
+            array_multisort(array_map(function($element) {
+                return $element->Price;
+            }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
+
+            $top++;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param $products
+     * @return array
+     */
+    private function getTopInternetProvidersFromProducts($products)
+    {
+        $uniqueProviderIds = [];
+        $providers = [];
+        foreach ($products as $product) {
+            if(!in_array($product->ServiceProviderCategory->Provider->Id, $uniqueProviderIds) &&
+                in_array($product->ServiceProviderCategory->Category->Id, self::INTERNET_CATEGORIES)
+            ) {
+                $providers[] = $product->ServiceProviderCategory->Provider;
+                array_push($uniqueProviderIds, $product->ServiceProviderCategory->Provider->Id);
+            }
+        }
+
+        return $providers;
     }
 }

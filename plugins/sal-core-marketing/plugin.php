@@ -21,6 +21,7 @@ $context = \CYH\Context\ContextProvider::GetContext(\CYH\Marketing\Plugins\SalCo
 
 $availableClasses = [
     '\\' . \CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::class,
+    '\\' . \CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class,
 ];
 
 \CYH\Plugins\SalCore::RegisterViewDirectories(new \CYH\Models\Core\ViewDirRegistryEntry(\CYH\Marketing\Plugins\SalCoreMarketing::class, __DIR__ . '/src/views/', [CYH\Plugins\SalCore::class]));
@@ -47,38 +48,18 @@ add_action( 'gm_virtual_pages', function( $controller ) {
 
 } );
 
-add_action( 'wp_ajax_cyh_find_city', 'cyh_find_city' );
-add_action( 'wp_ajax_nopriv_cyh_find_city', 'cyh_find_city' );
-function cyh_find_city() {
-    if (array_key_exists('zip_code', $_POST)) {
-        $marketingService = new \CYH\Marketing\Services\MarketingService();
-        $result = $marketingService->getCityByZip($_POST['zip_code']);
-        if(is_array($result) && count($result)> 0) {
-            $data = ['result' => 'success', 'link' => '/internet/'.strtolower($result['state_code']).'/'.$result['city_name']];
-        } else {
-            $data = ['result' => 'failure', 'link' => ''];
-        }
+add_action( 'wp_ajax_cyh_find_city', function(){
+    do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetCityByZip' );
+} );
+add_action( 'wp_ajax_nopriv_cyh_find_city', function(){
+    do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetCityByZip' );
+} );
 
-        echo wp_json_encode($data);
-        wp_die();
-    }
-}
-
-add_action( 'wp_ajax_cyh_show_brand_data', 'cyh_show_brand_data' );
-add_action( 'wp_ajax_nopriv_cyh_show_brand_data', 'cyh_show_brand_data' );
-function cyh_show_brand_data() {
-    if (array_key_exists('brand_id', $_POST)) {
-        $brandId = (int)$_POST['brand_id'];
-        $marketingService = new \CYH\Marketing\Services\MarketingService();
-        $result = $marketingService->getBrandHtml($brandId);
-        if($result !== false) {
-            //$data = ['result' => 'success', 'data' => htmlentities($result, ENT_QUOTES)];
-            $data = ['result' => 'success', 'data' => $result];
-        } else {
-            $data = ['result' => 'failure', 'data' => null];
-        }
-
-        echo wp_json_encode($data);
-        wp_die();
-    }
-}
+add_action( 'wp_ajax_cyh_show_brand_data', function(){
+    do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetBrandHtml' );
+    wp_die();
+} );
+add_action( 'wp_ajax_nopriv_cyh_show_brand_data', function(){
+    do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetBrandHtml' );
+    wp_die();
+} );
