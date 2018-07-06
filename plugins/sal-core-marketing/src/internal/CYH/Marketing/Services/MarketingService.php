@@ -386,7 +386,7 @@ class MarketingService extends CacheableService
             $sum+= $val;
         }
         $avg = $sum/count($data['allSpeeds']);
-        $data['avgSpeeds'] = $avg*1000;
+        $data['avgSpeeds'] = round($avg*1000, 2);
 
         $sum=0;
         foreach($data['internetPrices'] as $val) {
@@ -400,7 +400,7 @@ class MarketingService extends CacheableService
             $sum+= $val;
         }
         $avg = $sum/count($data['internetSpeeds']);
-        $data['avgInternetSpeed'] = $avg*1000;
+        $data['avgInternetSpeed'] = round($avg*1000,2);
 
         $data['bestOfferLowestPrice'] = '$'.$data['bestValues'][0]['price'];
         $data['bestOfferName'] = $data['bestValues'][0]['offer'];

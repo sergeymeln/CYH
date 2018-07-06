@@ -199,10 +199,7 @@
             <h2>Quick Facts on <?php echo $city->NormalName?> Internet Services</h2>
             <div id="map" class="map">
                 <?php
-                //  $a= 40.66347;
-                //echo "[flexiblemap address=\"10 downing street london uk/\"]";
-                //  sprintf('[flexiblemap  width="100%" zoom="11" center="%s, %s" marker="-34.916721,138.828878" ]', lat, lonf)
-                echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
+                    echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
                 ?>
             </div>
             <?php $bulletsHalfCount = count($city->Bullets)/2;?>
@@ -606,8 +603,7 @@
                 <div class="row">
                     <h2><?php echo ($city->SectionOneText != '') ? $city->SectionOneText : 'Looking for an Internet Bundle'?></h2>
                     <?php
-                    $secContent = str_replace("{q}","'", $city->SectionOne);
-                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
+                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionOne);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
                     <p class="text-center">
@@ -615,14 +611,12 @@
                     </p>
                     <h2><?php echo ($city->SectionTwoText != '') ? $city->SectionTwoText : 'We recommend Spectrum Bundles. Why?'?></h2>
                     <?php
-                    $secContent = str_replace("{q}","'", $city->SectionTwo);
-                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
+                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionTwo);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
                     <h2><?php echo ($city->SectionThreeText != '') ? $city->SectionThreeText : 'Consider switching providers?'?></h2>
                     <?php
-                    $secContent = str_replace("{q}","'", $city->SectionThree);
-                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
+                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionThree);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
                     <div class="button-wrap">
