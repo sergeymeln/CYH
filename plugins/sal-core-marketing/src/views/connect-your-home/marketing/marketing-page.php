@@ -262,8 +262,8 @@
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
                                 <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                                <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
                                 <td class="hidden-xs hidden-sm">
                                     <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -349,8 +349,8 @@
                                     </tr>
                                     <tr>
                                         <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                                        <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                        <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="btn-row">
@@ -378,8 +378,8 @@
                                         <th >Price From</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                        <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
@@ -437,8 +437,8 @@
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
                                 <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                                <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
                                 <td class="hidden-xs hidden-sm">
                                     <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -524,8 +524,8 @@
                                     </tr>
                                     <tr>
                                         <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                                        <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                        <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="btn-row">
@@ -553,8 +553,8 @@
                                     <th >Price From</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                    <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                     </td>
                                 </tr>
                                 <tr class="thead-row thead-simple">
@@ -680,8 +680,8 @@
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                             <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
                             <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                            <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                        <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                            <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                        <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                             </td>
                             <td class="hidden-xs hidden-sm">
                                 <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -765,8 +765,8 @@
                                 </tr>
                                 <tr>
                                     <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                                    <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                    <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                     </td>
                                 </tr>
                                 <tr class="btn-row">
@@ -794,8 +794,8 @@
                                         <th >Price From</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                        <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
@@ -851,8 +851,8 @@
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
                                 <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                                <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
                                 <td class="hidden-xs hidden-sm"><button class="btn btn-orange"><?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?></button></td>
                             </tr>
@@ -932,8 +932,8 @@
                                     </tr>
                                     <tr>
                                         <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
-                                        <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                        <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="btn-row">
@@ -961,8 +961,8 @@
                                         <th >Price From</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><?php echo $prod->PriceDescriptionBegin; ?> <span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span> <?php echo $prod->PriceDescriptionEnd; ?></span>
+                                        <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
