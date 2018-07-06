@@ -190,6 +190,7 @@ $(document).on('ready', function() {
             $('#allBrandsTab1').addClass('active');
             $('#allBrandsTab2').removeClass('active');
             $('#allBrandsTab2').show();
+            brandLoader.removeClass('loading');
             $('.providers-table-slider').slick();
         } else {
             var data = {

@@ -54,7 +54,7 @@
 <section class="top-providers-section">
     <div class="container">
         <div class="row">
-            <h2>Top <?php echo (count($cityData['topProvidersData'] <5)) ? count($cityData['topProvidersData']) : 5?> internet providers in <?php echo $city->NormalName?> , <?php echo $city->StateCode?></h2>
+            <h2>Top <?php echo (count($cityData['topProvidersData']) <5) ? count($cityData['topProvidersData']) : 5?> internet providers in <?php echo $city->NormalName?> , <?php echo $city->StateCode?></h2>
 
 <!-- Таблица для desktop начало -->
 

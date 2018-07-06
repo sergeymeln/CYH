@@ -98,7 +98,6 @@ class MarketingsController extends GenericController
         $_SESSION['productsForBrand'] = json_encode($preparedData['productListSorted']);
 
         $preparedData['topProvidersData'] = $this->getTopProvidersDataFromProducts($preparedData['productList']);
-        //echo '<pre>'; print_r($preparedData['topProvidersData']);exit;
 
         $city->Bullets = $this->getBulletsData($preparedData['productList'], $city);
         $this->View('marketing/marketing-page', [
@@ -198,7 +197,7 @@ class MarketingsController extends GenericController
         $providers = $this->getTopInternetProvidersFromProducts($products);
         $top = 0;
         foreach ($providers as $provider) {
-            if($top ==4) {
+            if($top ==5) {
                 break;
             }
             $result[$provider->Id]['provider'] = $provider;
