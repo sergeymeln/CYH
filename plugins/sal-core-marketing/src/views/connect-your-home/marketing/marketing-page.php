@@ -907,7 +907,7 @@
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
                         <li>
-                            <table class="table providers-table table">
+                            <table class="table providers-table tablet">
                                 <thead>
                                 <tr class="thead-row">
                                     <th scope="col" class="col-xs-6">Brand</th>
