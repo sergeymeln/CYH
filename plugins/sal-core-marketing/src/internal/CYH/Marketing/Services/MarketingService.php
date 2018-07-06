@@ -260,7 +260,7 @@ class MarketingService extends CacheableService
                                  <th >Price From</th>
                              </tr>
                              <tr>
-                                 <td><span class="big-text"><span class="number">$'.$prod->Price .'</span> '.$prod->PriceDescriptionEnd.'</span></td>
+                                 <td><span class="big-text"><span class="number">$'.$prod->Price .'</span></span> '.$prod->PriceDescriptionEnd.'</td>
                              </tr>
                              <tr class="thead-row thead-simple">
                                  <th>Max Speed</th>

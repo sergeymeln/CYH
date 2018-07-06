@@ -429,6 +429,8 @@ section {
     line-height: 22px;
     font-weight: 900;
     letter-spacing: 0.9px;
+    margin-top: 5px;
+    display: inline-block;
     .number {
       font-size: 36px;
     }
@@ -1127,7 +1129,8 @@ p.not-found-items {
     font-size: 14px;
   }
   .button-wrap .btn {
-    margin: 0;
+    margin-right: 0;
+    margin-left: 0;
   }
   .nearby-offers .flex-list li a {
     font-size: 14px;
