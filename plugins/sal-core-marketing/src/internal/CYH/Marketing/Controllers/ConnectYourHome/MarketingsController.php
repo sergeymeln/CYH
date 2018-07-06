@@ -56,7 +56,6 @@ class MarketingsController extends GenericController
     protected $dataTransformerHelper;
     protected $marketingService = null;
     protected $urlHelper = null;
-    const INTERNET_USERS_IN_USA = 78.2;
 
     public function __construct(ControllerContext $context)
     {
@@ -96,6 +95,7 @@ class MarketingsController extends GenericController
             session_start();
         }
         $_SESSION['productsForBrand'] = json_encode($preparedData['productListSorted']);
+        //echo '<pre>'; print_r($preparedData['productList']);exit;
 
         $preparedData['topProvidersData'] = $this->getTopProvidersDataFromProducts($preparedData['productList']);
 
@@ -210,12 +210,25 @@ class MarketingsController extends GenericController
                 }
             }
             $result[$providerId]['maxSpeed'] = max($result[$providerId]['speeds'])*1000;
-            $sum=0;
-            foreach($result[$providerId]['speeds'] as $val) {
-                $sum+= $val;
+            if($result[$providerId]['maxSpeed'] == 0) {
+                $result[$providerId]['maxSpeed'] = '-';
+                $result[$providerId]['avgSpeed'] = '-';
+            } else {
+                $sum=0;
+                $cnt = 0;
+                foreach($result[$providerId]['speeds'] as $val) {
+                    if($val == 0) {
+                        continue;
+                    }
+                    $sum+= $val;
+                    $cnt++;
+                }
+                if($cnt > 0) {
+                    $avg = $sum/$cnt;
+                    $result[$providerId]['avgSpeed'] = $avg*1000;
+                }
             }
-            $avg = $sum/count($result[$providerId]['speeds']);
-            $result[$providerId]['avgSpeed'] = $avg*1000;
+
             array_multisort(array_map(function($element) {
                 return $element->Price;
             }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
@@ -254,171 +267,6 @@ class MarketingsController extends GenericController
      */
     private function getBulletsData($products, $city)
     {
-        $data = [];
-        $data['internetPlansCount'] = 0;
-        $data['internetSecurityCount'] = 0;
-        $data['cityInternetUsers'] = round(((int)$city->Population * self::INTERNET_USERS_IN_USA)/100/1000000,1);
-        $data['bestTvValues'] = [];
-        $index = 0;
-        foreach($products as $prod) {
-            if(in_array($prod->ServiceProviderCategory->Category->Id, [4,5])) {
-                $data['internetPlansCount']++;
-                $data['internetSpeeds'][]=($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
-                $data['internetPrices'][]=$prod->Price;
-                preg_match('/Security/i', $prod->ServiceProviderCategory->Provider->Legal, $matches);
-                if(count($matches) > 0) {
-                    $data['internetSecurityCount']++;
-                }
-                if($prod->IsBestOffer) {
-                    $data['bestValues'][$index]['price'] = $prod->Price;
-                    $data['bestValues'][$index]['offer'] = $prod->ServiceProviderCategory->Provider->Name;
-                }
-            }
-
-            $data['allSpeeds'][]=($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
-            $data['allPrices'][]=$prod->Price;
-            if($prod->IsBestOffer) {
-                $data['allBestValues'][$index]['price'] = $prod->Price;
-                $data['allBestValues'][$index]['offer'] = $prod->ServiceProviderCategory->Provider->Name;
-            }
-            if(in_array($prod->ServiceProviderCategory->Category->Id, [7])) {
-                $data['tvPlansCount']++;
-                $data['tvSpeeds'][]=($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
-                $data['tvPrices'][]=$prod->Price;
-
-                if($prod->IsBestOffer) {
-                    $data['bestTvValues'][$index]['price'] = $prod->Price;
-                    $data['bestTvValues'][$index]['offer'] = $prod->ServiceProviderCategory->Provider->Name;
-                }
-            }
-
-            $data['allData'][$index]['price'] = $prod->Price;
-            $data['allData'][$index]['speed'] = ($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
-            $data['allData'][$index]['offer'] = $prod->ServiceProviderCategory->Provider->Name;
-
-            $index++;
-        }
-        array_multisort(array_map(function($element) {
-            return $element['price'];
-        }, $data['bestValues']), SORT_ASC, $data['bestValues']);
-
-        array_multisort(array_map(function($element) {
-            return $element['price'];
-        }, $data['allBestValues']), SORT_ASC, $data['allBestValues']);
-
-        if(count($data['bestTvValues'])> 0) {
-            array_multisort(array_map(function($element) {
-                return $element['price'];
-            }, $data['bestTvValues']), SORT_ASC, $data['bestTvValues']);
-
-            $sum=0;
-            foreach($data['bestTvValues'] as $val) {
-                $sum+= $val['price'];
-            }
-            $avg = $sum/count($data['bestTvValues']);
-            $data['bestOfferTvAvgPrice'] = '$'.round($avg,2);
-        }
-
-
-        $sum=0;
-        foreach($data['bestValues'] as $val) {
-            $sum+= $val['price'];
-        }
-        $avg = $sum/count($data['bestValues']);
-        $data['bestOfferAvgPrice'] = '$'.round($avg,2);
-
-        $sum=0;
-        foreach($data['allBestValues'] as $val) {
-            $sum+= $val['price'];
-        }
-        $avg = $sum/count($data['allBestValues']);
-        $data['allBestOfferAvgPrice'] = '$'.round($avg,2);
-
-        $sum=0;
-        foreach($data['allPrices'] as $val) {
-            $sum+= $val;
-        }
-        $avg = $sum/count($data['allPrices']);
-        $data['avgPrice'] = '$'.round($avg,2);
-
-        $sum=0;
-        foreach($data['allSpeeds'] as $val) {
-            $sum+= $val;
-        }
-        $avg = $sum/count($data['allSpeeds']);
-        $data['avgSpeeds'] = $avg*1000;
-
-        $sum=0;
-        foreach($data['internetPrices'] as $val) {
-            $sum+= $val;
-        }
-        $avg = $sum/count($data['internetPrices']);
-        $data['avgInternetPrice'] = '$'.round($avg,2);
-
-        $sum=0;
-        foreach($data['internetSpeeds'] as $val) {
-            $sum+= $val;
-        }
-        $avg = $sum/count($data['internetSpeeds']);
-        $data['avgInternetSpeed'] = $avg*1000;
-
-        $data['bestOfferLowestPrice'] = '$'.$data['bestValues'][0]['price'];
-        $data['bestOfferName'] = $data['bestValues'][0]['offer'];
-
-        $data['allBestOfferLowestPrice'] = '$'.$data['allBestValues'][0]['price'];
-        $data['allBestOfferName'] = $data['allBestValues'][0]['offer'];
-
-        $data['lowestInternetPrice'] = '$'.min($data['internetPrices']);
-        $data['lowestTvPrice'] = '$'.min($data['tvPrices']);
-
-        array_multisort(array_map(function($element) {
-            return $element['speed'];
-        }, $data['allData']), SORT_ASC, $data['allData']);
-
-        $data['bestAllSpeed'] = $data['allData'][0]['speed']*1000;
-        $data['bestAllOfferName'] = $data['allData'][0]['offer'];
-        $data['bestAllPrice'] = '$'.$data['allData'][0]['price'];
-
-        $data['allInternetRangePriceMin'] = '$'.min($data['internetPrices']);
-        $data['allInternetRangePriceMax'] = '$'.max($data['internetPrices']);
-        $data['allInternetRangeSpeedMin'] = min($data['internetSpeeds'])*1000;
-        $data['allInternetRangeSpeedMax'] = max($data['internetSpeeds'])*1000;
-
-        return $this->prepareBullets($data, $city->Bullets);
-    }
-
-    /**
-     * @param $data
-     * @param $bullets
-     * @return array
-     */
-    private function prepareBullets($data, $bullets)
-    {
-        $prepared = [];
-        foreach($bullets as $bullet) {
-            preg_match_all('/{.*?}/',$bullet, $matches);
-
-            if (count($matches[0])>0 && count($matches[0]) == 1) {
-                foreach($matches[0] as $match) {
-                    $key = str_replace(['{', '}'], '', $match);
-                    if(array_key_exists($key, $data)) {
-                        $prepared[] = str_replace($match, $data[$key], $bullet);
-                    } else {
-                        $prepared[] = $bullet;
-                    }
-                }
-            } else {
-                foreach($matches[0] as $match) {
-                    $toFind = str_replace(['{', '}'], '', $match);
-                    if(array_key_exists($toFind, $data)) {
-                        $repl[] = $match;
-                        $keys[] = $data[str_replace(['{', '}'], '', $match)];
-                    }
-                }
-                $prepared[] = str_replace($repl, $keys, $bullet);
-            }
-        }
-
-        return $prepared;
+        return $this->marketingService->getBulletsData($products, $city);
     }
 }
