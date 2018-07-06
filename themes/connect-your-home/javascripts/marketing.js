@@ -191,7 +191,8 @@ $(document).on('ready', function() {
             $('#allBrandsTab2').removeClass('active');
             $('#allBrandsTab2').show();
             brandLoader.removeClass('loading');
-            $('.providers-table-slider').slick();
+            tableSliderDestroy();
+            tableSliderInit();
         } else {
             var data = {
                 'action': 'cyh_show_brand_data',
