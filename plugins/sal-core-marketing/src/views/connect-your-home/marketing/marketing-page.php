@@ -202,7 +202,7 @@
                 //  $a= 40.66347;
                 //echo "[flexiblemap address=\"10 downing street london uk/\"]";
                 //  sprintf('[flexiblemap  width="100%" zoom="11" center="%s, %s" marker="-34.916721,138.828878" ]', lat, lonf)
-                echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
+                echo do_shortcode( '[flexiblemap maptype="quickfacts" height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
                 ?>
             </div>
             <?php $bulletsHalfCount = count($city->Bullets)/2;?>
