@@ -70,7 +70,7 @@ $font-family-gotham-narrow-bold: 'GothaProNarBol';
   url($cyhFontBasePath + 'GothaProNarBol.ttf') format('truetype'),
   url($cyhFontBasePath + 'GothaProNarBol.svg#GothaProNarBol') format('svg');
 }
-body {
+section {
   font-family: $font-family-roboto-regular;
   font-size: 16px;
   line-height: 27px;
@@ -856,7 +856,7 @@ p.not-found-items {
 
 }
 @media (max-width: 767px) {
-  body {
+  section {
     font-size: 14px;
     letter-spacing: 1.2px;
   }
