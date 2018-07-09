@@ -199,6 +199,7 @@ section {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1.4px;
+  width: 50%;
 }
 .inner-text {
   text-align: center;
@@ -783,6 +784,9 @@ p.not-found-items {
 
 
 @media (max-width: 1200px) {
+  .inner-title {
+    width: 85%;
+  }
   .inner-text {
     width: 65%;
   }
@@ -798,9 +802,6 @@ p.not-found-items {
   .intro-section .inner-block {
     padding-top: 8vh;
     padding-bottom: 0vh
-  }
-  .inner-title {
-    width: 65%;
   }
   .inner-text {
     width: 75%;

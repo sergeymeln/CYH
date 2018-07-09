@@ -77,7 +77,7 @@
                 <?php if ($topCounter == 5) {break;}?>
                     <tr>
                         <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
-                        <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></span></td>
+                        <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> Mbps</span></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
                         <td class="hidden-xs hidden-sm"><a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange">See all packages</a></td>
@@ -122,7 +122,7 @@
 
                             <tr>
                                 <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                             </tr>
                             <tr class="thead-row thead-simple">
                                 <th>AVG. Speed</th>
@@ -156,7 +156,7 @@
                                 <th >Price From</th>
                             </tr>
                             <tr>
-                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                             </tr>
                             <tr class="thead-row thead-simple">
                                 <th>Max Speed</th>
