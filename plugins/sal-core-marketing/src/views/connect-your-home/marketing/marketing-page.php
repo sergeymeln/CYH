@@ -13,6 +13,7 @@
                                 <label class="sr-only" for="zipCode">Email</label>
                                 <input type="text" class="form-control zip-code" id="zipCode" placeholder="ZIP code">
                             </div>
+                            <input type="hidden" value="<?php echo $city->Zip?>" id="currentZipCode"/>
                             <button type="button" id="cyh_process_zip" class="btn btn-green">Update location</button>
                         </form>
                         <div>
@@ -56,8 +57,6 @@
         <div class="row">
             <h2>Top <?php echo (count($cityData['topProvidersData']) <5) ? count($cityData['topProvidersData']) : 5?> internet providers in <?php echo $city->NormalName?> , <?php echo $city->StateCode?></h2>
 
-<!-- Таблица для desktop начало -->
-
             <table class="table providers-table hidden-xs">
                 <thead>
                     <tr class="thead-row">
@@ -77,7 +76,7 @@
                 <?php if ($topCounter == 5) {break;}?>
                     <tr>
                         <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
-                        <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
+                        <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> Mbps</span></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
                         <td class="hidden-xs hidden-sm"><a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange">See all packages</a></td>
@@ -99,10 +98,7 @@
                 <?php endif;?>
                 </tbody>
             </table>
-<!-- Таблица для desktop конец -->
 
-<!--Таблица для Tablet и Mbile начало
-            здесь уже информация по каждому бранду идет в отдельной таблице, которая находится в <li> -->
             <?php if (count($cityData['topProvidersData']) >0):?>
             <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                 <?php $topCounter = 0;?>
@@ -122,7 +118,7 @@
 
                             <tr>
                                 <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                             </tr>
                             <tr class="thead-row thead-simple">
                                 <th>AVG. Speed</th>
@@ -141,7 +137,6 @@
 
                         </tbody>
                     </table>
-<!--//////////////////////////////////////-->
                     <table class="table providers-table mobile">
                         <thead>
                             <tr class="thead-row">
@@ -156,7 +151,7 @@
                                 <th >Price From</th>
                             </tr>
                             <tr>
-                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : 'NA'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                             </tr>
                             <tr class="thead-row thead-simple">
                                 <th>Max Speed</th>
@@ -173,13 +168,11 @@
 
                         </tbody>
                     </table>
-<!--//////////////////////////////////////-->
                 </li>
                     <?php $topCounter++;?>
                     <?php array_push($usedIds, $spCatSorted['provider']->Id);?>
                 <?php endforeach;?>
             </ul>
-<!--Таблица для Tablet и Mbile конец -->
             <p class="provider-count hidden-sm hidden-md hidden-lg">
                 <span class="current-slide green-text">3</span> of <span class="slide-count green-text"><?php echo count($cityData['providers']);?></span> providers
             </p>
@@ -199,10 +192,7 @@
             <h2>Quick Facts on <?php echo $city->NormalName?> Internet Services</h2>
             <div id="map" class="map">
                 <?php
-                //  $a= 40.66347;
-                //echo "[flexiblemap address=\"10 downing street london uk/\"]";
-                //  sprintf('[flexiblemap  width="100%" zoom="11" center="%s, %s" marker="-34.916721,138.828878" ]', lat, lonf)
-                echo do_shortcode( '[flexiblemap maptype="quickfacts" height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
+                    echo do_shortcode( '[flexiblemap maptype="quickfacts" height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
                 ?>
             </div>
             <?php $bulletsHalfCount = count($city->Bullets)/2;?>
@@ -223,7 +213,6 @@
     </div>
 </section>
 
-
 <section class="best-offers-tab-section">
     <div class="container">
         <div class="row">
@@ -236,9 +225,7 @@
 
 
             <div class="tab-content">
-<!-- Контент первого таба начало-->
                 <div id="internet" class="tab-pane fade in active">
-<!-- Таблица для desktop начало -->
                     <table class="table providers-table offers-table hidden-xs">
                         <thead>
                             <tr class="thead-row">
@@ -252,21 +239,21 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                             if(!$prod->IsBestOffer){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}?>
+                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                            <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
                                 <td class="hidden-xs hidden-sm">
                                     <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -304,12 +291,10 @@
                         <?php endif;?>
                         </tbody>
                     </table>
-<!-- Таблица для desktop конец -->
-<!--Таблица для Tablet и Mbile начало
-                                здесь уже информация по каждому бранду идет в отдельной таблице, которая находится в <li> -->
+
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                         if(!$prod->IsBestOffer){continue;}
                         $tempCounter++;
                     }
@@ -317,7 +302,7 @@
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4, 5])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
@@ -351,9 +336,9 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="btn-row">
@@ -366,7 +351,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-<!-- //////////////////////////////////////////// -->
                             <table class="table providers-table mobile">
                                 <thead>
                                     <tr class="thead-row">
@@ -382,14 +366,14 @@
                                     </tr>
                                     <tr>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -399,11 +383,9 @@
                                     </tr>
                                 </tbody>
                             </table>
-<!-- //////////////////////////////////////////// -->
                         </li>
                         <?php endforeach;?>
                     </ul>
-<!--Таблица для Tablet и Mbile конец -->
                     <p class="provider-count hidden-sm hidden-md hidden-lg">
                         <span class="current-slide green-text">3</span> of <span class="slide-count green-text"><?php echo count($cityData['providers']);?></span> providers
                     </p>
@@ -411,8 +393,6 @@
                         <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
                     <?php endif;?>
                 </div>
-<!-- Контент первого таба конец-->
-<!-- Контент второго таба начало-->
                 <div id="internetTv" class="tab-pane fade">
                     <table class="table providers-table offers-table hidden-xs">
                         <thead>
@@ -427,21 +407,21 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                             if(!$prod->IsBestOffer){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                            <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
                                 <td class="hidden-xs hidden-sm">
                                     <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -480,12 +460,10 @@
                         <?php endif;?>
                         </tbody>
                     </table>
-                    <!-- Таблица для desktop конец -->
-                    <!--Таблица для Tablet и Mbile начало
-                                                    здесь уже информация по каждому бранду идет в отдельной таблице, которая находится в <li> -->
+
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                         if(!$prod->IsBestOffer){continue;}
                         $tempCounter++;
                     }
@@ -493,7 +471,7 @@
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
@@ -526,9 +504,9 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="btn-row">
@@ -541,7 +519,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-<!-- //////////////////////////////////////////// -->
                             <table class="table providers-table mobile">
                                 <thead>
                                 <tr class="thead-row">
@@ -557,14 +534,14 @@
                                 </tr>
                                 <tr>
                                     <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                     </td>
                                 </tr>
                                 <tr class="thead-row thead-simple">
                                     <th>Max Speed</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
+                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                 </tr>
                                 <tr class="btn-row">
                                     <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -574,7 +551,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-<!-- //////////////////////////////////////////// -->
                         </li>
                         <?php endforeach;?>
                     </ul>
@@ -585,13 +561,10 @@
                         <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
                     <?php endif;?>
                 </div>
-<!-- Контент второго таба конец-->
-<!-- Контент третьего таба начало-->
                 <!--<div id="internetTvVoice" class="tab-pane fade">
                     <p>Internet + TV + Voice</p>
                 </div>-->
             </div>
-<!-- Контент третьего таба конец-->
             <div class="button-wrap">
                 <a href="#all-available-offers" class="btn btn-big btn-green btn-green-glow">See all Internet offers in <?php echo $city->NormalName?></a>
                 <a href="/auth/?groupId=1265743" target="_blank" class="btn btn-orange btn-big btn-orange-glow">Secret Deals</a>
@@ -606,8 +579,7 @@
                 <div class="row">
                     <h2><?php echo ($city->SectionOneText != '') ? $city->SectionOneText : 'Looking for an Internet Bundle'?></h2>
                     <?php
-                    $secContent = str_replace("{q}","'", $city->SectionOne);
-                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
+                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionOne);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
                     <p class="text-center">
@@ -615,14 +587,12 @@
                     </p>
                     <h2><?php echo ($city->SectionTwoText != '') ? $city->SectionTwoText : 'We recommend Spectrum Bundles. Why?'?></h2>
                     <?php
-                    $secContent = str_replace("{q}","'", $city->SectionTwo);
-                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
+                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionTwo);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
                     <h2><?php echo ($city->SectionThreeText != '') ? $city->SectionThreeText : 'Consider switching providers?'?></h2>
                     <?php
-                    $secContent = str_replace("{q}","'", $city->SectionThree);
-                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($secContent);
+                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionThree);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
                     <div class="button-wrap">
@@ -651,7 +621,7 @@
                         <select class="form-control brand-list" name="brand-list" id="brandsList">
                             <option selected value="all">All list of brands</option>
                             <?php foreach ($cityData['providers'] as $provider):?>
-                            <option value="<?php echo $provider->Id;?>"><?php echo $provider->Name;?></option>
+                            <option data-hideTab="<?php echo $provider->HideTab?>" value="<?php echo $provider->Id;?>"><?php echo $provider->Name;?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
@@ -659,9 +629,7 @@
             </div>
 
             <div class="tab-content" id="allBrandsTab">
-<!-- Контент первого таба начало-->
                 <div id="internetOffers" class="tab-pane fade in active">
-<!-- Таблица для desktop начало -->
                     <table class="table providers-table offers-table hidden-xs">
                         <thead>
                         <tr class="thead-row">
@@ -675,19 +643,19 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                         <tr>
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                             <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                            <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                            <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                        <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                        <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                             </td>
                             <td class="hidden-xs hidden-sm">
                                 <a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -726,19 +694,17 @@
                         <?php endif;?>
                         </tbody>
                     </table>
-<!-- Таблица для desktop конец -->
-<!--Таблица для Tablet и Mbile начало
-        здесь уже информация по каждому бранду идет в отдельной таблице, которая находится в <li> -->
+
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                         $tempCounter++;
                     }
                     ?>
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -770,9 +736,9 @@
                                     <th>Price</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                     <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                     </td>
                                 </tr>
                                 <tr class="btn-row">
@@ -785,7 +751,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-<!-- ////////////////////////////////////////////-->
                             <table class="table providers-table mobile">
                                 <thead>
                                     <tr class="thead-row">
@@ -801,14 +766,14 @@
                                     </tr>
                                     <tr>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -818,11 +783,9 @@
                                     </tr>
                                 </tbody>
                             </table>
-<!-- ////////////////////////////////////////////-->
                         </li>
                         <?php endforeach;?>
                     </ul>
-<!--Таблица для Tablet и Mbile конец -->
                     <p class="provider-count hidden-sm hidden-md hidden-lg">
                         <span class="current-slide green-text">3</span> of <span class="slide-count green-text"><?php echo count($cityData['providers']);?></span> providers
                     </p>
@@ -830,8 +793,7 @@
                         <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
                     <?php endif;?>
                 </div>
-<!-- Контент первого таба конец-->
-<!-- Контент второго таба начало-->
+
                 <div id="internetTvOffers" class="tab-pane fade">
                     <table class="table providers-table offers-table hidden-xs">
                         <thead>
@@ -846,19 +808,19 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                            <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                            <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
                                 <td class="hidden-xs hidden-sm"><button class="btn btn-orange"><?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?></button></td>
                             </tr>
@@ -892,12 +854,10 @@
                         <?php endif;?>
                         </tbody>
                     </table>
-                    <!-- Таблица для desktop конец -->
-                    <!--Таблица для Tablet и Mbile начало
-                            здесь уже информация по каждому бранду идет в отдельной таблице, которая находится в <li> -->
+
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                         $tempCounter++;
                     }
                     ?>
@@ -905,7 +865,7 @@
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
 
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -937,9 +897,9 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="btn-row">
@@ -952,7 +912,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-<!-- ////////////////////////////////////////////-->
                             <table class="table providers-table mobile">
                                 <thead>
                                     <tr class="thead-row">
@@ -968,14 +927,14 @@
                                     </tr>
                                     <tr>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
-                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : 'NA'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
+                                                    <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : 'NA';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -985,7 +944,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-<!-- ////////////////////////////////////////////-->
                         </li>
                         <?php endforeach;?>
                     </ul>
@@ -997,12 +955,9 @@
                         <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
                     <?php endif;?>
                 </div>
-<!-- Контент второго таба конец-->
-<!-- Контент третьего таба начало-->
                 <!--<div id="internetTvVoiceOffers" class="tab-pane fade">
                     <p>Internet + TV + Voice</p>
                 </div>-->
-<!-- Контент третьего таба конец-->
             </div>
             <div class="tab-content" id="oneBrandTab"></div>
             <div class="button-wrap">
@@ -1042,79 +997,11 @@
         </div>
     </div>
 </section>
-
-
-
-
-<script>
-    /*$('ul.tabs').each(function(){
-
-        // For each set of tabs, we want to keep track of
-        // which tab is active and its associated content
-        var $active, $content, $links = $(this).find('.link');
-        console.log($links);
-        // If the location.hash matches one of the links, use that as the active tab.
-        // If no match is found, use the first link as the initial active tab.
-        $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
-        $active.addClass('active');
-
-        $content = $($active[0].hash);
-
-        // Hide the remaining content
-        $links.not($active).each(function () {
-            $(this.hash).hide();
-        });
-
-        // Bind the click event handler
-        $(this).on('click', 'a', function(e){
-            // Make the old tab inactive.
-            $active.removeClass('active');
-            $content.hide();
-
-            // Update the variables with the new link and content
-            $active = $(this);
-            $content = $(this.hash);
-
-            // Make the tab active.
-            $active.addClass('active');
-            $content.show();
-
-            // Prevent the anchor's default click action
-            e.preventDefault();
-        });
-    });*/
-    /*function openCity(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";}
-
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";}*/
-
-
-</script>
-
-
 <!-- container -->
 <?php
 //include 'page-templates/modal-form.php';
 wp_enqueue_script('cyh-app-main');
 ?>
-
-<!--map script -->
-
-
-
-
-
-<!-- end map script-->
-
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
     var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
@@ -1134,8 +1021,3 @@ wp_enqueue_script('cyh-app-main');
 <?php wp_footer(); ?>
 </body>
 </html>
-
-
-
-
-
