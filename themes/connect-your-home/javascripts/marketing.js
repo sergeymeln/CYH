@@ -18,7 +18,7 @@ $(document).on('ready', function() {
     adaptiveHeight: true,
     mobileFirst:true,
     slidesToScroll: 1,
-    customPaging :  getSlideAmount( '.providers-slider'),
+    customPaging:  getSlideAmount('.providers-slider'),
     responsive: [
       {
         breakpoint: 1020,
@@ -58,16 +58,19 @@ $(document).on('ready', function() {
     ]
 });
     function getSlideAmount(currentSlickElement) {
-      const $slickElement = $(currentSlickElement);
-      const $currentNumber = $slickElement.next('.provider-count').find('.current-slide');
-      const $slideCount = $slickElement.next('.provider-count').find('.slide-count');
+      const $slickElementArray = $(currentSlickElement);
 
-      $slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-        let i = (currentSlide ? currentSlide : 0) + 1;
+      $slickElementArray.each(function (i) {
+        const $currentNumber = $(this).next('.provider-count').find('.current-slide');
+        const $slideCount = $(this).next('.provider-count').find('.slide-count');
 
-        $currentNumber.text(i);
-        $slideCount.text(slick.slideCount);
-      });
+        $(this).on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+          let i = (currentSlide ? currentSlide : 0) + 1;
+
+          $currentNumber.text(i);
+          $slideCount.text(slick.slideCount);
+        });
+      })
     }
 
     function tableSliderInit() {

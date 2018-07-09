@@ -192,7 +192,7 @@
             <h2>Quick Facts on <?php echo $city->NormalName?> Internet Services</h2>
             <div id="map" class="map">
                 <?php
-                    echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
+                    echo do_shortcode( '[flexiblemap maptype="quickfacts" height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
                 ?>
             </div>
             <?php $bulletsHalfCount = count($city->Bullets)/2;?>
