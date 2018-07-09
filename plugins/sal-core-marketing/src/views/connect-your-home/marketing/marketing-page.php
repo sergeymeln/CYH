@@ -239,19 +239,19 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                             if(!$prod->IsBestOffer){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}?>
+                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
@@ -294,7 +294,7 @@
 
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                         if(!$prod->IsBestOffer){continue;}
                         $tempCounter++;
                     }
@@ -302,7 +302,7 @@
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4, 5])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
@@ -336,7 +336,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
@@ -373,7 +373,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -407,19 +407,19 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                             if(!$prod->IsBestOffer){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
@@ -463,7 +463,7 @@
 
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                         if(!$prod->IsBestOffer){continue;}
                         $tempCounter++;
                     }
@@ -471,7 +471,7 @@
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
@@ -504,7 +504,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
@@ -541,7 +541,7 @@
                                     <th>Max Speed</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span> </td>
+                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                 </tr>
                                 <tr class="btn-row">
                                     <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -643,17 +643,17 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                         <tr>
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                             <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                            <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                            <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                         <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                             </td>
@@ -697,14 +697,14 @@
 
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                         $tempCounter++;
                     }
                     ?>
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[4,5])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -736,7 +736,7 @@
                                     <th>Price</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                     <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                 <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                     </td>
@@ -773,7 +773,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -808,17 +808,17 @@
                         <tbody>
                         <?php $tempCounter = 0;
                         foreach ($cityData['productListSorted'] as $prod) {
-                            if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                            if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                            <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
@@ -857,7 +857,7 @@
 
                     <?php $tempCounter = 0;
                     foreach ($cityData['productListSorted'] as $prod) {
-                        if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}
+                        if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                         $tempCounter++;
                     }
                     ?>
@@ -865,7 +865,7 @@
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
 
                         <?php foreach($cityData['productListSorted'] as $prod):?>
-                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,[7])){continue;}?>
+                        <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -897,7 +897,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
@@ -934,7 +934,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*1000 : '-';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"

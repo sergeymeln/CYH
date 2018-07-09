@@ -22,6 +22,8 @@ class MarketingsController extends GenericController
     protected $urlHelper = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
+    const INTERNET_TV_CATEGORIES = [7];
+    const GBPS_TO_MBPS_MULTIPLIER = 1000;
 
     public function __construct(ControllerContext $context)
     {
@@ -56,7 +58,12 @@ class MarketingsController extends GenericController
         $city->Bullets = $this->marketingService->getBulletsData($preparedData['productList'], $city);
         $this->View('marketing/marketing-page', [
             'city' => $city,
-            'cityData' => $preparedData
+            'cityData' => $preparedData,
+            'constants' => [
+                'internetCats' => self::INTERNET_CATEGORIES,
+                'internetAndTvCats' => self::INTERNET_TV_CATEGORIES,
+                'multiplier' => self::GBPS_TO_MBPS_MULTIPLIER
+            ]
         ]);
     }
 
