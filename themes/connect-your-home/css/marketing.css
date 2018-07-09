@@ -30,13 +30,13 @@
   src: url("../fonts/GothaProNarBol.eot");
   src: url("../fonts/GothaProNarBol.eot") format("embedded-opentype"), url("../fonts/GothaProNarBol.woff") format("woff"), url("../fonts/GothaProNarBol.ttf") format("truetype"), url("../fonts/GothaProNarBol.svg#GothaProNarBol") format("svg"); }
 
-body {
+section {
   font-family: "RobotoRegular";
   font-size: 16px;
   line-height: 27px;
   letter-spacing: 1.3px;
   color: #484848; }
-  body h2 {
+  section h2 {
     font-family: "GothaProNarBol"; }
 
 h2 {
@@ -731,7 +731,7 @@ p.not-found-items {
       margin-left: 15px; } }
 
 @media (max-width: 767px) {
-  body {
+  section {
     font-size: 14px;
     letter-spacing: 1.2px; }
   .container {
