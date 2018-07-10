@@ -77,8 +77,8 @@
                     <tr>
                         <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
                         <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
-                        <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> Mbps</span></td>
-                        <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
+                        <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> <?php echo $spCatSorted['speedUnitsAvg'];?></span></td>
+                        <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
                         <td class="hidden-xs hidden-sm"><a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange">See all packages</a></td>
                     </tr>
                     <tr class="hidden-md hidden-lg">
@@ -125,8 +125,8 @@
                                 <th>Max Speed</th>
                             </tr>
                             <tr>
-                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> Mbps</span></td>
-                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
+                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> <?php echo $spCatSorted['speedUnitsAvg'];?></span></td>
+                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
                             </tr>
                             <tr class="btn-row">
                                 <td colspan="2"><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
@@ -157,7 +157,7 @@
                                 <th>Max Speed</th>
                             </tr>
                             <tr>
-                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> Mbps</span> </td>
+                                <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
                             </tr>
                             <tr class="btn-row">
                                 <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
@@ -247,11 +247,13 @@
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                             <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
-                            <?php if(!$prod->IsBestOffer){continue;}?>
+                                <?php
+                                $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
@@ -304,6 +306,9 @@
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
+                            <?php
+                                $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            ?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -336,7 +341,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
@@ -373,7 +378,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -416,10 +421,13 @@
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                             <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
+                                <?php
+                                $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
@@ -473,6 +481,9 @@
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php if(!$prod->IsBestOffer){continue;}?>
+                            <?php
+                            $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            ?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -504,7 +515,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
@@ -541,7 +552,7 @@
                                     <th>Max Speed</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
+                                    <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span> </td>
                                 </tr>
                                 <tr class="btn-row">
                                     <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -650,10 +661,13 @@
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
+                                <?php
+                                $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                ?>
                         <tr>
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                             <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                            <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                            <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                         <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                             </td>
@@ -705,6 +719,9 @@
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
+                            <?php
+                            $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            ?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -736,7 +753,7 @@
                                     <th>Price</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                                    <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                                     <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                 <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                     </td>
@@ -773,7 +790,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -815,10 +832,13 @@
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                             <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
+                                <?php
+                                $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                 <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
-                                <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                                <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                 </td>
@@ -866,6 +886,9 @@
 
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
+                            <?php
+                            $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            ?>
                         <li>
                             <table class="table providers-table tablet">
                                 <thead>
@@ -897,7 +920,7 @@
                                         <th>Price</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span></td>
+                                        <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                                         <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                                         </td>
@@ -934,7 +957,7 @@
                                         <th>Max Speed</th>
                                     </tr>
                                     <tr>
-                                        <td><span class="big-text"><span class="number"><?php echo ($prod->DownloadSpeed) ? $prod->DownloadSpeed*$constants['multiplier'] : '-';?></span> Mbps</span> </td>
+                                        <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span> </td>
                                     </tr>
                                     <tr class="btn-row">
                                         <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"

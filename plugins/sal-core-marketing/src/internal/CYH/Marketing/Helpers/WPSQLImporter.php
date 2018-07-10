@@ -180,4 +180,31 @@ class WPSQLImporter
 
         return $founded;
     }
+
+    public function updateContent()
+    {
+        ini_set('memory_limit', -1);
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT id, section_two FROM wp_cyh_city_content", OBJECT);
+        foreach($results as $res) {
+            preg_match_all('/{great\r\n\|fabulous\|long-term}/',$res->section_two, $matches);
+
+            if (count($matches[0])>0) {
+                foreach($matches[0] as $match) {
+                    $matchRepl = str_replace("\r\n",'',$match);
+                    $matchArr = explode('|', $matchRepl);
+                    for ($i=0; $i<count($matchArr); $i++) {
+                        $matchArr[$i] = str_replace(['{', '}'], '', $matchArr[$i]);
+                    }
+                    $matchCount = count($matchArr);
+                    $text = str_replace($match, $matchArr[rand(0, $matchCount-1)], $res->section_two);
+                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_two = REPLACE(section_two, "'.$match.'", "'.$matchArr[rand(0, $matchCount-1)].'") WHERE id='.$res->id.';');
+                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_two = REPLACE(section_two, "”", """) WHERE id='.$res->id.';');
+                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_two = REPLACE(section_two, "“", """) WHERE id='.$res->id.';');
+                }
+            }
+
+        }
+        exit;
+    }
 }
