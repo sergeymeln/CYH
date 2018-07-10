@@ -247,6 +247,7 @@
                         <?php if($tempCounter > 0):?>
                         <?php foreach($cityData['productListSorted'] as $prod):?>
                             <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
+                                <?php if(!$prod->IsBestOffer){continue;}?>
                                 <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
                                 ?>
