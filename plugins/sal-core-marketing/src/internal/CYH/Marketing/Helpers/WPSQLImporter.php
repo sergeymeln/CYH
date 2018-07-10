@@ -207,4 +207,15 @@ class WPSQLImporter
         }
         exit;
     }
+
+    public function getOpenCitiesData()
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT c.city_name, c.state_code FROM wp_cyh_city c 
+        INNER JOIN wp_cyh_city_content cc ON c.id=cc.city_id WHERE cc.is_published=1", OBJECT);
+        foreach ($results as $res) {
+            echo 'https://staging.connectyourhome.com/internet/'.strtolower($res->state_code).'/'.$res->city_name.'<br>';
+        }
+        exit;
+    }
 }
