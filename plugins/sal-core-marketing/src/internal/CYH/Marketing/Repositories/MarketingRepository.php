@@ -82,7 +82,27 @@ class MarketingRepository
             WHERE c.city_name <> "'.$cityData['city_name'].'" AND cc.is_published=1 
             HAVING distance < '.$radius.'
             ORDER BY distance
-            LIMIT 0 , 6;';
+            LIMIT 0 , 10;';
+
+        $statement = $this->adapter->createStatement($sql);
+        $result = $statement->execute();
+
+        return $result;
+    }
+
+    /**
+     * @param $cityData
+     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     */
+    public function GetBiggestCitiesInState($cityData)
+    {
+        $sql = 'SELECT
+                c.* 
+            FROM wp_cyh_city c
+            INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
+            WHERE c.city_name <> "'.$cityData['city_name'].'" AND c.state_code="'.$cityData['state_code'].'" AND cc.is_published=1 
+            ORDER BY population DESC
+            LIMIT 0 , 10;';
 
         $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();

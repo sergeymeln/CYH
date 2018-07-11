@@ -37,8 +37,14 @@ class MarketingService extends CacheableService
         $zipCodes = explode('/', $citiesData['zip_code']);
         $citiesData['zip_code'] = trim($zipCodes[0]);
         $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData);
+        $biggestCities = $this->marketingRepository->GetBiggestCitiesInState($citiesData);
+
         foreach($relatedCities as $relCity) {
             $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
+        }
+
+        foreach($biggestCities as $bigCity) {
+            $citiesData['biggest_cities'][] = $this->getRelatedLinkData($bigCity);
         }
 
         return $this->getCityFromData($citiesData);
@@ -99,7 +105,7 @@ class MarketingService extends CacheableService
      */
     public function getCityDescription($cityData)
     {
-        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call $1-111-111-111 for high-speed internet service providers.';
+        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call $'.get_field('home_phone_number', 'option').' for high-speed internet service providers.';
     }
 
     /**
@@ -305,6 +311,7 @@ class MarketingService extends CacheableService
         }
 
         $cityItem->RelatedCities = $data['related_cities'];
+        $cityItem->BiggestCitiesInState = $data['biggest_cities'];
 
         return $cityItem;
     }
