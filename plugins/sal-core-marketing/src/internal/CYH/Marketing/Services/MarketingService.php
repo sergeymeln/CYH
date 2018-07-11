@@ -377,9 +377,9 @@ class MarketingService extends CacheableService
     private function getFormattedSpeed($speed) {
         if($speed >0 ) {
             if($speed < self::OVERLOAD_MBPS_NUMBER) {
-                $speed = round($speed,2).'Mbps';
+                $speed = round($speed,0).'Mbps';
             } else {
-                $speed = round($speed * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2).'Gbps';
+                $speed = round($speed * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,0).'Gbps';
             }
         } else {
             $speed = '-';
@@ -393,10 +393,10 @@ class MarketingService extends CacheableService
         $data = [];
         $data['maxSpeed'] = max($speeds);
         if($data['maxSpeed'] < self::OVERLOAD_MBPS_NUMBER) {
-            $data['maxSpeed'] = round($data['maxSpeed'],2);
+            $data['maxSpeed'] = round($data['maxSpeed'],0);
             $data['speedUnitsMax'] = 'Mbps';
         } else {
-            $data['maxSpeed'] = round($data['maxSpeed'] * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2);
+            $data['maxSpeed'] = round($data['maxSpeed'] * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,0);
             $data['speedUnitsMax'] = 'Gbps';
         }
         if($data['maxSpeed'] == 0) {
@@ -415,13 +415,13 @@ class MarketingService extends CacheableService
             }
             if($cnt > 0) {
                 $avg = $sum/$cnt;
-                $data['avgSpeed'] = round($avg,2);
+                $data['avgSpeed'] = round($avg,0);
 
                 if($avg < self::OVERLOAD_MBPS_NUMBER) {
-                    $data['avgSpeed'] = round($avg,2);
+                    $data['avgSpeed'] = round($avg,0);
                     $data['speedUnitsAvg'] = 'Mbps';
                 } else {
-                    $data['avgSpeed'] = round($avg * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2);
+                    $data['avgSpeed'] = round($avg * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,0);
                     $data['speedUnitsAvg'] = 'Gbps';
                 }
             }
