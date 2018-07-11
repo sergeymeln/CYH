@@ -16,6 +16,8 @@ class MarketingService extends CacheableService
     const GBPS_TO_MBPS_MULTIPLIER = 1000;
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
+    const OVERLOAD_MBPS_TO_GBPS_MULTIPLIER = 0.001;
+    const OVERLOAD_MBPS_NUMBER = 1024;
 
     public function __construct()
     {
@@ -199,7 +201,7 @@ class MarketingService extends CacheableService
             $sum+= $val;
         }
         $avg = $sum/count($data['allSpeeds']);
-        $data['avgSpeeds'] = round($avg*self::GBPS_TO_MBPS_MULTIPLIER, 2);
+        $data['avgSpeeds'] = $this->getFormattedSpeed($avg);
 
         $sum=0;
         foreach($data['internetPrices'] as $val) {
@@ -213,7 +215,7 @@ class MarketingService extends CacheableService
             $sum+= $val;
         }
         $avg = $sum/count($data['internetSpeeds']);
-        $data['avgInternetSpeed'] = round($avg*self::GBPS_TO_MBPS_MULTIPLIER,2);
+        $data['avgInternetSpeed'] = $this->getFormattedSpeed($avg);
 
         $data['bestOfferLowestPrice'] = '$'.$data['bestValues'][0]['price'];
         $data['bestOfferName'] = $data['bestValues'][0]['offer'];
@@ -228,17 +230,15 @@ class MarketingService extends CacheableService
             return $element['speed'];
         }, $data['allData']), SORT_DESC, $data['allData']);
 
-        $data['bestAllSpeed'] = $data['allData'][0]['speed']*self::GBPS_TO_MBPS_MULTIPLIER;
-        if($data['bestAllSpeed'] == 0) {
-            $data['bestAllSpeed'] = '-';
-        }
+        $data['bestAllSpeed'] = $this->getFormattedSpeed($data['allData'][0]['speed']);
+
         $data['bestAllOfferName'] = $data['allData'][0]['offer'];
         $data['bestAllPrice'] = '$'.$data['allData'][0]['price'];
 
         $data['allInternetRangePriceMin'] = '$'.min($data['internetPrices']);
         $data['allInternetRangePriceMax'] = '$'.max($data['internetPrices']);
-        $data['allInternetRangeSpeedMin'] = min($data['internetSpeeds'])*self::GBPS_TO_MBPS_MULTIPLIER;
-        $data['allInternetRangeSpeedMax'] = max($data['internetSpeeds'])*self::GBPS_TO_MBPS_MULTIPLIER;
+        $data['allInternetRangeSpeedMin'] = $this->getFormattedSpeed(min($data['internetSpeeds']));
+        $data['allInternetRangeSpeedMax'] = $this->getFormattedSpeed(max($data['internetSpeeds']));
 
         return $this->prepareBullets($data, $city->Bullets);
     }
@@ -331,25 +331,11 @@ class MarketingService extends CacheableService
                     $result[$providerId]['spCategoryUrl'] = $product->ServiceProviderCategory->NavigationLink->LinkUrl;
                 }
             }
-            $result[$providerId]['maxSpeed'] = max($result[$providerId]['speeds'])*self::GBPS_TO_MBPS_MULTIPLIER;
-            if($result[$providerId]['maxSpeed'] == 0) {
-                $result[$providerId]['maxSpeed'] = '-';
-                $result[$providerId]['avgSpeed'] = '-';
-            } else {
-                $sum=0;
-                $cnt = 0;
-                foreach($result[$providerId]['speeds'] as $val) {
-                    if($val == 0) {
-                        continue;
-                    }
-                    $sum+= $val;
-                    $cnt++;
-                }
-                if($cnt > 0) {
-                    $avg = $sum/$cnt;
-                    $result[$providerId]['avgSpeed'] = $avg*self::GBPS_TO_MBPS_MULTIPLIER;
-                }
-            }
+            $speedData = $this->getSpeedDataForTopProviders($result[$providerId]['speeds']);
+            $result[$providerId]['maxSpeed'] = $speedData['maxSpeed'];
+            $result[$providerId]['avgSpeed'] = $speedData['avgSpeed'];
+            $result[$providerId]['speedUnitsAvg'] = $speedData['speedUnitsAvg'];
+            $result[$providerId]['speedUnitsMax'] = $speedData['speedUnitsMax'];
 
             array_multisort(array_map(function($element) {
                 return $element->Price;
@@ -379,5 +365,61 @@ class MarketingService extends CacheableService
         }
 
         return $providers;
+    }
+
+    private function getFormattedSpeed($speed) {
+        if($speed >0 ) {
+            if($speed < self::OVERLOAD_MBPS_NUMBER) {
+                $speed = round($speed,2).'Mbps';
+            } else {
+                $speed = round($speed * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2).'Gbps';
+            }
+        } else {
+            $speed = '-';
+        }
+
+        return $speed;
+    }
+
+    private function getSpeedDataForTopProviders($speeds)
+    {
+        $data = [];
+        $data['maxSpeed'] = max($speeds);
+        if($data['maxSpeed'] < self::OVERLOAD_MBPS_NUMBER) {
+            $data['maxSpeed'] = round($data['maxSpeed'],2);
+            $data['speedUnitsMax'] = 'Mbps';
+        } else {
+            $data['maxSpeed'] = round($data['maxSpeed'] * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2);
+            $data['speedUnitsMax'] = 'Gbps';
+        }
+        if($data['maxSpeed'] == 0) {
+            $data['maxSpeed'] = '-';
+            $data['avgSpeed'] = '-';
+            $data['speedUnitsMax'] = '';
+        } else {
+            $sum=0;
+            $cnt = 0;
+            foreach($speeds as $val) {
+                if($val == 0) {
+                    continue;
+                }
+                $sum+= $val;
+                $cnt++;
+            }
+            if($cnt > 0) {
+                $avg = $sum/$cnt;
+                $data['avgSpeed'] = round($avg,2);
+
+                if($avg < self::OVERLOAD_MBPS_NUMBER) {
+                    $data['avgSpeed'] = round($avg,2);
+                    $data['speedUnitsAvg'] = 'Mbps';
+                } else {
+                    $data['avgSpeed'] = round($avg * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2);
+                    $data['speedUnitsAvg'] = 'Gbps';
+                }
+            }
+        }
+
+        return $data;
     }
 }

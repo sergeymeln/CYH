@@ -120,23 +120,6 @@ $(document).on('ready', function() {
       $('.providers-table-slider').slick("refresh");
     });
 
-    //AJAX to find city
-    function postAjax(url, data, success) {
-        var params = typeof data == 'string' ? data : Object.keys(data).map(
-            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
-        ).join('&');
-
-        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-        xhr.open('POST', url);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
-        };
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(params);
-        return xhr;
-    }
-
     $('#cyh_process_zip').on('click', function(e) {
         $('#cyh_process_status').text('').addClass('loading');
 
@@ -154,7 +137,7 @@ $(document).on('ready', function() {
             'zip_code': $('#zipCode').val()
         };
 
-        postAjax(ajax_object.ajax_url, data, function(resp){
+        $.post(ajax_object.ajax_url, data, function(resp){
             var response = $.parseJSON(resp);
             if(response.result == 'success') {
                 window.location.href=response.link;
@@ -205,7 +188,7 @@ $(document).on('ready', function() {
                 'zip':zip
             };
 
-            postAjax(ajax_object.ajax_url, data, function(resp){
+            $.post(ajax_object.ajax_url, data, function(resp){
                 if(resp.length > 0) {
                     brandLoader.removeClass('loading');
                     $('#allBrandsTab').hide();

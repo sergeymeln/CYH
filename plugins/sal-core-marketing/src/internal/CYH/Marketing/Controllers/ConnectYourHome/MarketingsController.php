@@ -23,7 +23,6 @@ class MarketingsController extends GenericController
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
-    const GBPS_TO_MBPS_MULTIPLIER = 1000;
 
     public function __construct(ControllerContext $context)
     {
@@ -61,8 +60,7 @@ class MarketingsController extends GenericController
             'cityData' => $preparedData,
             'constants' => [
                 'internetCats' => self::INTERNET_CATEGORIES,
-                'internetAndTvCats' => self::INTERNET_TV_CATEGORIES,
-                'multiplier' => self::GBPS_TO_MBPS_MULTIPLIER
+                'internetAndTvCats' => self::INTERNET_TV_CATEGORIES
             ]
         ]);
     }
