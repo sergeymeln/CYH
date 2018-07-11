@@ -1024,7 +1024,7 @@
 <section class="nearby-offers">
     <div class="container">
         <div class="row">
-            <h2>See Internet Offers in biggest 10 cities in <?php echo $city->StateName?> state</h2>
+            <h2>See Internet Offers in 10 biggest cities in <?php echo $city->StateName?> state</h2>
             <?php if(count($city->BiggestCitiesInState) > 0):?>
                 <div class="offers-list-wrap">
                     <?php $bigCitiesHalfCount = count($city->BiggestCitiesInState)/2;?>
