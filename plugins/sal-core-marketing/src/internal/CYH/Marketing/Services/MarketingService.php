@@ -37,8 +37,14 @@ class MarketingService extends CacheableService
         $zipCodes = explode('/', $citiesData['zip_code']);
         $citiesData['zip_code'] = trim($zipCodes[0]);
         $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData);
+        $biggestCities = $this->marketingRepository->GetBiggestCitiesInState($citiesData);
+
         foreach($relatedCities as $relCity) {
             $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
+        }
+
+        foreach($biggestCities as $bigCity) {
+            $citiesData['biggest_cities'][] = $this->getRelatedLinkData($bigCity);
         }
 
         return $this->getCityFromData($citiesData);
@@ -99,7 +105,7 @@ class MarketingService extends CacheableService
      */
     public function getCityDescription($cityData)
     {
-        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call $1-111-111-111 for high-speed internet service providers.';
+        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call $'.get_field('home_phone_number', 'option').' for high-speed internet service providers.';
     }
 
     /**
@@ -305,6 +311,7 @@ class MarketingService extends CacheableService
         }
 
         $cityItem->RelatedCities = $data['related_cities'];
+        $cityItem->BiggestCitiesInState = $data['biggest_cities'];
 
         return $cityItem;
     }
@@ -370,9 +377,9 @@ class MarketingService extends CacheableService
     private function getFormattedSpeed($speed) {
         if($speed >0 ) {
             if($speed < self::OVERLOAD_MBPS_NUMBER) {
-                $speed = round($speed,2).'Mbps';
+                $speed = round($speed,0).'Mbps';
             } else {
-                $speed = round($speed * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2).'Gbps';
+                $speed = round($speed * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,0).'Gbps';
             }
         } else {
             $speed = '-';
@@ -386,10 +393,10 @@ class MarketingService extends CacheableService
         $data = [];
         $data['maxSpeed'] = max($speeds);
         if($data['maxSpeed'] < self::OVERLOAD_MBPS_NUMBER) {
-            $data['maxSpeed'] = round($data['maxSpeed'],2);
+            $data['maxSpeed'] = round($data['maxSpeed'],0);
             $data['speedUnitsMax'] = 'Mbps';
         } else {
-            $data['maxSpeed'] = round($data['maxSpeed'] * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2);
+            $data['maxSpeed'] = round($data['maxSpeed'] * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,0);
             $data['speedUnitsMax'] = 'Gbps';
         }
         if($data['maxSpeed'] == 0) {
@@ -408,13 +415,13 @@ class MarketingService extends CacheableService
             }
             if($cnt > 0) {
                 $avg = $sum/$cnt;
-                $data['avgSpeed'] = round($avg,2);
+                $data['avgSpeed'] = round($avg,0);
 
                 if($avg < self::OVERLOAD_MBPS_NUMBER) {
-                    $data['avgSpeed'] = round($avg,2);
+                    $data['avgSpeed'] = round($avg,0);
                     $data['speedUnitsAvg'] = 'Mbps';
                 } else {
-                    $data['avgSpeed'] = round($avg * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,2);
+                    $data['avgSpeed'] = round($avg * self::OVERLOAD_MBPS_TO_GBPS_MULTIPLIER,0);
                     $data['speedUnitsAvg'] = 'Gbps';
                 }
             }

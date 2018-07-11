@@ -26,6 +26,7 @@ class CityItem
     public $TagLine;
     public $Bullets;
     public $RelatedCities;
+    public $BiggestCitiesInState;
 
     public function __construct()
     {

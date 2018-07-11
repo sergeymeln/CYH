@@ -218,4 +218,27 @@ class WPSQLImporter
         }
         exit;
     }
+
+    public function openCities()
+    {
+
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT c.id, c.city_name, c.state_code FROM wp_cyh_city c 
+        INNER JOIN wp_cyh_city_content cc ON c.id=cc.city_id WHERE section_two_text <> ''", OBJECT);
+        $ids = [];
+        foreach ($results as $res) {
+            $ids[] = $res->id;
+        }
+        $impl = implode(',', $ids);
+
+        $results = $wpdb->get_results("SELECT id, city_normal_name, population FROM `wp_cyh_city` WHERE id NOT IN(".$impl.") ORDER BY population DESC LIMIT 1000", OBJECT);
+
+        foreach ($results as $res) {
+            $ids[] = $res->id;
+        }
+        $impl = implode(',', $ids);
+        $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET is_published = 1 WHERE city_id IN('.$impl.');');
+
+        exit;
+    }
 }
