@@ -645,9 +645,6 @@ p.not-found-items {
   .information-section .button-wrap {
     margin-top: 65px; }
 
-.nearby-offers {
-  margin-bottom: 65px; }
-
 .nearby-offers-list li {
   line-height: 1; }
   .nearby-offers-list li:after {
@@ -662,6 +659,9 @@ p.not-found-items {
     border-bottom: 1px solid #12adea; }
   .nearby-offers-list li:after {
     font-size: 12px; }
+
+footer {
+  margin-top: 65px; }
 
 @media (min-width: 768px) {
   .container {
