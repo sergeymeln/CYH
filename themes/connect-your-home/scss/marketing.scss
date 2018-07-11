@@ -735,9 +735,6 @@ p.not-found-items {
     margin-top: 65px;
   }
 }
-.nearby-offers {
-  margin-bottom: 65px;
-}
 .nearby-offers-list {
   li {
     line-height: 1;
@@ -757,6 +754,9 @@ p.not-found-items {
       font-size: 12px;
     }
   }
+}
+footer {
+  margin-top: 65px;
 }
 
 @media (min-width: 768px){
