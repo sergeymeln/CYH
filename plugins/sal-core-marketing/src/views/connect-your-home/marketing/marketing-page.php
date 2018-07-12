@@ -1077,11 +1077,11 @@
         </div>
     </div>
 </section>
+<?php if(count($city->BiggestCitiesInState) > 0):?>
 <section class="nearby-offers">
     <div class="container">
         <div class="row">
             <h2>See Internet Offers in 10 biggest cities in <?php echo $city->StateName?> state</h2>
-            <?php if(count($city->BiggestCitiesInState) > 0):?>
                 <div class="offers-list-wrap">
                     <?php $bigCitiesHalfCount = count($city->BiggestCitiesInState)/2;?>
                     <?php $counter = 0?>
@@ -1100,14 +1100,10 @@
                         <?php endforeach;?>
                     </ul>
                 </div>
-            <?php else:?>
-                <div class="offers-list-wrap">
-                    <span>No items found</span>
-                </div>
-            <?php endif;?>
         </div>
     </div>
 </section>
+<?php endif;?>
 <!-- container -->
 <?php
 //include 'page-templates/modal-form.php';
