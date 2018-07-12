@@ -19,6 +19,8 @@ class MarketingRepository
         'password' => DB_PASSWORD
     );
 
+    const CITIES_IN = ['City', 'Town', 'Township', 'Village'];
+
     public function __construct()
     {
         $this->adapter = new Adapter($this->config);
@@ -37,6 +39,7 @@ class MarketingRepository
         $select->join(array("cc" => CYH_TABLE_PREFIX."cyh_city_content"), CYH_TABLE_PREFIX."cyh_city.id=cc.city_id");
         $select->join(array("tl" => CYH_TABLE_PREFIX."cyh_tag_lines"), "cc.tag_lines_id=tl.id");
         $select->where(array('state_short_name' => $data['state_short_name'], 'city_name' => $data['city_name']));
+        $select->where->in('city_type', self::CITIES_IN);
         $statement = $sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
 
@@ -79,7 +82,7 @@ class MarketingRepository
             ) AS distance
             FROM wp_cyh_city c
             INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
-            WHERE c.city_name <> "'.$cityData['city_name'].'" AND cc.is_published=1 
+            WHERE c.city_name <> "'.$cityData['city_name'].'" AND cc.is_published=1 AND c.city_type IN('.implode(',', $this->getConvertedArray()).')
             HAVING distance < '.$radius.'
             ORDER BY distance
             LIMIT 0 , 10;';
@@ -100,7 +103,7 @@ class MarketingRepository
                 c.* 
             FROM wp_cyh_city c
             INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
-            WHERE c.city_name <> "'.$cityData['city_name'].'" AND c.state_code="'.$cityData['state_code'].'" AND cc.is_published=1 
+            WHERE c.city_name <> "'.$cityData['city_name'].'" AND c.state_code="'.$cityData['state_code'].'" AND cc.is_published=1 AND c.city_type IN('.implode(',', $this->getConvertedArray()).')
             ORDER BY population DESC
             LIMIT 0 , 10;';
 
@@ -122,6 +125,7 @@ class MarketingRepository
         $select->join(array("s" => CYH_TABLE_PREFIX."cyh_state"), "s.id=".CYH_TABLE_PREFIX."cyh_city.state_id");
         $select->join(array("cc" => CYH_TABLE_PREFIX."cyh_city_content"), CYH_TABLE_PREFIX."cyh_city.id=cc.city_id");
         $select->where(array('state_short_name' => strtoupper($data[2]), 'city_name' => $data[3], 'is_published' => 1));
+        $select->where->in('city_type', self::CITIES_IN);
         $statement = $sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
 
@@ -149,10 +153,20 @@ class MarketingRepository
         $sql = 'SELECT *
             FROM '.CYH_TABLE_PREFIX.'cyh_city c
             INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
-            WHERE c.zip_code LIKE "%'.$zipCode.'%" AND cc.is_published=1';
+            WHERE c.zip_code LIKE "%'.$zipCode.'%" AND cc.is_published=1 AND c.city_type IN('.implode(',', $this->getConvertedArray()).')';
 
         $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
+
+        return $result;
+    }
+
+    private function getConvertedArray()
+    {
+        $result = [];
+        foreach (self::CITIES_IN as $city) {
+            array_push($result, '"'.$city.'"');
+        }
 
         return $result;
     }
