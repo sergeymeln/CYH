@@ -231,13 +231,15 @@ class WPSQLImporter
         }
         $impl = implode(',', $ids);
 
-        $results = $wpdb->get_results("SELECT id, city_normal_name, population FROM `wp_cyh_city` WHERE id NOT IN(".$impl.") ORDER BY population DESC LIMIT 1000", OBJECT);
+        $results = $wpdb->get_results("SELECT id, city_normal_name, population FROM `wp_cyh_city` WHERE id NOT IN(".$impl.") 
+        AND city_type IN('City', 'Town', 'Township', 'Village') ORDER BY population DESC LIMIT 1000", OBJECT);
 
         foreach ($results as $res) {
             $ids[] = $res->id;
         }
         $impl = implode(',', $ids);
         $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET is_published = 1 WHERE city_id IN('.$impl.');');
+        echo $impl;
 
         exit;
     }
