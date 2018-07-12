@@ -250,10 +250,18 @@
                                 <?php if(!$prod->IsBestOffer){continue;}?>
                                 <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                if(count($content) !=0) {
+                                    $tdClass = 'slide-cell';
+                                    $spanClass = 'arrow-up';
+                                } else {
+                                    $tdClass = '';
+                                    $spanClass = '';
+                                }
                                 ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
+                                <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -271,7 +279,6 @@
                                     <div class="hidden-content">
                                         <ul class="plan-description">
                                             <?php
-                                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
@@ -309,6 +316,14 @@
                             <?php if(!$prod->IsBestOffer){continue;}?>
                             <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                            if(count($content) !=0) {
+                                $tdClass = 'slide-cell';
+                                $spanClass = 'arrow-up';
+                            } else {
+                                $tdClass = '';
+                                $spanClass = '';
+                            }
                             ?>
                         <li>
                             <table class="table providers-table tablet">
@@ -322,7 +337,7 @@
 
                                     <tr>
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                        <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
+                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
                                     </tr>
                                     <tr class="hidden-row">
                                         <td></td>
@@ -330,7 +345,6 @@
                                             <div class="hidden-content">
                                                 <ul class="plan-description">
                                                     <?php
-                                                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
@@ -424,10 +438,18 @@
                             <?php if(!$prod->IsBestOffer){continue;}?>
                                 <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                if(count($content) !=0) {
+                                    $tdClass = 'slide-cell';
+                                    $spanClass = 'arrow-up';
+                                } else {
+                                    $tdClass = '';
+                                    $spanClass = '';
+                                }
                                 ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
+                                <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -445,7 +467,6 @@
                                     <div class="hidden-content">
                                         <ul class="plan-description">
                                             <?php
-                                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
@@ -484,6 +505,14 @@
                             <?php if(!$prod->IsBestOffer){continue;}?>
                             <?php
                             $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                            if(count($content) !=0) {
+                                $tdClass = 'slide-cell';
+                                $spanClass = 'arrow-up';
+                            } else {
+                                $tdClass = '';
+                                $spanClass = '';
+                            }
                             ?>
                         <li>
                             <table class="table providers-table tablet">
@@ -496,7 +525,7 @@
                                 <tbody>
                                     <tr>
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                        <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
+                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
                                     </tr>
                                     <tr class="hidden-row">
                                         <td></td>
@@ -504,7 +533,6 @@
                                             <div class="hidden-content">
                                                 <ul class="plan-description">
                                                     <?php
-                                                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
@@ -664,10 +692,18 @@
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                                 <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                if(count($content) != 0) {
+                                    $tdClass = 'slide-cell';
+                                    $spanClass = 'arrow-up';
+                                } else {
+                                    $tdClass = '';
+                                    $spanClass = '';
+                                }
                                 ?>
                         <tr>
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                            <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
+                            <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?> </span></td>
                             <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                         <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -685,7 +721,6 @@
                                 <div class="hidden-content">
                                     <ul class="plan-description">
                                         <?php
-                                        $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                         do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                         ?>
                                     </ul>
@@ -722,6 +757,14 @@
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                             <?php
                             $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                            if(count($content) != 0) {
+                                $tdClass = 'slide-cell';
+                                $spanClass = 'arrow-up';
+                            } else {
+                                $tdClass = '';
+                                $spanClass = '';
+                            }
                             ?>
                         <li>
                             <table class="table providers-table tablet">
@@ -734,7 +777,7 @@
                                 <tbody>
                                 <tr>
                                     <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                    <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
+                                    <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
                                 </tr>
                                 <tr class="hidden-row">
                                     <td></td>
@@ -742,7 +785,6 @@
                                         <div class="hidden-content">
                                             <ul class="plan-description">
                                                 <?php
-                                                $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                                 do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                 ?>
                                             </ul>
@@ -835,10 +877,18 @@
                             <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                                 <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                                $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                                if(count($content) != 0) {
+                                    $tdClass = 'slide-cell';
+                                    $spanClass = 'arrow-up';
+                                } else {
+                                    $tdClass = '';
+                                    $spanClass = '';
+                                }
                                 ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?> </span></td>
+                                <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?> </span></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -851,7 +901,6 @@
                                     <div class="hidden-content">
                                         <ul class="plan-description">
                                             <?php
-                                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
@@ -889,6 +938,14 @@
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php
                             $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
+                            $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
+                            if(count($content) != 0) {
+                                $tdClass = 'slide-cell';
+                                $spanClass = 'arrow-up';
+                            } else {
+                                $tdClass = '';
+                                $spanClass = '';
+                            }
                             ?>
                         <li>
                             <table class="table providers-table tablet">
@@ -901,7 +958,7 @@
                                 <tbody>
                                     <tr>
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                        <td class="slide-cell"><span class="middle-text arrow-up"><?php echo $prod->Name?></span></td>
+                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
                                     </tr>
                                     <tr class="hidden-row">
                                         <td></td>
@@ -909,7 +966,6 @@
                                             <div class="hidden-content">
                                                 <ul class="plan-description">
                                                     <?php
-                                                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($prod->Description);
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
