@@ -121,14 +121,17 @@ class MarketingService extends CacheableService
         $data['cityInternetUsers'] = round(((int)$city->Population * self::INTERNET_USERS_IN_USA)/100/1000000,1);
         $data['bestTvValues'] = [];
         $index = 0;
+        $tvProviders = [];
+        $securityProviders = [];
         foreach($products as $prod) {
             if(in_array($prod->ServiceProviderCategory->Category->Id, self::INTERNET_CATEGORIES)) {
                 $data['internetPlansCount']++;
                 $data['internetSpeeds'][]=($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
                 $data['internetPrices'][]=$prod->Price;
                 preg_match('/Security/i', $prod->ServiceProviderCategory->Provider->Legal, $matches);
-                if(count($matches) > 0) {
+                if(count($matches) > 0 && !in_array($prod->ServiceProviderCategory->Provider->Id,$securityProviders)) {
                     $data['internetSecurityCount']++;
+                    array_push($securityProviders, $prod->ServiceProviderCategory->Provider->Id);
                 }
                 if($prod->IsBestOffer) {
                     $data['bestValues'][$index]['price'] = $prod->Price;
@@ -143,7 +146,10 @@ class MarketingService extends CacheableService
                 $data['allBestValues'][$index]['offer'] = $prod->ServiceProviderCategory->Provider->Name;
             }
             if(in_array($prod->ServiceProviderCategory->Category->Id, self::INTERNET_TV_CATEGORIES)) {
-                $data['tvPlansCount']++;
+                if(!in_array($prod->ServiceProviderCategory->Provider->Id, $tvProviders)) {
+                    $data['tvPlansCount']++;
+                    array_push($tvProviders, $prod->ServiceProviderCategory->Provider->Id);
+                }
                 $data['tvSpeeds'][]=($prod->DownloadSpeed) ? $prod->DownloadSpeed : 0;
                 $data['tvPrices'][]=$prod->Price;
 
