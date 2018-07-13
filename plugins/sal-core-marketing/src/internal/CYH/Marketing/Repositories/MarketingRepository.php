@@ -19,7 +19,7 @@ class MarketingRepository
         'password' => DB_PASSWORD
     );
 
-    const CITIES_IN = ['City', 'Town', 'Township', 'Village', 'Borough'];
+    const CITIES_IN = ['City', 'Town', 'Township', 'Village', 'Borough', 'Metropolitan Government'];
 
     public function __construct()
     {

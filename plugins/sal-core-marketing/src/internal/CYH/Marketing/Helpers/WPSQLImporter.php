@@ -243,4 +243,46 @@ class WPSQLImporter
 
         exit;
     }
+
+    public function getNotCities()
+    {
+
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT c.id, c.city_type, c.city_name, c.state_code FROM wp_cyh_city c 
+        INNER JOIN wp_cyh_city_content cc ON c.id=cc.city_id WHERE section_two_text <> '' AND city_type NOT IN('City', 'Town', 'Township', 'Village');", OBJECT);
+        echo '<pre>'; print_r($results);exit;
+        foreach ($results as $res) {
+            echo 'https://staging.connectyourhome.com/internet/'.strtolower($res->state_code).'/'.$res->city_name.'<br>';
+        }
+
+        exit;
+    }
+
+    public function openMoreCities()
+    {
+        $statesArr = ['AK','DC','DE','HI','ME','NH','SD','WV','WY','MS','MT','KY','ND','NE','RI','NM','SC','AR','ID','AL','KS','LA','NV','OK'];
+
+        global $wpdb;
+        $ids=[];
+        $allIds = [];
+        foreach ($statesArr as $state) {
+
+            $results = $wpdb->get_results("SELECT id, city_normal_name, population FROM `wp_cyh_city` WHERE state_code='".$state."' 
+        AND city_type IN('City', 'Town', 'Township', 'Village') ORDER BY population DESC LIMIT 10", OBJECT);
+
+            echo 'RESULT by '.$state.' : -'.count($results).'<br>';
+            foreach ($results as $res) {
+                $ids[] = $res->id;
+                $allIds[] = $res->id;
+            }
+            $impl = implode(',', $ids);
+            $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET is_published = 1 WHERE city_id IN('.$impl.');');
+        }
+
+        $imp = implode(',', $allIds);
+        echo 'Count: '.count($allIds).'<br>';
+        echo $imp;
+
+        exit;
+    }
 }
