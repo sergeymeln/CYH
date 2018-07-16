@@ -504,6 +504,8 @@ section {
         border-top: 7px solid #333545;*/
       -webkit-transform: rotate(180deg);
               transform: rotate(180deg); }
+  .providers-table .terms-content {
+    display: none; }
 
 .not-found-items {
   text-align: center; }

@@ -120,6 +120,22 @@ $(document).on('ready', function() {
       $('.providers-table-slider').slick("refresh");
     });
 
+    //Modal
+    function getTermsInfo() {
+      var modalLink = $('a[data-target="#legalInfo"]');
+
+      modalLink.on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var content = $(this).next('.terms-content').text();
+        $('#legalInfo .modal-body .text-left').text(content);
+
+        $('#legalInfo').modal('show');
+      });
+
+    }
+    getTermsInfo();
+
     $('#cyh_process_zip').on('click', function(e) {
         $('#cyh_process_status').text('').addClass('loading');
 
@@ -181,6 +197,7 @@ $(document).on('ready', function() {
             brandLoader.removeClass('loading');
             tableSliderDestroy();
             tableSliderInit();
+            getTermsInfo();
         } else {
             var data = {
                 'action': 'cyh_show_brand_data',
@@ -201,6 +218,7 @@ $(document).on('ready', function() {
                     $('#'+hideTab).hide();
                     tableSliderDestroy();
                     tableSliderInit();
+                    getTermsInfo();
                 }
             });
         }

@@ -288,6 +288,9 @@
                                             ?>
                                         </ul>
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                        <span class="terms-content">
+                                            <?php echo $prod->Legal; ?>
+                                        </span>
                                     </div>
                                 </td>
                                 <td></td>
@@ -354,6 +357,9 @@
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                    <span class="terms-content">
+                                                        <?php echo $prod->Legal; ?>
+                                                    </span>
                                                 </ul>
                                             </div>
                                         </td>
@@ -478,6 +484,9 @@
                                             ?>
                                         </ul>
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                        <span class="terms-content">
+                                            <?php echo $prod->Legal; ?>
+                                        </span>
                                     </div>
                                 </td>
                                 <td></td>
@@ -545,6 +554,9 @@
                                                     ?>
                                                 </ul>
                                                 <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                <span class="terms-content">
+                                                    <?php echo $prod->Legal; ?>
+                                                </span>
                                             </div>
                                         </td>
                                     </tr>
@@ -736,6 +748,9 @@
                                         ?>
                                     </ul>
                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                    <span class="terms-content">
+                                        <?php echo $prod->Legal; ?>
+                                    </span>
                                 </div>
                             </td>
                             <td></td>
@@ -801,6 +816,9 @@
                                                 ?>
                                             </ul>
                                             <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                            <span class="terms-content">
+                                                <?php echo $prod->Legal; ?>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>
@@ -918,6 +936,9 @@
                                             ?>
                                         </ul>
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                        <span class="terms-content">
+                                            <?php echo $prod->Legal; ?>
+                                        </span>
                                     </div>
                                 </td>
                                 <td></td>
@@ -984,6 +1005,9 @@
                                                     ?>
                                                 </ul>
                                                 <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                <span class="terms-content">
+                                                    <?php echo $prod->Legal; ?>
+                                                </span>
                                             </div>
                                         </td>
                                     </tr>
@@ -1130,9 +1154,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <p class="text-left">
-                    <?php echo $prod->Legal; ?>
-                </p>
+                <p class="text-left"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
