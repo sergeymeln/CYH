@@ -1,4 +1,4 @@
-
+<?php $showSpectrum=0;?>
 <section class="intro-section">
     <div class="container-fluid">
         <div class="darken-bg"></div>
@@ -38,6 +38,11 @@
             <h2>In <?php echo $city->NormalName?> There Are offers from <?php echo count($cityData['providers']);?> providers </h2>
             <ul class="providers-slider">
                 <?php foreach ($cityData['providers'] as $provider):?>
+                    <?php
+                    if(preg_match('/Spectrum/i', $provider->Name)) {
+                        $showSpectrum=1;
+                    }
+                    ?>
                     <li><a target="_blank" href="<?php echo $provider->NavigationLink->LinkUrl?>"><img src="<?php echo $provider->Logo; ?>" ></a></li>
                 <?php endforeach;?>
             </ul>
@@ -622,6 +627,7 @@
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionOne);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
+                    <?php if($showSpectrum == 1):?>
                     <p class="text-center">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/spectrum-logo.png">
                     </p>
@@ -630,6 +636,7 @@
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionTwo);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
+                    <?php endif;?>
                     <h2><?php echo ($city->SectionThreeText != '') ? $city->SectionThreeText : 'Consider switching providers?'?></h2>
                     <?php
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionThree);

@@ -50,7 +50,7 @@ class MarketingsController extends GenericController
         $preparedData['productList'] = $this->filterProducts($productList);
         $preparedData['providers'] = $this->getProvidersFromProducts($preparedData['productList']);
         $preparedData['productListSorted'] = $this->sortProducts($preparedData['productList']);
-        //echo '<pre>'; print_r($preparedData['providers']);exit;
+        //echo '<pre>'; print_r($preparedData['productList']);exit;
 
         $preparedData['topProvidersData'] = $this->marketingService->getTopProvidersDataFromProducts($preparedData['productList']);
 
