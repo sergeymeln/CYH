@@ -103,16 +103,18 @@ h2 {
   }
 }
 a:hover,
-a:focus {
+a:focus,
+a:active {
+  color: $text-color;
   text-decoration: none;
-}
-p{
-  font-size: 16px;
-  line-height: 27px;
-  letter-spacing: 1.3px;
 }
 section {
   padding: 45px 0 70px 0;
+  p{
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: 1.3px;
+  }
 }
 .green-text {
   color: $green;
@@ -1136,5 +1138,16 @@ footer {
   .nearby-offers .flex-list li a {
     font-size: 14px;
     line-height: 38px;
+  }
+}
+.modal-header {
+  text-align: center;
+}
+.modal-footer {
+  .btn {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 15px;
   }
 }

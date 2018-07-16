@@ -287,6 +287,7 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
+                                        <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                     </div>
                                 </td>
                                 <td></td>
@@ -352,6 +353,7 @@
                                                     <?php
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
+                                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                                 </ul>
                                             </div>
                                         </td>
@@ -475,6 +477,7 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
+                                        <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                     </div>
                                 </td>
                                 <td></td>
@@ -541,6 +544,7 @@
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
+                                                <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -731,6 +735,7 @@
                                         do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                         ?>
                                     </ul>
+                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                 </div>
                             </td>
                             <td></td>
@@ -795,6 +800,7 @@
                                                 do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                 ?>
                                             </ul>
+                                            <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -911,6 +917,7 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
+                                        <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                     </div>
                                 </td>
                                 <td></td>
@@ -976,6 +983,7 @@
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
+                                                <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -1110,6 +1118,30 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="legalInfo" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Terms &amp; Conditions
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-left">
+                    <?php echo $prod->Legal; ?>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php endif;?>
 <!-- container -->
 <?php
