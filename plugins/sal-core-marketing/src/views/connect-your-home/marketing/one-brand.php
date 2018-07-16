@@ -53,7 +53,7 @@
                                 do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                 ?>
                             </ul>
-                            <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
+                            <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                         </div>
                     </td>
                     <td></td>
@@ -118,7 +118,7 @@
                                         do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                         ?>
                                     </ul>
-                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
+                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                 </div>
                             </td>
                         </tr>
