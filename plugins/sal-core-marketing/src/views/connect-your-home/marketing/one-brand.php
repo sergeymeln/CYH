@@ -54,6 +54,9 @@
                                 ?>
                             </ul>
                             <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
+                            <span class="terms-content">
+                                <?php echo $prod->Legal; ?>
+                            </span>
                         </div>
                     </td>
                     <td></td>
@@ -119,6 +122,9 @@
                                         ?>
                                     </ul>
                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Test Link</a>
+                                    <span class="terms-content">
+                                        <?php echo $prod->Legal; ?>
+                                    </span>
                                 </div>
                             </td>
                         </tr>
