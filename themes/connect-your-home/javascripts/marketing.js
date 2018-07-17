@@ -179,7 +179,7 @@ $(document).on('ready', function() {
         return isValidZip;
     }
 
-    $('#selectBrand').on('click', function(e) {
+    $('#brandsList').on('change', function(e) {
         let brandLoader = $(this).prev('.loader');
         let brand = $('#brandsList').val();
         let zip = $('#currentZipCode').val();
@@ -187,7 +187,7 @@ $(document).on('ready', function() {
 
         brandLoader.addClass('loading');
 
-        if (brand == 'all') {
+        if (brand == 'all' || brand == '') {
             $('#allBrandsTab').show();
             $('#oneBrandTab').hide();
             $('#allBrandsTab1').show();

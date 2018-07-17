@@ -50,9 +50,9 @@ class MarketingsController extends GenericController
         $preparedData['productList'] = $this->filterProducts($productList);
         $preparedData['providers'] = $this->getProvidersFromProducts($preparedData['productList']);
         $preparedData['productListSorted'] = $this->sortProducts($preparedData['productList']);
-        //echo '<pre>'; print_r($preparedData['productList']);exit;
 
         $preparedData['topProvidersData'] = $this->marketingService->getTopProvidersDataFromProducts($preparedData['productList']);
+        //echo '<pre>'; print_r($preparedData['productListSorted']);exit;
 
         $city->Bullets = $this->marketingService->getBulletsData($preparedData['productList'], $city);
         $this->View('marketing/marketing-page', [
@@ -114,6 +114,10 @@ class MarketingsController extends GenericController
     {
         array_multisort(array_map(function($element) {
             return $element->Price;
+        }, $products), SORT_ASC, $products);
+
+        array_multisort(array_map(function($element) {
+            return $element->ServiceProviderCategory->Provider->Rank;
         }, $products), SORT_ASC, $products);
 
         return $products;

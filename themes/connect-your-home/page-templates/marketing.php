@@ -17,4 +17,4 @@ catch (Exception $ex)
     $settings = \CYH\WpOptionsHandlers\Pages\GeneralOptions::GetSettings();
     wp_redirect($settings['general_error_page']);
 }
-get_footer();
+get_footer('sal');

@@ -354,6 +354,11 @@ class MarketingService extends CacheableService
                 return $element->Price;
             }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
 
+
+            usort($result, function($a, $b){
+                return ($a['provider']->Rank < $b['provider']->Rank) ? -1 : 1;
+            });
+
             $top++;
         }
 

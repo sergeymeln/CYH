@@ -11,7 +11,7 @@
                         <form class="form-inline">
                             <div class="form-group">
                                 <label class="sr-only" for="zipCode">Email</label>
-                                <input type="text" class="form-control zip-code" id="zipCode" placeholder="ZIP code">
+                                <input type="text" value="<?php echo $city->Zip?>" class="form-control zip-code" id="zipCode" placeholder="ZIP code">
                             </div>
                             <input type="hidden" value="<?php echo $city->Zip?>" id="currentZipCode"/>
                             <button type="button" id="cyh_process_zip" class="btn btn-green">Update location</button>
@@ -678,10 +678,11 @@
                 </ul>
                 <form class="form-inline">
                     <span class="loader"></span>
-                    <button type="button" class="btn btn-white" id="selectBrand">Select Brand</button>
+                    <!--<button type="button" class="btn btn-white" id="selectBrand">Select Brand</button>-->
                     <div class="form-group">
                         <label for="brandsList" class="sr-only">List of brands</label>
                         <select class="form-control brand-list" name="brand-list" id="brandsList">
+                            <option selected value="">Select Brand</option>
                             <option selected value="all">All list of brands</option>
                             <?php foreach ($cityData['providers'] as $provider):?>
                             <option data-hideTab="<?php echo $provider->HideTab?>" value="<?php echo $provider->Id;?>"><?php echo $provider->Name;?></option>
