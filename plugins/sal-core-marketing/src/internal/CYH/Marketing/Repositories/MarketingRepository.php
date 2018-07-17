@@ -172,6 +172,11 @@ class MarketingRepository
     }
 
 
+    /**
+     * @param $cityData
+     * @param int $radius
+     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     */
     public function getNearestPublishedCity($cityData, $radius=1500)
     {
         $sql = 'SELECT
