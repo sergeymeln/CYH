@@ -682,8 +682,7 @@
                     <div class="form-group">
                         <label for="brandsList" class="sr-only">List of brands</label>
                         <select class="form-control brand-list" name="brand-list" id="brandsList">
-                            <option selected value="">Select Brand</option>
-                            <option selected value="all">All list of brands</option>
+                            <option selected value="all">Select Brand</option>
                             <?php foreach ($cityData['providers'] as $provider):?>
                             <option data-hideTab="<?php echo $provider->HideTab?>" value="<?php echo $provider->Id;?>"><?php echo $provider->Name;?></option>
                             <?php endforeach;?>

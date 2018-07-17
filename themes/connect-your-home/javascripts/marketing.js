@@ -187,7 +187,7 @@ $(document).on('ready', function() {
 
         brandLoader.addClass('loading');
 
-        if (brand == 'all' || brand == '') {
+        if (brand == 'all') {
             $('#allBrandsTab').show();
             $('#oneBrandTab').hide();
             $('#allBrandsTab1').show();
