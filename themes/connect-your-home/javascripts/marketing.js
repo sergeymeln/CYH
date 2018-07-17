@@ -180,7 +180,7 @@ $(document).on('ready', function() {
     }
 
     $('#brandsList').on('change', function(e) {
-        let brandLoader = $(this).prev('.loader');
+        let brandLoader = $(this).parent().parent().find('.loader');
         let brand = $('#brandsList').val();
         let zip = $('#currentZipCode').val();
         let hideTab = $('#brandsList option:selected').attr('data-hideTab');
