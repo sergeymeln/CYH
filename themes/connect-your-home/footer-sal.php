@@ -12,25 +12,6 @@
             <!-- /.col-md-12 -->
         </div>
         <!-- /.row -->
-        <div class="row foot-links">
-            <div class="col-sm-3">
-                <?php the_field('footer_column_1', 'option'); ?>
-            </div>
-            <!-- /.col-md3 -->
-            <div class="col-sm-3">
-                <?php the_field('footer_column_2', 'option'); ?>
-            </div>
-            <!-- /.col-md3 -->
-            <div class="col-sm-3">
-                <?php the_field('footer_column_3', 'option'); ?>
-            </div>
-            <!-- /.col-md3 -->
-            <div class="col-sm-3">
-                <?php the_field('footer_column_4', 'option'); ?>
-            </div>
-            <!-- /.col-md3 -->
-        </div>
-        <!-- /.row foot-links -->
         <div class="row copy">
             <div class="seal">
                 <a href="http://www.bbb.org/denver/business-reviews/cable-tv-internet-and-telephone-installation-service/connect-your-home-llc-in-denver-co-90165080/#bbbonlineclick"

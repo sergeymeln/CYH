@@ -108,16 +108,6 @@
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" class="brand" alt="Connect Your Home&reg;"></a>
                 </div>
                 <div class="col-md-8 col-md-offset-1 col-sm-offset-0 col-sm-9 double-row">
-                    <div class="row top-search mbottom-sm-20">
-                        <div class="col-md-12 col-sm-7 col-sm-offset-5 col-md-offset-0">
-                            <form id="header-search" onsubmit="return false;">
-                                <div class="form-holder">
-                                    <input class="testing input address-autocomplete" type="form-control" name="search" id="address" placeholder="Enter address" style="padding:2px;width:70%; ">
-                                    <button class="btn btn-green search-button search-button-header" type="submit">Go!</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                     <div class="row mbottom-sm-20" cf>
                         <div class="col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4">
 
@@ -158,32 +148,6 @@
                 </div>
             </div>
             <!-- /row -->
-
-            <nav class="navbar navbar-cyh" role="navigation">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <?php
-                    wp_nav_menu( array(
-                            'theme_location'    => 'header-menu',
-                            'depth'             => 2,
-                            'container'         => 'div',
-                            'container_class'   => 'collapse navbar-collapse',
-                            'container_id'      => 'bs-example-navbar-collapse-1',
-                            'menu_class'        => 'nav navbar-nav',
-                            'fallback_cb'       => '\CYH\WpWalkers\BootstrapMenuWalker::fallback',
-                            'walker'            => new \CYH\WpWalkers\BootstrapMenuWalker())
-                    );
-                    ?>
-                </div>
-            </nav>
         </div>
     </header>
 
