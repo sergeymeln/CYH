@@ -180,7 +180,7 @@ $(document).on('ready', function() {
     }
 
     $('#brandsList').on('change', function(e) {
-        let brandLoader = $(this).parent().parent().find('.loader');
+        let brandLoader = $(this).parent().parent().parent().find('.loader');
         let brand = $('#brandsList').val();
         let zip = $('#currentZipCode').val();
         let hideTab = $('#brandsList option:selected').attr('data-hideTab');
@@ -226,6 +226,22 @@ $(document).on('ready', function() {
         e.preventDefault();
 
     });
+
+  $(document).on('click', 'a[data-brand-id]', function (e) {
+      e.preventDefault();
+
+      var brandId = $(this).attr('data-brand-id'),
+          brandsSection = $('#all-available-offers'),
+          brandList = $('#brandsList');
+          new_position = $(brandsSection).offset();
+
+      $('html, body').stop().animate({ scrollTop: new_position.top }, 500);
+
+      if(brandList.val() === brandId) {
+        return;
+      }
+      brandList.val(brandId).change();
+  })
 
 });
 

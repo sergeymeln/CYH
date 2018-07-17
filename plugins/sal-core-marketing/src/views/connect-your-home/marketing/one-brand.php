@@ -32,7 +32,7 @@
                 ?>
                 <tr>
                     <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                    <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?> </span></td>
+                    <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?> </span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                     <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                     <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                         <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -110,7 +110,7 @@
                         <tbody>
                         <tr>
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                            <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                            <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                         </tr>
                         <tr class="hidden-row">
                             <td></td>

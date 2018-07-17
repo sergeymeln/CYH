@@ -84,13 +84,11 @@
                         <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> <?php echo $spCatSorted['speedUnitsAvg'];?></span></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
-                        <td class="hidden-xs hidden-sm"><a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-id="brand-<?php echo $spCatSorted['provider']->Id?>">See all packages</a></td>
+                        <td class="hidden-xs hidden-sm"><a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a></td>
                     </tr>
                     <tr class="hidden-md hidden-lg">
-                        <td colspan="4"><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
-                                           onclick="ga('send', 'event', 'Call', 'ClicktoCall - Header');" class="btn btn-orange">
-                                <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>
-                            </a>
+                        <td colspan="4">
+                            <a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
                         </td>
                     </tr>
                     <?php $topCounter++;?>
@@ -134,10 +132,9 @@
                                 <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
                             </tr>
                             <tr class="btn-row">
-                                <td colspan="2"><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
-                                                   onclick="ga('send', 'event', 'Call', 'ClicktoCall - Header');" class="btn btn-orange">
-                                        <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>
-                                    </a></td>
+                                <td colspan="2">
+                                    <a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
+                                </td>
                             </tr>
 
                         </tbody>
@@ -165,10 +162,9 @@
                                 <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
                             </tr>
                             <tr class="btn-row">
-                                <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>"
-                                                                      onclick="ga('send', 'event', 'Call', 'ClicktoCall - Header');" class="btn btn-orange">
-                                            <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($spCatSorted['provider']->Phone->Number)?>
-                                        </a></td>
+                                <td>
+                                    <a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
+                                </td>
                             </tr>
 
                         </tbody>
@@ -266,7 +262,7 @@
                                 ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                <td class="<?php echo $tdClass?>"><div><span class="middle-text "><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -346,7 +342,7 @@
 
                                     <tr>
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                        <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                     </tr>
                                     <tr class="hidden-row">
                                         <td></td>
@@ -462,7 +458,7 @@
                                 ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -542,7 +538,7 @@
                                 <tbody>
                                     <tr>
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                        <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                     </tr>
                                     <tr class="hidden-row">
                                         <td></td>
@@ -681,12 +677,14 @@
                     <!--<button type="button" class="btn btn-white" id="selectBrand">Select Brand</button>-->
                     <div class="form-group">
                         <label for="brandsList" class="sr-only">List of brands</label>
-                        <select class="form-control brand-list" name="brand-list" id="brandsList">
-                            <option selected value="all">Select Brand</option>
-                            <?php foreach ($cityData['providers'] as $provider):?>
-                            <option data-hideTab="<?php echo $provider->HideTab?>" value="<?php echo $provider->Id;?>"><?php echo $provider->Name;?></option>
-                            <?php endforeach;?>
-                        </select>
+                        <span class="select-wrap">
+                            <select class="form-control brand-list" name="brand-list" id="brandsList">
+                                <option selected value="all">Select Brand</option>
+                                <?php foreach ($cityData['providers'] as $provider):?>
+                                <option data-hideTab="<?php echo $provider->HideTab?>" value="<?php echo $provider->Id;?>"><?php echo $provider->Name;?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </span>
                     </div>
                 </form>
             </div>
@@ -726,7 +724,7 @@
                                 ?>
                         <tr>
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                            <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?> </span></td>
+                            <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?> </span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                             <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                         <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -804,7 +802,7 @@
                                 <tbody>
                                 <tr>
                                     <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                    <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                    <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 </tr>
                                 <tr class="hidden-row">
                                     <td></td>
@@ -919,7 +917,7 @@
                                 ?>
                             <tr>
                                 <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?> </span></td>
+                                <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?> </span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                             <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
@@ -993,7 +991,7 @@
                                 <tbody>
                                     <tr>
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
-                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                        <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                     </tr>
                                     <tr class="hidden-row">
                                         <td></td>
