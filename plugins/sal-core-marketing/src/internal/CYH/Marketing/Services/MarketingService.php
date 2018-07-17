@@ -80,6 +80,20 @@ class MarketingService extends CacheableService
         $result = $this->marketingRepository->getCityByZip($zipCode);
         $cities = [];
         foreach($result as $city) {
+            if($city['is_published'] == 0) {
+                $cities[] = $city;
+            } else {
+                return $city;
+            }
+        }
+
+        if(count($cities) == 0) {
+            return false;
+        }
+
+        $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
+        $cities=[];
+        foreach($result as $city) {
             $cities[] = $city;
         }
 
@@ -236,7 +250,11 @@ class MarketingService extends CacheableService
         $data['allBestOfferName'] = $data['allBestValues'][0]['offer'];
 
         $data['lowestInternetPrice'] = '$'.min($data['internetPrices']);
-        $data['lowestTvPrice'] = '$'.min($data['tvPrices']);
+        if(is_array($data['tvPrices']) && count($data['tvPrices'])>0) {
+            $data['lowestTvPrice'] = '$'.min($data['tvPrices']);
+        } else {
+            $data['lowestTvPrice'] = '-';
+        }
 
         array_multisort(array_map(function($element) {
             return $element['speed'];

@@ -74,6 +74,10 @@ class AjaxController extends GenericController
             return $element->Price;
         }, $products), SORT_ASC, $products);
 
+        array_multisort(array_map(function($element) {
+            return $element->ServiceProviderCategory->Provider->Rank;
+        }, $products), SORT_ASC, $products);
+
         return $products;
     }
 

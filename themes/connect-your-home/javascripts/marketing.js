@@ -141,10 +141,10 @@ $(document).on('ready', function() {
 
         var validationResult = validateZip($('#zipCode').val());
         if(!validationResult) {
-            $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter valid code');
+            $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter accurate zip code');
             setTimeout(function(){
                 $('#cyh_process_status').removeClass('error-message').text('');
-                $('#zipCode').val('');
+                $('#zipCode').val($('#currentZipCode').val());
                 }, 3000);
             return;
         }
@@ -160,10 +160,10 @@ $(document).on('ready', function() {
                 $('#cyh_process_status').removeClass('loading error-message');
 
             } else {
-                $('#cyh_process_status').addClass('error-message').removeClass('loading').text('City was not found');
+                $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter accurate zip code');
                 setTimeout(function(){
                     $('#cyh_process_status').removeClass('error-message').text('');
-                    $('#zipCode').val('');
+                    $('#zipCode').val($('#currentZipCode').val());
                 }, 3000);
                 e.preventDefault();
             }

@@ -153,7 +153,7 @@ class MarketingRepository
         $sql = 'SELECT *
             FROM '.CYH_TABLE_PREFIX.'cyh_city c
             INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
-            WHERE c.zip_code LIKE "%'.$zipCode.'%" AND cc.is_published=1 AND c.city_type IN('.implode(',', $this->getConvertedArray()).')';
+            WHERE c.zip_code LIKE "%'.$zipCode.'%" AND c.city_type IN('.implode(',', $this->getConvertedArray()).')';
 
         $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
@@ -167,6 +167,32 @@ class MarketingRepository
         foreach (self::CITIES_IN as $city) {
             array_push($result, '"'.$city.'"');
         }
+
+        return $result;
+    }
+
+
+    public function getNearestPublishedCity($cityData, $radius=1500)
+    {
+        $sql = 'SELECT
+                c.*, (
+                  3959 * acos (
+                  cos ( radians('.$cityData['latitude'].') )
+                  * cos( radians( latitude ) )
+                  * cos( radians( longitude ) - radians('.$cityData['longitude'].') )
+                  + sin ( radians('.$cityData['latitude'].') )
+                  * sin( radians( latitude ) )
+                )
+            ) AS distance
+            FROM wp_cyh_city c
+            INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
+            WHERE c.city_name <> "'.$cityData['city_name'].'" AND cc.is_published=1 AND c.city_type IN('.implode(',', $this->getConvertedArray()).')
+            HAVING distance < '.$radius.'
+            ORDER BY distance
+            LIMIT 0 , 1;';
+
+        $statement = $this->adapter->createStatement($sql);
+        $result = $statement->execute();
 
         return $result;
     }
