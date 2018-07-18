@@ -288,6 +288,9 @@ class MarketingService extends CacheableService
         $prepared = [];
         $skipBulletsData = ['-','0'];
         foreach($bullets as $bullet) {
+            if(preg_match('/Exclusive Offers/', $bullet)) {
+                continue;
+            }
             preg_match_all('/{.*?}/',$bullet, $matches);
 
             if (count($matches[0])>0 && count($matches[0]) == 1) {
@@ -473,7 +476,12 @@ class MarketingService extends CacheableService
         $usersCount = '';
         $isMillion = round(((int)$population * self::INTERNET_USERS_IN_USA)/100/1000000,1);
         if($isMillion == 0) {
-            $usersCount = round(((int)$population * self::INTERNET_USERS_IN_USA)/100,0);
+            if((1000 <= (int)$population) && ((int)$population <=999999)) {
+                $usersCount = round(((int)$population * self::INTERNET_USERS_IN_USA)/100/1000,1);
+                $usersCount = $usersCount.' thousand';
+            } else {
+                $usersCount = (int)$population;
+            }
         } else {
             $usersCount = $isMillion.' million';
         }
