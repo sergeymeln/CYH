@@ -207,7 +207,7 @@
             </div>
             <div id="map" class="map">
                 <?php
-                echo do_shortcode( '[flexiblemap maptype="quickfacts" height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
+                echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
                 ?>
             </div>
         </div>
@@ -624,7 +624,7 @@
             </div>
             <div class="button-wrap">
                 <a href="#all-available-offers" class="btn btn-big btn-green btn-green-glow">See all Internet offers in <?php echo $city->NormalName?></a>
-                <a href="/auth/?groupId=1265743" target="_blank" class="btn btn-orange btn-big btn-orange-glow">Secret Deals</a>
+                <!--<a href="/auth/?groupId=1265743" target="_blank" class="btn btn-orange btn-big btn-orange-glow">Secret Deals</a>-->
             </div>
         </div>
     </div>

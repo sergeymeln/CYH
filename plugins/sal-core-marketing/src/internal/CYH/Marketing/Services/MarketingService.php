@@ -132,8 +132,9 @@ class MarketingService extends CacheableService
         $data = [];
         $data['internetPlansCount'] = 0;
         $data['internetSecurityCount'] = 0;
-        $data['cityInternetUsers'] = round(((int)$city->Population * self::INTERNET_USERS_IN_USA)/100/1000000,1);
+        $data['cityInternetUsers'] = $this->getInternetUsersCount($city->Population);
         $data['bestTvValues'] = [];
+        $data['tvPlansCount'] = 0;
         $index = 0;
         $tvProviders = [];
         $securityProviders = [];
@@ -281,12 +282,16 @@ class MarketingService extends CacheableService
     private function prepareBullets($data, $bullets)
     {
         $prepared = [];
+        $skipBulletsData = ['-','0'];
         foreach($bullets as $bullet) {
             preg_match_all('/{.*?}/',$bullet, $matches);
 
             if (count($matches[0])>0 && count($matches[0]) == 1) {
                 foreach($matches[0] as $match) {
                     $key = str_replace(['{', '}'], '', $match);
+                    if(in_array($data[$key], $skipBulletsData)) {
+                        continue;
+                    }
                     if(array_key_exists($key, $data)) {
                         $prepared[] = str_replace($match, $data[$key], $bullet);
                     } else {
@@ -457,5 +462,19 @@ class MarketingService extends CacheableService
         }
 
         return $data;
+    }
+
+    private function getInternetUsersCount($population)
+    {
+        $usersCount = '';
+        $isMillion = round(((int)$population * self::INTERNET_USERS_IN_USA)/100/1000000,1);
+        if($isMillion == 0) {
+            $usersCount = round(((int)$population * self::INTERNET_USERS_IN_USA)/100,0);
+        } else {
+            $usersCount = $isMillion.' million';
+        }
+
+        return $usersCount;
+
     }
 }
