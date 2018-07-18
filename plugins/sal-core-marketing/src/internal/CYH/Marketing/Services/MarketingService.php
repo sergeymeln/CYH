@@ -36,15 +36,19 @@ class MarketingService extends CacheableService
         }
         $zipCodes = explode('/', $citiesData['zip_code']);
         $citiesData['zip_code'] = trim($zipCodes[0]);
-        $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData);
         $biggestCities = $this->marketingRepository->GetBiggestCitiesInState($citiesData);
+        $bigCitiesIds = [];
+        if (count($biggestCities)>0) {
+            foreach ($biggestCities as $bigCity) {
+                $bigCitiesIds[] = $bigCity['id'];
+                $citiesData['biggest_cities'][] = $this->getRelatedLinkData($bigCity);
+            }
+        }
+
+        $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
 
         foreach($relatedCities as $relCity) {
             $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
-        }
-
-        foreach($biggestCities as $bigCity) {
-            $citiesData['biggest_cities'][] = $this->getRelatedLinkData($bigCity);
         }
 
         return $this->getCityFromData($citiesData);

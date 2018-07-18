@@ -65,10 +65,11 @@ class MarketingRepository
 
     /**
      * @param $cityData
+     * @param $excludeCityIds
      * @param int $radius
      * @return \Zend\Db\Adapter\Driver\ResultInterface
      */
-    public function GetRelatedCities($cityData, $radius=1500)
+    public function GetRelatedCities($cityData, $excludeCityIds, $radius=1500)
     {
         $sql = 'SELECT
                 c.*, (
@@ -82,7 +83,9 @@ class MarketingRepository
             ) AS distance
             FROM wp_cyh_city c
             INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
-            WHERE c.city_name <> "'.$cityData['city_name'].'" AND cc.is_published=1 AND c.city_type IN('.implode(',', $this->getConvertedArray()).')
+            WHERE c.city_name <> "'.$cityData['city_name'].'" AND cc.is_published=1 
+            AND c.id NOT IN('.implode(',', $excludeCityIds).')
+            AND c.city_type IN('.implode(',', $this->getConvertedArray()).')
             HAVING distance < '.$radius.'
             ORDER BY distance
             LIMIT 0 , 10;';
