@@ -6,6 +6,7 @@ $dark: #333545;
 $gray: #c6c6c6;
 $black: #000;
 $button-color: #b0b0b0;
+$button-color-text: #808080;
 $table-border-color: #e5e5e5;
 $dark-green: #558d32;
 $green-btn-glow: #cdffad;
@@ -161,9 +162,9 @@ section {
   font-size: 16px;
   letter-spacing: 1px;
   text-align: center;
-  color: $tab-text-color;
-  border: solid 1px $tab-text-color;
-  background-color: transparent;
+  color: $button-color-text;
+  border: solid 1px $button-color;
+  background-color: rgba(117,117,117,0.06);
   padding: 13px 25px;
   transition: border-color ease-in-out 0.15s,
   box-shadow ease-in-out 0.15s,
@@ -180,7 +181,7 @@ section {
 }
 .brand-list:focus {
   box-shadow: none;
-  border-color: $tab-text-color;
+  border-color: $button-color;
 }
 .form-control::-webkit-input-placeholder {
   color: $white;
@@ -707,7 +708,7 @@ p.not-found-items {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 7px solid $tab-text-color;
+    border-top: 7px solid $button-color-text;
     position: absolute;
     right: 8px;
     top: 0px;
