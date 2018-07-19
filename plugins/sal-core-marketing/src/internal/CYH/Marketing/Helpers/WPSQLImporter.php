@@ -260,17 +260,17 @@ class WPSQLImporter
 
     public function openMoreCities()
     {
-        $statesArr = ['AK','DC','DE','HI','ME','NH','SD','WV','WY','MS','MT','KY','ND','NE','RI','NM','SC','AR','ID','AL','KS','LA','NV','OK'];
 
         global $wpdb;
+        //$statesArr = ['AK','DC','DE','HI','ME','NH','SD','WV','WY','MS','MT','KY','ND','NE','RI','NM','SC','AR','ID','AL','KS','LA','NV','OK'];
+        $statesArr = $wpdb->get_results("SELECT state_short_name FROM `wp_cyh_state`", OBJECT);
+
         $ids=[];
         $allIds = [];
         foreach ($statesArr as $state) {
-
-            $results = $wpdb->get_results("SELECT id, city_normal_name, population FROM `wp_cyh_city` WHERE state_code='".$state."' 
+            $results = $wpdb->get_results("SELECT id, city_normal_name, population FROM `wp_cyh_city` WHERE state_code='".$state->state_short_name."' 
         AND city_type IN('City', 'Town', 'Township', 'Village') ORDER BY population DESC LIMIT 21", OBJECT);
 
-            //echo 'RESULT by '.$state.' : -'.count($results).'<br>';
             foreach ($results as $res) {
                 $ids[] = $res->id;
                 $allIds[] = $res->id;

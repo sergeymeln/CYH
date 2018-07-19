@@ -60,7 +60,7 @@
 <section class="top-providers-section">
     <div class="container">
         <div class="row">
-            <h2>Top <?php echo (count($cityData['topProvidersData']) <5) ? count($cityData['topProvidersData']) : 5?> internet providers in <?php echo $city->NormalName?> , <?php echo $city->StateCode?></h2>
+            <h2>Top <?php echo (count($cityData['topProvidersData']) <5) ? count($cityData['topProvidersData']) : 5?> internet providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?></h2>
 
             <table class="table providers-table hidden-xs">
                 <thead>
@@ -1099,7 +1099,7 @@
                             $counter = 0;
                         }?>
                         <li><a href="/internet/<?php echo strtolower($relCity['state_code'])?>/<?php echo strtolower($relCity['city_name'])?>">
-                                <?php echo $relCity['city_normal_name']?>
+                                <?php echo $relCity['city_normal_name']?>, <?php echo $relCity['state_code']?>
                             </a>
                         </li>
                         <?php $counter++?>
@@ -1130,7 +1130,7 @@
                                 $counter = 0;
                             }?>
                             <li><a href="/internet/<?php echo strtolower($bigCity['state_code'])?>/<?php echo strtolower($bigCity['city_name'])?>">
-                                    <?php echo $bigCity['city_normal_name']?>
+                                    <?php echo $bigCity['city_normal_name']?>, <?php echo $bigCity['state_code']?>
                                 </a>
                             </li>
                             <?php $counter++?>
