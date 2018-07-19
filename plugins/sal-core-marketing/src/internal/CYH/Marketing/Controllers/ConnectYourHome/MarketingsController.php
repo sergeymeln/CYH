@@ -112,6 +112,12 @@ class MarketingsController extends GenericController
      */
     private function sortProducts($products)
     {
+        usort($products, function($a, $b){
+            if($a->ServiceProviderCategory->Provider->Rank == $b->ServiceProviderCategory->Provider->Rank) {
+                return strcmp($a->ServiceProviderCategory->Provider->Name, $b->ServiceProviderCategory->Provider->Name);
+            }
+        });
+
         array_multisort(array_map(function($element) {
             return $element->ServiceProviderCategory->Provider->Rank;
         }, $products), SORT_ASC, SORT_NUMERIC, array_map(function($element) {
