@@ -83,16 +83,25 @@ class MarketingService extends CacheableService
     {
         $result = $this->marketingRepository->getCityByZip($zipCode);
         $cities = [];
+        $matchedCities = [];
         foreach($result as $city) {
             if($city['is_published'] == 0) {
                 $cities[] = $city;
             } else {
-                return $city;
+                $matchedCities[]=$city;
             }
         }
 
-        if(count($cities) == 0) {
+        if(count($cities) == 0 && count($matchedCities) == 0) {
             return false;
+        }
+
+        if(count($matchedCities)>0) {
+            usort($matchedCities, function($a, $b){
+                return ($a['population'] > $b['population']) ? -1 : 1;
+            });
+
+            return $matchedCities[0];
         }
 
         $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
