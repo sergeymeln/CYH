@@ -161,8 +161,8 @@ section {
   font-size: 16px;
   letter-spacing: 1px;
   text-align: center;
-  color: $button-color;
-  border: solid 1px #d5d5d5;
+  color: $tab-text-color;
+  border: solid 1px $tab-text-color;
   background-color: transparent;
   padding: 13px 25px;
   transition: border-color ease-in-out 0.15s,
@@ -180,7 +180,7 @@ section {
 }
 .brand-list:focus {
   box-shadow: none;
-  border-color: #d5d5d5;
+  border-color: $tab-text-color;
 }
 .form-control::-webkit-input-placeholder {
   color: $white;
@@ -707,7 +707,7 @@ p.not-found-items {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 7px solid $button-color;
+    border-top: 7px solid $tab-text-color;
     position: absolute;
     right: 8px;
     top: 0px;
@@ -892,6 +892,16 @@ footer {
   .flex-list {
     margin: 0 15px;
   }
+  .nearby-offers {
+    .flex-list:first-child {
+      margin-left: 15px;
+      margin-right:30px;
+    }
+    .flex-list:last-child {
+      margin-left: 30px;
+      margin-right: 15px;
+    }
+  }
   .flex-list li, .flex-list li a {
     font-size: 18px;
     line-height: 41px;
@@ -912,6 +922,9 @@ footer {
       li:last-child {
         margin-right: 0;
       }
+    }
+    .select-wrap {
+      margin-left: 0;
     }
     .loader {
       order: 1;
@@ -979,6 +992,11 @@ footer {
   .flex-list {
     max-width: 100%;
   }
+  .nearby-offers {
+    .flex-list {
+      max-width: calc(50% - 45px);
+    }
+  }
   .tab-offers{
     margin: 0 63px;
     li:last-child {
@@ -998,7 +1016,9 @@ footer {
       .form-group {
         display: inline-table;
         order: 1;
-        margin-top: 20px;
+      }
+      .loading {
+        margin-bottom: 20px;
       }
     }
     .loader {
@@ -1021,16 +1041,16 @@ footer {
   .offers-list-wrap{
     width: 100%;
   }
+  .best-offers-tab-section h2 {
+    margin-bottom: 57px;
+  }
   .tab-offers {
     display: flex;
     flex-direction: column;
     align-items: center;
     li {
       width: 247px;
-      margin: 0 0 20px 0;
-      &:last-child{
-        margin: 0;
-      }
+      margin: 20px 0 0 0;
     }
   }
   .offers-navigation {
@@ -1067,7 +1087,7 @@ footer {
     margin-left: 0;
   }
   .nearby-offers .offers-list-wrap {
-    flex-direction: column;
+    //flex-direction: column;
   }
 }
 @media (max-width: 600px) {
@@ -1095,6 +1115,9 @@ footer {
   }
   section {
     padding: 30px 0 55px 0;
+  }
+  .btn-green, .btn-orange {
+    padding: 14px 25px;
   }
   .inner-block {
     padding: 0 15px;
@@ -1200,7 +1223,10 @@ footer {
   }
   .nearby-offers .flex-list li a {
     font-size: 14px;
-    line-height: 38px;
+    line-height: 26px;
+  }
+  .nearby-offers  .flex-list li {
+    margin-bottom: 5px;
   }
 }
 .modal-header {
