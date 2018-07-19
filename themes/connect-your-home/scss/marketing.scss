@@ -380,6 +380,10 @@ section {
     padding: 0px 60px;
     overflow: hidden;
     display: flex;
+    .slick-list {
+      margin-right: auto;
+      margin-left: auto;
+    }
   }
   .slick-slide  {
     padding: 30px;
@@ -449,7 +453,7 @@ section {
     font-weight: 900;
     letter-spacing: 0.9px;
     margin-top: 5px;
-    display: inline-block;
+    display: block;
     .number {
       font-size: 36px;
     }
