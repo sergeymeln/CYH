@@ -268,9 +268,9 @@ class WPSQLImporter
         foreach ($statesArr as $state) {
 
             $results = $wpdb->get_results("SELECT id, city_normal_name, population FROM `wp_cyh_city` WHERE state_code='".$state."' 
-        AND city_type IN('City', 'Town', 'Township', 'Village') ORDER BY population DESC LIMIT 10", OBJECT);
+        AND city_type IN('City', 'Town', 'Township', 'Village') ORDER BY population DESC LIMIT 21", OBJECT);
 
-            echo 'RESULT by '.$state.' : -'.count($results).'<br>';
+            //echo 'RESULT by '.$state.' : -'.count($results).'<br>';
             foreach ($results as $res) {
                 $ids[] = $res->id;
                 $allIds[] = $res->id;
