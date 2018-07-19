@@ -389,6 +389,12 @@ class MarketingService extends CacheableService
                 return ($a['provider']->Rank < $b['provider']->Rank) ? -1 : 1;
             });
 
+            usort($result, function($a, $b){
+                if($a['provider']->Rank == $b['provider']->Rank) {
+                   return strcmp($a["provider"]->Name, $b["provider"]->Name);
+                }
+            });
+
             $top++;
         }
 
