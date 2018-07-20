@@ -8,14 +8,14 @@
                     <h1 class="inner-title">best internet providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
                     <p class="inner-text"><?php echo $city->TagLine?></p>
                     <div class="zip-code-form">
-                        <form class="form-inline">
+                        <div class="form-inline">
                             <div class="form-group">
                                 <label class="sr-only" for="zipCode">Email</label>
                                 <input type="text" value="<?php echo $city->Zip?>" class="form-control zip-code" id="zipCode" placeholder="ZIP code">
                             </div>
                             <input type="hidden" value="<?php echo $city->Zip?>" id="currentZipCode"/>
                             <button type="button" id="cyh_process_zip" class="btn btn-green">Update location</button>
-                        </form>
+                        </div>
                         <div>
                             <span class="active process-status" id="cyh_process_status"></span>
                         </div>
@@ -672,7 +672,7 @@
                     <li id="allBrandsTab2"><a href="#internetTvOffers" data-toggle="tab" class="btn btn-white">Internet + TV</a></li>
                     <!--<li><a href="#internetTvVoiceOffers" data-toggle="tab" class="btn btn-white">Internet + TV + Voice</a></li>-->
                 </ul>
-                <form class="form-inline">
+                <div class="form-inline">
                     <span class="loader"></span>
                     <!--<button type="button" class="btn btn-white" id="selectBrand">Select Brand</button>-->
                     <div class="form-group">
@@ -686,7 +686,7 @@
                             </select>
                         </span>
                     </div>
-                </form>
+                </div>
             </div>
 
             <div class="tab-content" id="allBrandsTab">
