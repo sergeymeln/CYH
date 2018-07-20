@@ -90,7 +90,7 @@ h2 {
   text-transform: uppercase;
   position: relative;
   padding-bottom: 15px;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
   &:after{
     content:'';
     width: 70px;
@@ -353,11 +353,6 @@ section {
 
 
 /*Map Section Start*/
-.map-section {
-  h2 {
-    margin-bottom: 80px;
-  }
-}
 .map {
   margin-top: 57px;
   box-shadow: 0 10px 20px 0 rgba(62, 79, 109, 0.07);
@@ -367,9 +362,6 @@ section {
 /*Offer section start*/
 .best-offers-tab-section {
   background-color: $section-dark-bg;
-  h2 {
-    margin-bottom: 77px;
-  }
 }
 .top-providers-section {
   background-color: $section-dark-bg;
@@ -783,7 +775,7 @@ p.not-found-items {
   padding: 73px 0;
   h2 {
     margin-top: 64px;
-    margin-bottom: 68px;
+    margin-bottom: 70px;
     &:first-child {
       margin-top: 0;
     }
@@ -858,7 +850,7 @@ footer {
   }
 }
 @media (max-width: 992px) {
-  h2 {
+  h2, .information-section h2 {
     font-size: 32px;
     margin-bottom: 65px;
   }
@@ -955,6 +947,9 @@ footer {
       bottom: 0;
     }
   }
+  .information-section h2 {
+    margin-bottom: 42px;
+  }
   .inner-title {
     font-size: 30px;
   }
@@ -980,10 +975,7 @@ footer {
     margin: 0 auto;
   }
   .providers-table.tablet {
-    margin: 27px 0;
-  }
-  .map-section h2 {
-    margin-bottom: 68px;
+    margin: 0px 0;
   }
   .flex-list li, .flex-list li a {
     font-size: 22px;
@@ -1010,6 +1002,7 @@ footer {
   .offers-navigation {
     margin-bottom: 0;
     .tab-offers {
+      margin-top: -20px;
       margin-bottom: 25px;
     }
     .form-inline {
@@ -1024,6 +1017,11 @@ footer {
     }
     .loader {
       order: 1;
+    }
+  }
+  .offers-navigation {
+    .tab-offers {
+      margin-top: 0px;
     }
   }
   .nearby-offers {
@@ -1042,19 +1040,18 @@ footer {
   .offers-list-wrap{
     width: 100%;
   }
-  .best-offers-tab-section h2 {
-    margin-bottom: 57px;
-  }
   .tab-offers {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: -20px;
     li {
       width: 247px;
       margin: 20px 0 0 0;
     }
   }
   .offers-navigation {
+    margin-top: -20px;
     .tab-offers {
       display: flex;
       border-bottom: 0;
@@ -1104,14 +1101,13 @@ footer {
     transform: none;
   }
   .providers-table {
-    margin: 20px 0;
+    margin: 0px 0;
   }
 }
 @media (max-width: 480px) {
   h2 {
     font-size: 22px;
     line-height: 26px;
-    margin-bottom: 20px;
     width: 100%;
   }
   section {
@@ -1211,9 +1207,6 @@ footer {
   .flex-list li, .flex-list li a {
     font-size: 14px;
     line-height: 32px;
-  }
-  .best-offers-tab-section h2 {
-    margin-bottom: 45px;
   }
   .btn-green, .btn-orange{
     font-size: 14px;
