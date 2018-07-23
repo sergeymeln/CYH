@@ -97,6 +97,7 @@ class WPSQLImporter
                 );
             }*/
         }
+        $this->updateContent();
 
         echo 'FINISH';exit;
 
