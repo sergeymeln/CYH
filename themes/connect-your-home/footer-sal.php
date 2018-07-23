@@ -22,8 +22,6 @@
 
             </div>
             <hr/>
-            <a class="cta-cyh" href="https://www.connectyourbusiness.com">Looking for business services? Visit Connect
-                Your Business&reg;!</a>
             <div class="col-md-12"><p>&copy; Copyright <?php echo date('Y') ?>. Connect Your Home, LLC</p></div>
         </div>
 </footer>

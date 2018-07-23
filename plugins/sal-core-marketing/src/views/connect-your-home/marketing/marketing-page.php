@@ -639,21 +639,22 @@
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionOne);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
-                    <?php if($showSpectrum == 1):?>
-                    <p class="text-center">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/spectrum-logo.png">
-                    </p>
-                    <h2><?php echo ($city->SectionTwoText != '') ? $city->SectionTwoText : 'We recommend Spectrum Bundles. Why?'?></h2>
+
+                    <h2><?php echo ($city->SectionTwoText != '') ? $city->SectionTwoText : 'More Important Information About Choosing an Internet Provider in '.$city->NormalName?></h2>
                     <?php
                     $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionTwo);
                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                     ?>
+                    <?php if($showSpectrum == 1):?>
+                        <p class="text-center">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/spectrum-logo.png">
+                        </p>
+                        <h2><?php echo ($city->SectionThreeText != '') ? $city->SectionThreeText : 'We recommend Spectrum Bundles. Why?'?></h2>
+                        <?php
+                        $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionThree);
+                        do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                        ?>
                     <?php endif;?>
-                    <h2><?php echo ($city->SectionThreeText != '') ? $city->SectionThreeText : 'Consider switching providers?'?></h2>
-                    <?php
-                    $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($city->SectionThree);
-                    do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
-                    ?>
                     <div class="button-wrap">
                         <a href="#best-offers" class="btn btn-big btn-green btn-green-glow">Go to best offers</a>
                     </div>

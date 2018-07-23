@@ -47,7 +47,7 @@ class WPSQLImporter
             }
         }
 
-        $cities = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_city', OBJECT);
+        $cities = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_city WHERE city_type IN("City", "Town", "Township", "Village")', OBJECT);
         $allTagLines = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_tag_lines', OBJECT);
         $universalButtels = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_universal_statistic_bullets', OBJECT);
 
@@ -68,7 +68,8 @@ class WPSQLImporter
             $sectionOne = $this->GenerateContent($city->city_normal_name, $state, $sectionOne);
             $sectionTwo = $this->GenerateContent($city->city_normal_name, $state, $sectionTwo);
             $sectionThree = $this->GenerateContent($city->city_normal_name, $state, $sectionThree);
-            $tagLines = $this->GenerateTagLines(1, $allTagLines);
+            $this->updateContentNew($city->id, $sectionOne, $sectionTwo, $sectionThree);
+            /*$tagLines = $this->GenerateTagLines(1, $allTagLines);
 
             $wpdb->insert($wpdb->prefix.'cyh_city_content',
                 [
@@ -94,7 +95,7 @@ class WPSQLImporter
                         'city_content_id'=>$cityContentId
                     ]
                 );
-            }
+            }*/
         }
 
         echo 'FINISH';exit;
@@ -104,24 +105,29 @@ class WPSQLImporter
     private function GenerateSection($cityId, $type=1, $lessUsedNeeded = 0)
     {
         global $wpdb;
-        $paragraphsCount = rand(0,1);
-        $generatedText = '';
+        $typesMap = [
+            1 => [1,2,3,4],
+            2 => [5,6,7],
+            3 => [8,9],
+        ];
+
         $foundedParagraphsIds = [];
+        $foundedParagraphs = [];
+        $generatedText = '';
         if($lessUsedNeeded == 1) {
-            $content = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_content WHERE type='.$type.' ORDER BY usage_count DESC LIMIT 10', OBJECT);
+            foreach ($typesMap[$type] as $section) {
+                $foundedParagraphs[] = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_content WHERE type='.$section.' ORDER BY usage_count DESC LIMIT 1', OBJECT);
+            }
         } else {
-            $content = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_content WHERE type='.$type.' ORDER BY RAND()', OBJECT);
+            foreach ($typesMap[$type] as $section) {
+                $foundedParagraphs[] = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cyh_content WHERE type='.$section.' ORDER BY RAND() LIMIT 1', OBJECT);
+            }
         }
-        if($paragraphsCount ==0 ){
-            $randomKeys=array_rand($content,3);
-        } else {
-            $randomKeys=array_rand($content,4);
+        foreach ($foundedParagraphs as $paragr) {
+            $generatedText.=$paragr[0]->content;
+            $foundedParagraphsIds[] = $paragr[0]->id;
         }
-        for($i=0; $i<count($randomKeys); $i++) {
-            $generatedText.= $content[$randomKeys[$i]]->content;
-            $foundedParagraphs[] = $content[$randomKeys[$i]]->id;
-        }
-        $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_content SET usage_count=usage_count+1 WHERE id IN('.implode(',',$foundedParagraphs).')');
+        $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_content SET usage_count=usage_count+1 WHERE id IN('.implode(',',$foundedParagraphsIds).')');
 
         return $generatedText;
     }
@@ -198,13 +204,14 @@ class WPSQLImporter
                     }
                     $matchCount = count($matchArr);
                     $text = str_replace($match, $matchArr[rand(0, $matchCount-1)], $res->section_two);
-                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_two = REPLACE(section_two, "'.$match.'", "'.$matchArr[rand(0, $matchCount-1)].'") WHERE id='.$res->id.';');
-                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_two = REPLACE(section_two, "”", """) WHERE id='.$res->id.';');
-                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_two = REPLACE(section_two, "“", """) WHERE id='.$res->id.';');
+                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_three = REPLACE(section_three, "'.$match.'", "'.$matchArr[rand(0, $matchCount-1)].'") WHERE id='.$res->id.';');
+                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_three = REPLACE(section_three, "”", """) WHERE id='.$res->id.';');
+                    $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_three = REPLACE(section_three, "“", """) WHERE id='.$res->id.';');
                 }
             }
 
         }
+        echo 'END';
         exit;
     }
 
@@ -284,5 +291,29 @@ class WPSQLImporter
         echo $imp;
 
         exit;
+    }
+
+    public function getOpenCitiesIds()
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT c.id FROM wp_cyh_city c 
+        INNER JOIN wp_cyh_city_content cc ON c.id=cc.city_id WHERE cc.is_published=1", OBJECT);
+        $ids=[];
+        foreach ($results as $res) {
+            $ids[]=$res->id;
+        }
+        $imp = implode(',', $ids);
+        echo 'Count: '.count($ids).'<br>';
+        echo $imp;
+        exit;
+    }
+
+    private function updateContentNew($cityId, $sectionOne, $sectionTwo, $sectionThree)
+    {
+        global $wpdb;
+        $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_one="", section_two="", section_three="" 
+         WHERE city_id='.$cityId.' AND section_two_text="";');
+        $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_one="'.$sectionOne.'", section_two="'.$sectionTwo.'", section_three="'.$sectionThree.'" 
+         WHERE city_id='.$cityId.' AND section_two_text="";');
     }
 }
