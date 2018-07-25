@@ -71,8 +71,13 @@ class MarketingRepository
      */
     public function GetRelatedCities($cityData, $excludeCityIds, $radius=1500)
     {
+        $bigCitiesCondition = '';
+        if(count($excludeCityIds) > 0) {
+            $bigCitiesCondition = ' AND c.id NOT IN('.implode(',', $excludeCityIds).') ';
+        }
         $sql = 'SELECT
-                c.*, (
+                c.*, (123456
+                
                   3959 * acos (
                   cos ( radians('.$cityData['latitude'].') )
                   * cos( radians( latitude ) )
@@ -84,7 +89,7 @@ class MarketingRepository
             FROM wp_cyh_city c
             INNER JOIN '.CYH_TABLE_PREFIX.'cyh_city_content cc ON c.id=cc.city_id
             WHERE c.city_name <> "'.$cityData['city_name'].'" AND cc.is_published=1 
-            AND c.id NOT IN('.implode(',', $excludeCityIds).')
+            '.$bigCitiesCondition.'
             AND c.city_type IN('.implode(',', $this->getConvertedArray()).')
             HAVING distance < '.$radius.'
             ORDER BY distance

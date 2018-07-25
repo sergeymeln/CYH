@@ -283,10 +283,12 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
+                                        <?php if($prod->Legal != ''):?>
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                         <span class="terms-content">
                                             <?php echo $prod->Legal; ?>
                                         </span>
+                                        <?php endif;?>
                                     </div>
                                 </td>
                                 <td></td>
@@ -352,10 +354,12 @@
                                                     <?php
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
+                                                    <?php if($prod->Legal != ''):?>
                                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                                     <span class="terms-content">
                                                         <?php echo $prod->Legal; ?>
                                                     </span>
+                                                    <?php endif;?>
                                                 </ul>
                                             </div>
                                         </td>
@@ -479,10 +483,12 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
+                                        <?php if($prod->Legal != ''):?>
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                         <span class="terms-content">
                                             <?php echo $prod->Legal; ?>
                                         </span>
+                                        <?php endif;?>
                                     </div>
                                 </td>
                                 <td></td>
@@ -549,10 +555,12 @@
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
+                                                <?php if($prod->Legal != ''):?>
                                                 <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                                 <span class="terms-content">
                                                     <?php echo $prod->Legal; ?>
                                                 </span>
+                                                <?php endif;?>
                                             </div>
                                         </td>
                                     </tr>
@@ -746,10 +754,12 @@
                                         do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                         ?>
                                     </ul>
+                                    <?php if($prod->Legal != ''):?>
                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                     <span class="terms-content">
                                         <?php echo $prod->Legal; ?>
                                     </span>
+                                    <?php endif;?>
                                 </div>
                             </td>
                             <td></td>
@@ -814,10 +824,12 @@
                                                 do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                 ?>
                                             </ul>
+                                            <?php if($prod->Legal != ''):?>
                                             <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                             <span class="terms-content">
                                                 <?php echo $prod->Legal; ?>
                                             </span>
+                                            <?php endif;?>
                                         </div>
                                     </td>
                                 </tr>
@@ -934,10 +946,12 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
+                                        <?php if($prod->Legal != ''):?>
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                         <span class="terms-content">
                                             <?php echo $prod->Legal; ?>
                                         </span>
+                                        <?php endif;?>
                                     </div>
                                 </td>
                                 <td></td>
@@ -1003,10 +1017,12 @@
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
+                                                <?php if($prod->Legal != ''):?>
                                                 <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                                 <span class="terms-content">
                                                     <?php echo $prod->Legal; ?>
                                                 </span>
+                                                <?php endif;?>
                                             </div>
                                         </td>
                                     </tr>
