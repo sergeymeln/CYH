@@ -76,8 +76,7 @@ class MarketingRepository
             $bigCitiesCondition = ' AND c.id NOT IN('.implode(',', $excludeCityIds).') ';
         }
         $sql = 'SELECT
-                c.*, (123456
-                
+                c.*, (                
                   3959 * acos (
                   cos ( radians('.$cityData['latitude'].') )
                   * cos( radians( latitude ) )

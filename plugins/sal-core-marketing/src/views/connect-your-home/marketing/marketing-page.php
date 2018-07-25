@@ -43,7 +43,7 @@
                         $showSpectrum=1;
                     }
                     ?>
-                    <li><a target="_blank" href="<?php echo $provider->NavigationLink->LinkUrl?>"><img src="<?php echo $provider->Logo; ?>" ></a></li>
+                    <li><img src="<?php echo $provider->Logo; ?>" ></li>
                 <?php endforeach;?>
             </ul>
 
