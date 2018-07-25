@@ -297,7 +297,7 @@ class MarketingService extends CacheableService
         $prepared = [];
         $skipBulletsData = ['-','0'];
         foreach($bullets as $bullet) {
-            if(preg_match('/Exclusive Offers/', $bullet)) {
+            if(preg_match('/exclusive offers/i', $bullet)) {
                 continue;
             }
             preg_match_all('/{.*?}/',$bullet, $matches);
