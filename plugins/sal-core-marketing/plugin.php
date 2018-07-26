@@ -22,6 +22,7 @@ $context = \CYH\Context\ContextProvider::GetContext(\CYH\Marketing\Plugins\SalCo
 $availableClasses = [
     '\\' . \CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::class,
     '\\' . \CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class,
+    '\\' . \CYH\Marketing\Controllers\ConnectYourHome\TermsAndConditionsController::class,
 ];
 
 \CYH\Plugins\SalCore::RegisterViewDirectories(new \CYH\Models\Core\ViewDirRegistryEntry(\CYH\Marketing\Plugins\SalCoreMarketing::class, __DIR__ . '/src/views/', [CYH\Plugins\SalCore::class]));
@@ -29,9 +30,9 @@ $availableClasses = [
 
 add_action( 'gm_virtual_pages', function( $controller ) {
 
+    $marketingService = new \CYH\Marketing\Services\MarketingService();
     if(preg_match('/\/internet\/[a-z]{1,}\/[a-zA-Z-]{1,}\/{0,1}$/', $_SERVER['REQUEST_URI'])) {
         $urlHelper = new \CYH\Marketing\Helpers\UrlHelper();
-        $marketingService = new \CYH\Marketing\Services\MarketingService();
         $cityData = $urlHelper->getCityFromUrl();
         if ($cityData !== false) {
             $title = $marketingService->getCityTitle($cityData);
@@ -45,6 +46,18 @@ add_action( 'gm_virtual_pages', function( $controller ) {
         }
 
     }
+
+    $title = $marketingService->getTermsTitle();
+    $controller->addPage( new \GM\VirtualPages\Page( '/offers-terms-and-conditions' ) )
+        ->setTitle($title)
+        ->setTemplate( 'page-templates/marketing-terms.php' );
+    $desc = $marketingService->getTermsDescription();
+    add_filter("wpseo_metadesc", function() use ($desc){
+        return $desc;
+    });
+
+
+
 
 } );
 
@@ -63,3 +76,9 @@ add_action( 'wp_ajax_nopriv_cyh_show_brand_data', function(){
     do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetBrandHtml' );
     wp_die();
 } );
+
+//SEO setup
+
+add_filter( 'wpseo_sitemap_index', \CYH\Marketing\Helpers\SeoMarketingHelper::class . '::AddMarketingSitemap' );
+
+add_action( 'init', \CYH\Marketing\Helpers\SeoMarketingHelper::class . '::InitSitemapActions' );

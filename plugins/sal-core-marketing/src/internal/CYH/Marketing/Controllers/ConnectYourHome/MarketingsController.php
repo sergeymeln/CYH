@@ -42,7 +42,7 @@ class MarketingsController extends GenericController
 
         $productFilter = new ProductFilter();
         $productFilter->Zip = $city->Zip;
-        $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheDisabledSettings());
+        $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
         if(count($productList) ==0) {
             return false;
         }
@@ -50,6 +50,7 @@ class MarketingsController extends GenericController
         $preparedData['productList'] = $this->filterProducts($productList);
         $preparedData['providers'] = $this->getProvidersFromProducts($preparedData['productList']);
         $preparedData['productListSorted'] = $this->sortProducts($preparedData['productList']);
+        $preparedData['productListSortedAll'] = $this->sortAllProducts($preparedData['productList']);
 
         $preparedData['topProvidersData'] = $this->marketingService->getTopProvidersDataFromProducts($preparedData['productList']);
         //echo '<pre>'; print_r($preparedData['productListSorted']);exit;
@@ -123,6 +124,21 @@ class MarketingsController extends GenericController
         }, $products), SORT_ASC, SORT_NUMERIC, array_map(function($element) {
             return $element->Price;
         }, $products), SORT_ASC, $products);
+
+        return $products;
+    }
+
+    /**
+     * @param $products
+     * @return mixed
+     */
+    private function sortAllProducts($products)
+    {
+        array_multisort(array_map(function($element) {
+            return $element->ServiceProviderCategory->Provider->Name;
+        }, $products), SORT_ASC, array_map(function($element) {
+            return $element->Price;
+        }, $products), SORT_NUMERIC, $products);
 
         return $products;
     }

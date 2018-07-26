@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="inner-block vertical-align">
-                    <h1 class="inner-title">best internet providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
+                    <h1 class="inner-title">Best Internet providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
                     <p class="inner-text"><?php echo $city->TagLine?></p>
                     <div class="zip-code-form">
                         <div class="form-inline">
@@ -283,12 +283,14 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
-                                        <?php if($prod->Legal != ''):?>
+                                        <?php /*if($prod->Legal != ''):*/?><!--
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                         <span class="terms-content">
-                                            <?php echo $prod->Legal; ?>
+                                            <?php /*echo $prod->Legal; */?>
                                         </span>
-                                        <?php endif;?>
+                                        --><?php /*endif;*/?>
+                                        <!--Temporary add link-->
+                                        <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
                                     </div>
                                 </td>
                                 <td></td>
@@ -354,12 +356,14 @@
                                                     <?php
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
-                                                    <?php if($prod->Legal != ''):?>
+                                                    <?php /*if($prod->Legal != ''):*/?><!--
                                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                                     <span class="terms-content">
-                                                        <?php echo $prod->Legal; ?>
+                                                        <?php /*echo $prod->Legal; */?>
                                                     </span>
-                                                    <?php endif;?>
+                                                    --><?php /*endif;*/?>
+                                                    <!--Temporary add link-->
+                                                    <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
                                                 </ul>
                                             </div>
                                         </td>
@@ -483,12 +487,14 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
-                                        <?php if($prod->Legal != ''):?>
+                                        <?php /*if($prod->Legal != ''):*/?><!--
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                         <span class="terms-content">
-                                            <?php echo $prod->Legal; ?>
+                                            <?php /*echo $prod->Legal; */?>
                                         </span>
-                                        <?php endif;?>
+                                        --><?php /*endif;*/?>
+                                        <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                                     </div>
                                 </td>
                                 <td></td>
@@ -555,12 +561,14 @@
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
-                                                <?php if($prod->Legal != ''):?>
+                                                <?php /*if($prod->Legal != ''):*/?><!--
                                                 <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                                 <span class="terms-content">
-                                                    <?php echo $prod->Legal; ?>
+                                                    <?php /*echo $prod->Legal; */?>
                                                 </span>
-                                                <?php endif;?>
+                                                --><?php /*endif;*/?>
+                                                <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -712,13 +720,13 @@
                         </thead>
                         <tbody>
                         <?php $tempCounter = 0;
-                        foreach ($cityData['productListSorted'] as $prod) {
+                        foreach ($cityData['productListSortedAll'] as $prod) {
                             if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
-                        <?php foreach($cityData['productListSorted'] as $prod):?>
+                        <?php foreach($cityData['productListSortedAll'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                                 <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
@@ -754,12 +762,14 @@
                                         do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                         ?>
                                     </ul>
-                                    <?php if($prod->Legal != ''):?>
+                                    <?php /*if($prod->Legal != ''):*/?><!--
                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                     <span class="terms-content">
-                                        <?php echo $prod->Legal; ?>
+                                        <?php /*echo $prod->Legal; */?>
                                     </span>
-                                    <?php endif;?>
+                                    --><?php /*endif;*/?>
+                                    <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                                 </div>
                             </td>
                             <td></td>
@@ -782,14 +792,14 @@
                     </table>
 
                     <?php $tempCounter = 0;
-                    foreach ($cityData['productListSorted'] as $prod) {
+                    foreach ($cityData['productListSortedAll'] as $prod) {
                         if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}
                         $tempCounter++;
                     }
                     ?>
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
-                        <?php foreach($cityData['productListSorted'] as $prod):?>
+                        <?php foreach($cityData['productListSortedAll'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetCats'])){continue;}?>
                             <?php
                             $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
@@ -824,12 +834,14 @@
                                                 do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                 ?>
                                             </ul>
-                                            <?php if($prod->Legal != ''):?>
+                                            <?php /*if($prod->Legal != ''):*/?><!--
                                             <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                             <span class="terms-content">
-                                                <?php echo $prod->Legal; ?>
+                                                <?php /*echo $prod->Legal; */?>
                                             </span>
-                                            <?php endif;?>
+                                            --><?php /*endif;*/?>
+                                            <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -909,13 +921,13 @@
                         </thead>
                         <tbody>
                         <?php $tempCounter = 0;
-                        foreach ($cityData['productListSorted'] as $prod) {
+                        foreach ($cityData['productListSortedAll'] as $prod) {
                             if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                             $tempCounter++;
                         }
                         ?>
                         <?php if($tempCounter > 0):?>
-                        <?php foreach($cityData['productListSorted'] as $prod):?>
+                        <?php foreach($cityData['productListSortedAll'] as $prod):?>
                             <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                                 <?php
                                 $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
@@ -946,12 +958,14 @@
                                             do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                             ?>
                                         </ul>
-                                        <?php if($prod->Legal != ''):?>
+                                        <?php /*if($prod->Legal != ''):*/?><!--
                                         <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                         <span class="terms-content">
-                                            <?php echo $prod->Legal; ?>
+                                            <?php /*echo $prod->Legal; */?>
                                         </span>
-                                        <?php endif;?>
+                                        --><?php /*endif;*/?>
+                                        <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                                     </div>
                                 </td>
                                 <td></td>
@@ -974,7 +988,7 @@
                     </table>
 
                     <?php $tempCounter = 0;
-                    foreach ($cityData['productListSorted'] as $prod) {
+                    foreach ($cityData['productListSortedAll'] as $prod) {
                         if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}
                         $tempCounter++;
                     }
@@ -982,7 +996,7 @@
                     <?php if($tempCounter > 0):?>
                     <ul class="providers-table-slider hidden-sm hidden-md hidden-lg">
 
-                        <?php foreach($cityData['productListSorted'] as $prod):?>
+                        <?php foreach($cityData['productListSortedAll'] as $prod):?>
                         <?php if(!in_array($prod->ServiceProviderCategory->Category->Id,$constants['internetAndTvCats'])){continue;}?>
                             <?php
                             $speedData = \CYH\Marketing\Helpers\ProductDataHelper::getSpeedData($prod->DownloadSpeed);
@@ -1017,12 +1031,14 @@
                                                     do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                                     ?>
                                                 </ul>
-                                                <?php if($prod->Legal != ''):?>
+                                               <!-- <?php /*if($prod->Legal != ''):*/?>
                                                 <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                                 <span class="terms-content">
-                                                    <?php echo $prod->Legal; ?>
+                                                    <?php /*echo $prod->Legal; */?>
                                                 </span>
-                                                <?php endif;?>
+                                                --><?php /*endif;*/?>
+                                                <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                                             </div>
                                         </td>
                                     </tr>

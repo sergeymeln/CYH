@@ -53,12 +53,14 @@
                                 do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                 ?>
                             </ul>
-                            <?php if($prod->Legal != ''):?>
+                            <?php /*if($prod->Legal != ''):*/?><!--
                             <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                             <span class="terms-content">
-                                <?php echo $prod->Legal; ?>
+                                <?php /*echo $prod->Legal; */?>
                             </span>
-                            <?php endif;?>
+                            --><?php /*endif;*/?>
+                            <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                         </div>
                     </td>
                     <td></td>
@@ -123,12 +125,14 @@
                                         do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                         ?>
                                     </ul>
-                                    <?php if($prod->Legal != ''):?>
+                                    <?php /*if($prod->Legal != ''):*/?><!--
                                     <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
                                     <span class="terms-content">
-                                        <?php echo $prod->Legal; ?>
+                                        <?php /*echo $prod->Legal; */?>
                                     </span>
-                                    <?php endif;?>
+                                    --><?php /*endif;*/?>
+                                    <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+
                                 </div>
                             </td>
                         </tr>

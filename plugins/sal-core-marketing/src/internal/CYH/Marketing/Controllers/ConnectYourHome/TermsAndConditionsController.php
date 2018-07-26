@@ -4,18 +4,17 @@ namespace CYH\Marketing\Controllers\ConnectYourHome;
 
 use CYH\Context\Base\ControllerContext;
 use CYH\Controllers\Core\GenericController;
-use CYH\Sal\Services\ProductsService;
-use CYH\Sal\Services\CacheSettingsProvider;
 use CYH\Models\Filters\ProductFilter;
+use CYH\Sal\Services\CacheSettingsProvider;
+use CYH\Sal\Services\ProductsService;
 use CYH\Marketing\Services\MarketingService;
 
-
-class AjaxController extends GenericController
+class TermsAndConditionsController extends GenericController
 {
     protected $prodService = null;
+    protected $dataTransformerHelper;
     protected $marketingService = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
-    const INTERNET_CATEGORIES = [4,5];
 
     public function __construct(ControllerContext $context)
     {
@@ -24,27 +23,21 @@ class AjaxController extends GenericController
         $this->marketingService = new MarketingService();
     }
 
-    public function GetBrandHtml()
+    public function RenderTerms()
     {
-        $brandId = (int)$_POST['brand_id'];
-        $zip = $_POST['zip'];
-        $city = $this->marketingService->getCityByZip($zip);
+        $preparedData = [];
 
         $productFilter = new ProductFilter();
-        $productFilter->Zip = $zip;
-        $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
-        $productList = $this->filterProducts($productList);
-        $productList = $this->sortProducts($productList);
-
-        if(count($productList) == 0) {
+        $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheDisabledSettings());
+        if(count($productList) ==0) {
             return false;
         }
 
-        $this->View('marketing/one-brand', [
-            'products' => $productList,
-            'brandId' => $brandId,
-            'catIds' => self::INTERNET_CATEGORIES,
-            'city' => $city
+        $preparedData['productList'] = $this->filterProducts($productList);
+        $preparedData['productListSorted'] = $this->sortProducts($preparedData['productList']);
+
+        $this->View('marketing/marketing-terms-page', [
+            'cityData' => $preparedData
         ]);
     }
 
@@ -79,20 +72,5 @@ class AjaxController extends GenericController
         }, $products), SORT_NUMERIC, $products);
 
         return $products;
-    }
-
-    public function GetCityByZip()
-    {
-        if (array_key_exists('zip_code', $_POST)) {
-            $result = $this->marketingService->getCityByZip($_POST['zip_code']);
-            if(is_array($result) && count($result)> 0) {
-                $data = ['result' => 'success', 'link' => '/internet/'.strtolower($result['state_code']).'/'.$result['city_name']];
-            } else {
-                $data = ['result' => 'failure', 'link' => ''];
-            }
-
-            echo wp_json_encode($data);
-            wp_die();
-        }
     }
 }

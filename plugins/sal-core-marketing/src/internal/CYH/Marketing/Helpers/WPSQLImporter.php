@@ -32,7 +32,7 @@ class WPSQLImporter
                         'latitude'=>$result->latitude,
                         'longitude'=>$result->longitude,
                         'city_name'=>strtolower(str_replace([' ', 'ñ', '.','(', ')'], ['-', 'n', '-','-', ''],$result->name)),
-                        'city_normal_name'=>$result->name,
+                        'city_normal_name'=>str_replace(['(', ')'], ['', ''],$result->name),
                         'city_type'=>$result->type,
                         'county'=>$result->county,
                         'state_code'=>$result->state_code,
@@ -313,9 +313,9 @@ class WPSQLImporter
     {
         global $wpdb;
 
-        $sectionOne = str_replace("'", '&rsquo;', $sectionOne);
-        $sectionTwo = str_replace("'", '&rsquo;', $sectionTwo);
-        $sectionThree = str_replace("'", '&rsquo;', $sectionThree);
+        $sectionOne = str_replace(["'", '(Town)','(Township)'], ['&rsquo;','Town','Township'], $sectionOne);
+        $sectionTwo = str_replace(["'", '(Town)','(Township)'], ['&rsquo;','Town','Township'], $sectionTwo);
+        $sectionThree = str_replace(["'", '(Town)','(Township)'], ['&rsquo;','Town','Township'], $sectionThree);
         $wpdb->query('UPDATE '.$wpdb->prefix.'cyh_city_content SET section_one="", section_two="", section_three="" 
          WHERE city_id='.$cityId.' AND section_two_text="";');
         $wpdb->query('UPDATE '.$wpdb->prefix."cyh_city_content SET section_one='".$sectionOne."', section_two='".$sectionTwo."', section_three='".$sectionThree."' 

@@ -46,6 +46,22 @@ class MarketingRepository
         return $results->current();
     }
 
+    public function GetPublishedCities()
+    {
+        $sql = new Sql($this->adapter);
+        $select = $sql->select();
+        $select->from(CYH_TABLE_PREFIX.'cyh_city');
+        $select->join(array("s" => CYH_TABLE_PREFIX."cyh_state"), "s.id=".CYH_TABLE_PREFIX."cyh_city.state_id");
+        $select->join(array("cc" => CYH_TABLE_PREFIX."cyh_city_content"), CYH_TABLE_PREFIX."cyh_city.id=cc.city_id");
+        //$select->join(array("tl" => CYH_TABLE_PREFIX."cyh_tag_lines"), "cc.tag_lines_id=tl.id");
+        $select->where(array('is_published' => 1));
+        $select->where->in('city_type', self::CITIES_IN);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+
+        return $results;
+    }
+
     /**
      * @param $cityContentId
      * @return \Zend\Db\Adapter\Driver\ResultInterface
@@ -76,7 +92,7 @@ class MarketingRepository
             $bigCitiesCondition = ' AND c.id NOT IN('.implode(',', $excludeCityIds).') ';
         }
         $sql = 'SELECT
-                c.*, (                
+                c.*, (
                   3959 * acos (
                   cos ( radians('.$cityData['latitude'].') )
                   * cos( radians( latitude ) )
