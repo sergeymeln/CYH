@@ -47,17 +47,16 @@ add_action( 'gm_virtual_pages', function( $controller ) {
 
     }
 
-    $title = $marketingService->getTermsTitle();
-    $controller->addPage( new \GM\VirtualPages\Page( '/offers-terms-and-conditions' ) )
-        ->setTitle($title)
-        ->setTemplate( 'page-templates/marketing-terms.php' );
-    $desc = $marketingService->getTermsDescription();
-    add_filter("wpseo_metadesc", function() use ($desc){
-        return $desc;
-    });
-
-
-
+    if(preg_match('/\/offers-terms-and-conditions/', $_SERVER['REQUEST_URI'])) {
+        $title = $marketingService->getTermsTitle();
+        $controller->addPage( new \GM\VirtualPages\Page( '/offers-terms-and-conditions' ) )
+            ->setTitle($title)
+            ->setTemplate( 'page-templates/marketing-terms.php' );
+        $desc = $marketingService->getTermsDescription();
+        add_filter("wpseo_metadesc", function() use ($desc){
+            return $desc;
+        });
+    }
 
 } );
 
