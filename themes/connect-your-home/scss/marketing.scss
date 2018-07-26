@@ -209,7 +209,7 @@ section {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1.4px;
-  width: 50%;
+  width: 85%;
 }
 .inner-text {
   text-align: center;
@@ -217,7 +217,7 @@ section {
   font-size: 14px;
   line-height: 28px;
   letter-spacing: 1.2px;
-  width: 40%;
+  width: 65%;
   margin-bottom: 3vh;
   font-weight: 500;
 }
@@ -228,7 +228,7 @@ section {
   background-position: center center;
   background-size:cover;
   position: relative;
-  height: 500px;
+  max-height: 500px;
   padding: 0;
   .darken-bg{
     content: '';
@@ -245,10 +245,9 @@ section {
     height: 100%;
     align-items: center;
     justify-content: space-between;
-    height: 500px;
-    padding-top: 15vh;
+    padding-top: 7vh;
     padding-bottom: 2vh;
-    position: absolute;
+    position: relative;
     z-index: 1;
     margin: 0 auto;
     left: 0;
@@ -639,6 +638,20 @@ p.not-found-items {
 }
 .providers-table.mobile {
   display: none;
+    .slide-cell {
+      .middle-text {
+        display: block;
+        position: relative;
+        padding-right: 15px;
+        float: left;
+        width: 100%;
+      }
+    }
+  .plan-description {
+    .plus-list {
+      padding-left: 0;
+    }
+  }
 }
 .offers-navigation {
   margin-bottom: 65px;
@@ -858,7 +871,7 @@ footer {
     border-bottom: 0;
   }
   .intro-section .inner-block {
-    padding-top: 8vh;
+    padding-top: 3vh;
     padding-bottom: 0vh
   }
   .inner-text {
@@ -963,9 +976,6 @@ footer {
       display: inline-block;
     }
   }
-  .intro-section .inner-block {
-    padding-top: 11vh;
-  }
   .breadcrumb li a {
     font-size: 18px;
   }
@@ -976,6 +986,7 @@ footer {
   }
   .providers-table.tablet {
     margin: 0px 0;
+    margin-bottom: 20px;
   }
   .flex-list li, .flex-list li a {
     font-size: 22px;
@@ -1102,10 +1113,11 @@ footer {
   }
   .providers-table {
     margin: 0px 0;
+    margin-bottom: 20px;
   }
 }
 @media (max-width: 480px) {
-  h2 {
+  h2, .information-section h2 {
     font-size: 22px;
     line-height: 26px;
     width: 100%;
@@ -1117,7 +1129,6 @@ footer {
     padding: 14px 25px;
   }
   .inner-block {
-    padding: 0 15px;
     .zip-code-form .form-inline {
       display: block;
     }
@@ -1128,7 +1139,6 @@ footer {
     }
   }
   .intro-section .inner-block {
-    padding-top: 0;
     justify-content: center;
   }
   .inner-title {
@@ -1197,9 +1207,7 @@ footer {
   .btn-orange.btn-big {
     min-width: 290px;
     max-width: 290px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: pre-line;
   }
   .map {
     margin-bottom: 20px;

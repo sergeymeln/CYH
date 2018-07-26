@@ -167,6 +167,31 @@
                             <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                         </tr>
                         <tr class="thead-row thead-simple">
+                            <th >Product Description</th>
+                        </tr>
+                        <tr>
+                            <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                        </tr>
+                        <tr class="hidden-row">
+                            <td>
+                                <div class="hidden-content">
+                                    <ul class="plan-description">
+                                        <?php
+                                        do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                        ?>
+                                        <?php /*if($prod->Legal != ''):*/?><!--
+                                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                    <span class="terms-content">
+                                                        <?php /*echo $prod->Legal; */?>
+                                                    </span>
+                                                    --><?php /*endif;*/?>
+                                        <!--Temporary add link-->
+                                        <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="thead-row thead-simple">
                             <th >Price From</th>
                         </tr>
                         <tr>
