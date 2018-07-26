@@ -1,33 +1,35 @@
 <?php $showSpectrum=0;?>
 <section class="intro-section">
     <div class="container-fluid">
-        <div class="darken-bg"></div>
-        <div class="container">
-            <div class="row">
-                <div class="inner-block vertical-align">
-                    <h1 class="inner-title">Best Internet providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
-                    <p class="inner-text"><?php echo $city->TagLine?></p>
-                    <div class="zip-code-form">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label class="sr-only" for="zipCode">Email</label>
-                                <input type="text" value="<?php echo $city->Zip?>" class="form-control zip-code" id="zipCode" placeholder="ZIP code">
+        <div class="row">
+            <div class="darken-bg"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="inner-block vertical-align">
+                        <h1 class="inner-title">Best Internet providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
+                        <p class="inner-text"><?php echo $city->TagLine?></p>
+                        <div class="zip-code-form">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label class="sr-only" for="zipCode">Email</label>
+                                    <input type="text" value="<?php echo $city->Zip?>" class="form-control zip-code" id="zipCode" placeholder="ZIP code">
+                                </div>
+                                <input type="hidden" value="<?php echo $city->Zip?>" id="currentZipCode"/>
+                                <button type="button" id="cyh_process_zip" class="btn btn-green">Update location</button>
                             </div>
-                            <input type="hidden" value="<?php echo $city->Zip?>" id="currentZipCode"/>
-                            <button type="button" id="cyh_process_zip" class="btn btn-green">Update location</button>
+                            <div>
+                                <span class="active process-status" id="cyh_process_status"></span>
+                            </div>
                         </div>
-                        <div>
-                            <span class="active process-status" id="cyh_process_status"></span>
-                        </div>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#" class="active">Internet</a></li>
+                            <li><a href="#" class="active"><?php echo $city->StateName?></a></li>
+                            <li><a class="active"><?php echo $city->NormalName?></a></li>
+                        </ol>
                     </div>
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#" class="active">Internet</a></li>
-                        <li><a href="#" class="active"><?php echo $city->StateName?></a></li>
-                        <li><a class="active"><?php echo $city->NormalName?></a></li>
-                    </ol>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -399,6 +401,31 @@
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
+                                        <th >Product Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                    </tr>
+                                    <tr class="hidden-row">
+                                        <td>
+                                            <div class="hidden-content">
+                                                <ul class="plan-description">
+                                                    <?php
+                                                    do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                    ?>
+                                                    <?php /*if($prod->Legal != ''):*/?><!--
+                                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                    <span class="terms-content">
+                                                        <?php /*echo $prod->Legal; */?>
+                                                    </span>
+                                                    --><?php /*endif;*/?>
+                                                    <!--Temporary add link-->
+                                                    <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="thead-row thead-simple">
                                         <th >Price From</th>
                                     </tr>
                                     <tr>
@@ -601,6 +628,31 @@
                                 <tbody>
                                 <tr>
                                     <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                </tr>
+                                <tr class="thead-row thead-simple">
+                                    <th >Product Description</th>
+                                </tr>
+                                <tr>
+                                    <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>
+                                        <div class="hidden-content">
+                                            <ul class="plan-description">
+                                                <?php
+                                                do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                ?>
+                                                <?php /*if($prod->Legal != ''):*/?><!--
+                                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                    <span class="terms-content">
+                                                        <?php /*echo $prod->Legal; */?>
+                                                    </span>
+                                                    --><?php /*endif;*/?>
+                                                <!--Temporary add link-->
+                                                <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr class="thead-row thead-simple">
                                     <th >Price From</th>
@@ -876,6 +928,31 @@
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
+                                        <th >Product Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                    </tr>
+                                    <tr class="hidden-row">
+                                        <td>
+                                            <div class="hidden-content">
+                                                <ul class="plan-description">
+                                                    <?php
+                                                    do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                    ?>
+                                                    <?php /*if($prod->Legal != ''):*/?><!--
+                                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                    <span class="terms-content">
+                                                        <?php /*echo $prod->Legal; */?>
+                                                    </span>
+                                                    --><?php /*endif;*/?>
+                                                    <!--Temporary add link-->
+                                                    <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="thead-row thead-simple">
                                         <th >Price From</th>
                                     </tr>
                                     <tr>
@@ -1071,6 +1148,31 @@
                                 <tbody>
                                     <tr>
                                         <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                    </tr>
+                                    <tr class="thead-row thead-simple">
+                                        <th >Product Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="<?php echo $tdClass?>"><span class="middle-text <?php echo $spanClass?>"><?php echo $prod->Name?></span></td>
+                                    </tr>
+                                    <tr class="hidden-row">
+                                        <td>
+                                            <div class="hidden-content">
+                                                <ul class="plan-description">
+                                                    <?php
+                                                    do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                                    ?>
+                                                    <?php /*if($prod->Legal != ''):*/?><!--
+                                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
+                                                    <span class="terms-content">
+                                                        <?php /*echo $prod->Legal; */?>
+                                                    </span>
+                                                    --><?php /*endif;*/?>
+                                                    <!--Temporary add link-->
+                                                    <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
                                         <th >Price From</th>
