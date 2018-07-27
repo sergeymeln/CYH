@@ -89,8 +89,9 @@ h2 {
   text-align: center;
   text-transform: uppercase;
   position: relative;
-  padding-bottom: 15px;
-  margin-bottom: 80px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 0;
   &:after{
     content:'';
     width: 70px;
@@ -101,7 +102,7 @@ h2 {
     left: 0;
     right: 0;
     margin: 0 auto;
-    bottom: -7px;
+    bottom: 0px;
   }
 }
 a:hover,
@@ -111,7 +112,7 @@ a:active {
   text-decoration: none;
 }
 section {
-  padding: 45px 0 70px 0;
+  padding: 50px 0 45px 0;
   p{
     font-size: 16px;
     line-height: 27px;
@@ -353,7 +354,7 @@ section {
 
 /*Map Section Start*/
 .map {
-  margin-top: 57px;
+  margin-top: 30px;
   box-shadow: 0 10px 20px 0 rgba(62, 79, 109, 0.07);
 }
 /*Map Section End*/
@@ -372,13 +373,14 @@ section {
     padding: 0px 60px;
     overflow: hidden;
     display: flex;
+    margin-bottom: 30px;
     .slick-list {
       margin-right: auto;
       margin-left: auto;
     }
   }
   .slick-slide  {
-    padding: 30px;
+    padding: 0 30px;
   }
   /*.slick-active.slick-center {
     transform: scale(1.4);
@@ -389,8 +391,7 @@ section {
   color: $dark;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 65px;
-  margin-top: 20px;
+  margin-bottom: 30px;
 }
 .zip-code-form {
   text-align: center;
@@ -431,7 +432,7 @@ section {
   overflow: hidden;
   box-shadow: 0 10px 20px 0 rgba(62, 79, 109, 0.07);
   background-color: $white;
-  margin: 73px 0;
+  margin: 0px 0 30px 0;
   tr > td {
     font-family: $font-family-roboto-medium;
     font-size: 14px;
@@ -654,7 +655,7 @@ p.not-found-items {
   }
 }
 .offers-navigation {
-  margin-bottom: 65px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
   .form-inline {
@@ -693,7 +694,7 @@ p.not-found-items {
   margin: 0;
   padding: 0;
   padding: 0 50px;
-  margin-top: 42px;
+  margin-top: 0px;
   .slick-slide {
     margin: 0 10px;
   }
@@ -745,13 +746,13 @@ p.not-found-items {
     padding-left: 20px;
     padding-right: 20px;
     min-width: 280px;
-    margin: 10px 20px;
+    margin: 10px 20px 0 20px;
   }
 }
 .offers-list-wrap {
   display: flex;
   justify-content: center;
-  padding-top: 5px;
+  padding-top: 0px;
 }
 .flex-list {
   margin: 0 auto;
@@ -785,10 +786,8 @@ p.not-found-items {
   }
 }
 .information-section {
-  padding: 73px 0;
   h2 {
     margin-top: 64px;
-    margin-bottom: 70px;
     &:first-child {
       margin-top: 0;
     }
@@ -802,9 +801,9 @@ p.not-found-items {
       margin:  0 auto;
     }
   }
-  .button-wrap {
-    margin-top: 65px;
-  }
+}
+.nearby-offers {
+  padding-bottom: 0;
 }
 .nearby-offers-list {
   li {
@@ -827,9 +826,8 @@ p.not-found-items {
   }
 }
 footer {
-  margin-top: 65px;
+  margin-top: 45px;
 }
-
 @media (min-width: 768px){
   .container {
     width: 730px;
@@ -865,7 +863,6 @@ footer {
 @media (max-width: 992px) {
   h2, .information-section h2 {
     font-size: 32px;
-    margin-bottom: 65px;
   }
   .providers-table tbody > .hidden-row td {
     border-bottom: 0;
@@ -879,6 +876,7 @@ footer {
   }
   .offer-section .providers-slider {
     padding: 0px 14%;
+    margin-bottom: 30px;
   }
 
   .providers-slider {
@@ -889,23 +887,20 @@ footer {
       right: 7%;
     }
   }
-  .provider-count {
-    margin-top: 12px;
-  }
   .providers-table tbody > tr > td{
     padding: 40px 25px;
   }
   .flex-list {
-    margin: 0 15px;
+    margin: 0 23px;
   }
   .nearby-offers {
     .flex-list:first-child {
-      margin-left: 15px;
+      margin-left: 23px;
       margin-right:30px;
     }
     .flex-list:last-child {
-      margin-left: 30px;
-      margin-right: 15px;
+      margin-left: 23px;
+      margin-right: 0px;
     }
   }
   .flex-list li, .flex-list li a {
@@ -936,6 +931,13 @@ footer {
       order: 1;
       margin-left: 15px;
     }
+    &.simple {
+      .tab-offers {
+       border-bottom: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
   }
 
 }
@@ -955,13 +957,14 @@ footer {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 42px;
+    margin-bottom: 30px;
     &:after{
       bottom: 0;
     }
   }
   .information-section h2 {
-    margin-bottom: 42px;
+    margin-top: 40px;
+    margin-bottom: 30px;
   }
   .inner-title {
     font-size: 30px;
@@ -986,7 +989,7 @@ footer {
   }
   .providers-table.tablet {
     margin: 0px 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
   .flex-list li, .flex-list li a {
     font-size: 22px;
@@ -1011,7 +1014,7 @@ footer {
     }
   }
   .offers-navigation {
-    margin-bottom: 0;
+    margin-bottom: 30px;
     .tab-offers {
       margin-top: -20px;
       margin-bottom: 25px;
@@ -1027,7 +1030,7 @@ footer {
       }
     }
     .loader {
-      order: 1;
+      order: 2;
     }
   }
   .offers-navigation {
@@ -1091,6 +1094,11 @@ footer {
         width: 247px;
       }
     }
+    &.simple {
+      .tab-offers:after {
+        display: none;
+      }
+    }
   }
   .brand-list {
     margin-left: 0;
@@ -1123,7 +1131,7 @@ footer {
     width: 100%;
   }
   section {
-    padding: 30px 0 55px 0;
+    padding: 30px 0 30px 0;
   }
   .btn-green, .btn-orange {
     padding: 14px 25px;
@@ -1175,7 +1183,7 @@ footer {
   }
   .provider-count {
     margin-top: 0px;
-    margin-bottom: 48px;
+    margin-bottom: 15px;
   }
   .providers-table-slider {
     padding: 0 20px;
@@ -1229,6 +1237,9 @@ footer {
   }
   .nearby-offers  .flex-list li {
     margin-bottom: 5px;
+  }
+  footer {
+    margin-top: 30px;
   }
 }
 .modal-header {

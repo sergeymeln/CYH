@@ -220,13 +220,14 @@
     <div class="container">
         <div class="row">
             <h2 id="best-offers">Best Offers For Internet Service in <?php echo $city->NormalName?>, <?php echo $city->StateCode?></h2>
+            <div class="offers-navigation simple">
             <ul class="nav nav-pills tab-offers">
                 <li class="active"><a href="#internet" data-toggle="tab" class="btn btn-white">Internet</a></li>
                 <li><a href="#internetTv" data-toggle="tab" class="btn btn-white">Internet + TV</a></li>
                 <!--<li><a href="#internetTvVoice" data-toggle="tab" class="btn btn-white">Internet + TV + Voice</a></li>-->
             </ul>
 
-
+            </div>
             <div class="tab-content">
                 <div id="internet" class="tab-pane fade in active">
                     <table class="table providers-table offers-table hidden-xs">
