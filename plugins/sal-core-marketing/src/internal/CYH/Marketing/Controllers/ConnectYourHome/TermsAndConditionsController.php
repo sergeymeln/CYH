@@ -28,7 +28,7 @@ class TermsAndConditionsController extends GenericController
         $preparedData = [];
 
         $productFilter = new ProductFilter();
-        $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheDisabledSettings());
+        $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
         if(count($productList) ==0) {
             return false;
         }

@@ -12,6 +12,9 @@
     <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
     <meta name="google-site-verification" content="EFtzbtsY_0VcjlbC1YCbyftWw6hjWZjVqhqdnO1MeOQ" />
 
+    <?php if(preg_match('/\/offers-terms-and-conditions/',$_SERVER['REQUEST_URI'])):?>
+    <meta name="robots" content="noindex,nofollow">
+    <?php endif;?>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.1/themes/base/minified/jquery-ui.min.css" />
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
