@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <div class="inner-block vertical-align">
-                        <h1 class="inner-title">Best Internet providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
+                        <h1 class="inner-title">Best Internet Providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
                         <p class="inner-text"><?php echo $city->TagLine?></p>
                         <div class="zip-code-form">
                             <div class="form-inline">

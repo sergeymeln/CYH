@@ -16,7 +16,8 @@ class MarketingRepository
         'driver' => 'Pdo_Mysql',
         'database' => DB_NAME,
         'username' => DB_USER,
-        'password' => DB_PASSWORD
+        'password' => DB_PASSWORD,
+        'charset' => 'utf8'
     );
 
     const CITIES_IN = ['City', 'Town', 'Township', 'Village', 'Borough', 'Metropolitan Government'];
