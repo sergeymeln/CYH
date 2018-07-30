@@ -609,6 +609,24 @@ section {
   .terms-content {
     display: none;
   }
+  &.terms-table {
+    table-layout: fixed;
+    tbody > tr > td {
+      vertical-align: top;
+      padding: 25px 25px;
+      &:after {
+        height: 95%;
+      }
+      &:last-child {
+        text-align: left;
+      }
+    }
+  }
+}
+.terms-slider {
+  .slick-prev, .slick-next {
+    top: 1%;
+  }
 }
 .not-found-items {
   text-align: center;
@@ -987,6 +1005,10 @@ footer {
     width: 70%;
     margin: 0 auto;
   }
+  .providers-table.hidden-xs {
+    visibility: hidden;
+    display: none;
+  }
   .providers-table.tablet {
     margin: 0px 0;
     margin-bottom: 30px;
@@ -1201,6 +1223,9 @@ footer {
     .slick-prev:before {
       margin: 0 8px;
     }
+  }
+  .providers-table.terms-table tbody > tr > td:last-child {
+    text-align: center;
   }
   .providers-table tbody > tr > td {
     padding: 35px 25px;

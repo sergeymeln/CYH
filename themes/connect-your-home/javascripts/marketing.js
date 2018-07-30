@@ -2,6 +2,7 @@ $(document).on('ready', function() {
 
   let slidersAmount = $('.providers-slider li').length;
   let amount = slidersAmount;
+  let winWidth = $(window).width();
 
   if(slidersAmount > 5) {
     amount = 5;
@@ -56,7 +57,17 @@ $(document).on('ready', function() {
           }
       }
     ]
-});
+  });
+
+  $(window).load(function () {
+    if(winWidth < 768 && location.hash) {
+      const hash = location.hash.slice(1);
+      const numSlide = $('.'+hash).parent().parent().attr('data-slick-index');
+
+      $('.providers-table-slider').slick('slickGoTo', parseInt(numSlide));
+    }
+  })
+
     function getSlideAmount(currentSlickElement) {
       const $slickElementArray = $(currentSlickElement);
 
@@ -74,6 +85,7 @@ $(document).on('ready', function() {
     }
 
     function tableSliderInit() {
+
       $('.providers-table-slider').slick({
         dots: false,
         slidesToShow: 1,
