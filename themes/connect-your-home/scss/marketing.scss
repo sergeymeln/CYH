@@ -292,7 +292,7 @@ section {
 .breadcrumb{
   background-color: transparent;
   li {
-    a{
+    span {
       font-family: $font-family-roboto-regular;
       font-weight: 900;
       letter-spacing: 0.3px;
@@ -309,7 +309,7 @@ section {
     & + li:before {
       content: '';
     }
-    &:last-child a:after {
+    &:last-child span:after {
       content: '';
     }
   }

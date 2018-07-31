@@ -22,10 +22,10 @@
                             </div>
                         </div>
                         <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#" class="active">Internet</a></li>
-                            <li><a href="#" class="active"><?php echo $city->StateName?></a></li>
-                            <li><a class="active"><?php echo $city->NormalName?></a></li>
+                            <li><span>Home</span></li>
+                            <li><span class="active">Internet</span></li>
+                            <li><span class="active"><?php echo $city->StateName?></span></li>
+                            <li><span class="active"><?php echo $city->NormalName?></span></li>
                         </ol>
                     </div>
 
