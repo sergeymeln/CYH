@@ -1276,50 +1276,7 @@
         </div>
     </div>
 </section>
-<div class="modal fade" id="legalInfo" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    ×
-                </button>
-                <h4 class="modal-title">
-                    Terms &amp; Conditions
-                </h4>
-            </div>
-            <div class="modal-body">
-                <p class="text-left"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <?php endif;?>
-<!-- container -->
-<?php
-//include 'page-templates/modal-form.php';
-wp_enqueue_script('cyh-app-main');
-?>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    var time = ($("body").hasClass('home')) ? 45000 : 60000;
-    setTimeout(
-        function () {
-            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/593eb657b3d02e11ecc697d7/default';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        }, time);
-</script>
-<!--End of Tawk.to Script-->
 <?php wp_footer(); ?>
-</body>
-</html>
+<!-- container -->
