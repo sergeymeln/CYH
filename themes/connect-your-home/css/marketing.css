@@ -841,7 +841,7 @@ footer {
     letter-spacing: 1px; }
   .zip-code-form .form-group {
     display: inline-block; }
-  .breadcrumb li a {
+  .breadcrumb li span {
     font-size: 18px; }
   .offers-list-wrap {
     -webkit-box-orient: vertical;
@@ -1000,7 +1000,7 @@ footer {
   .breadcrumb {
     text-align: center;
     margin-top: 20px; }
-    .breadcrumb li a {
+    .breadcrumb li span {
       font-size: 14px; }
   .providers-slider .slick-prev {
     left: 0; }
