@@ -40,6 +40,7 @@
             s0.parentNode.insertBefore(s1, s0);
         }, time);
 </script><!--End of Tawk.to Script-->
-
+<?php wp_enqueue_script('cyh-app-main'); ?>
+<?php wp_footer(); ?>
 </body>
 </html>

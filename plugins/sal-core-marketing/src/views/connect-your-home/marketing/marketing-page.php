@@ -1278,5 +1278,4 @@
 </section>
 
 <?php endif;?>
-<?php wp_footer(); ?>
 <!-- container -->
