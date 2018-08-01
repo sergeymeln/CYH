@@ -45,7 +45,7 @@
                         $showSpectrum=1;
                     }
                     ?>
-                    <li><img src="<?php echo $provider->Logo; ?>" ></li>
+                    <li><img src="<?php echo $provider->Logo; ?>" max-width="253px" max-height="150px"></li>
                 <?php endforeach;?>
             </ul>
 
