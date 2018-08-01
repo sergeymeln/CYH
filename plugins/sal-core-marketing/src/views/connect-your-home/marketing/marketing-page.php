@@ -716,7 +716,7 @@
                     ?>
                     <?php if($showSpectrum == 1):?>
                         <p class="text-center">
-                            <img src="<?php echo get_template_directory_uri(); ?>/images/spectrum-logo.png">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/spectrum-logo.png" width="255px" height="84px">
                         </p>
                         <h2><?php echo ($city->SectionThreeText != '') ? $city->SectionThreeText : 'We recommend Spectrum Bundles. Why?'?></h2>
                         <?php

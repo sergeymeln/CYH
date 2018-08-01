@@ -30,6 +30,10 @@
   src: url("../fonts/GothaProNarBol.eot");
   src: url("../fonts/GothaProNarBol.eot") format("embedded-opentype"), url("../fonts/GothaProNarBol.woff") format("woff"), url("../fonts/GothaProNarBol.ttf") format("truetype"), url("../fonts/GothaProNarBol.svg#GothaProNarBol") format("svg"); }
 
+header.page-head .brand {
+  min-width: 189px;
+  min-height: 52px; }
+
 section {
   font-family: "RobotoRegular";
   font-size: 16px;
