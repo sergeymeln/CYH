@@ -16,7 +16,6 @@ $(document).on('ready', function() {
     centerPadding: '0px',
     arrows: true,
     slidesToShow: amount,
-    adaptiveHeight: true,
     mobileFirst:true,
     slidesToScroll: 1,
     customPaging:  getSlideAmount('.providers-slider'),
@@ -63,8 +62,14 @@ $(document).on('ready', function() {
     if(winWidth < 768 && location.hash) {
       const hash = location.hash.slice(1);
       const numSlide = $('.'+hash).parent().parent().attr('data-slick-index');
+      $('.terms-table-slider').slick({
+        dots: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight: true
+      });
 
-      $('.providers-table-slider').slick('slickGoTo', parseInt(numSlide));
+      $('.terms-table-slider').slick('slickGoTo', parseInt(numSlide));
     }
   })
 
