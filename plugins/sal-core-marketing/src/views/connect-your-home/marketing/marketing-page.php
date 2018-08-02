@@ -45,7 +45,7 @@
                         $showSpectrum=1;
                     }
                     ?>
-                    <li><img src="<?php echo $provider->Logo; ?>" max-width="253px" max-height="150px"></li>
+                    <li><img src="<?php echo $provider->Logo; ?>" width="253px"></li>
                 <?php endforeach;?>
             </ul>
 
@@ -82,7 +82,7 @@
                 <?php if (in_array($spCatSorted['provider']->Id, $usedIds)) {continue;}?>
                 <?php if ($topCounter == 5) {break;}?>
                     <tr>
-                        <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
+                        <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>" width="130px"></td>
                         <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> <?php echo $spCatSorted['speedUnitsAvg'];?></span></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
@@ -122,7 +122,7 @@
                         <tbody>
 
                             <tr>
-                                <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
+                                <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>" width="130px"></td>
                                 <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                             </tr>
                             <tr class="thead-row thead-simple">
@@ -149,7 +149,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>"></td>
+                                <td><img src="<?php echo $spCatSorted['provider']->Logo; ?>" width="130px"></td>
                             </tr>
                             <tr class="thead-row thead-simple">
                                 <th >Price From</th>
@@ -264,7 +264,7 @@
                                 }
                                 ?>
                             <tr>
-                                <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                 <td class="<?php echo $tdClass?>"><div><span class="middle-text "><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
@@ -348,7 +348,7 @@
                                 <tbody>
 
                                     <tr>
-                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                         <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                     </tr>
                                     <tr class="hidden-row">
@@ -399,7 +399,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
                                         <th >Product Description</th>
@@ -493,7 +493,7 @@
                                 }
                                 ?>
                             <tr>
-                                <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                 <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span><?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
@@ -577,7 +577,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                         <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                     </tr>
                                     <tr class="hidden-row">
@@ -628,7 +628,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                    <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                 </tr>
                                 <tr class="thead-row thead-simple">
                                     <th >Product Description</th>
@@ -793,7 +793,7 @@
                                 }
                                 ?>
                         <tr>
-                            <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                            <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                             <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?> </span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                             <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
@@ -875,7 +875,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                    <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                     <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 </tr>
                                 <tr class="hidden-row">
@@ -926,7 +926,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
                                         <th >Product Description</th>
@@ -1019,7 +1019,7 @@
                                 }
                                 ?>
                             <tr>
-                                <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                 <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?> </span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                 <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span></td>
                                 <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
@@ -1097,7 +1097,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                         <td class="<?php echo $tdClass?>"><div><span class="middle-text"><?php echo $prod->Name?></span><span class="show-more <?php echo $spanClass?>">Details</span></div></td>
                                     </tr>
                                     <tr class="hidden-row">
@@ -1148,7 +1148,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>"></td>
+                                        <td><img src="<?php echo $prod->ServiceProviderCategory->Provider->Logo?>" width="130px"></td>
                                     </tr>
                                     <tr class="thead-row thead-simple">
                                         <th >Product Description</th>

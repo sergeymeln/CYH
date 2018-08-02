@@ -72,10 +72,6 @@ $font-family-gotham-narrow-bold: 'GothaProNarBol';
   url($cyhFontBasePath + 'GothaProNarBol.ttf') format('truetype'),
   url($cyhFontBasePath + 'GothaProNarBol.svg#GothaProNarBol') format('svg');
 }
-header.page-head .brand {
-  max-width: 189px;
-  max-height: 52px;
-}
 section {
   font-family: $font-family-roboto-regular;
   font-size: 16px;
@@ -381,9 +377,6 @@ section {
     .slick-list {
       margin-right: auto;
       margin-left: auto;
-    }
-    img {
-      max-width: 254px;
     }
   }
   .slick-slide  {
