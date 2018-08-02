@@ -307,7 +307,7 @@ add_filter('stylesheet_uri', 'CssVersioner');
 function RegisterScripts()
 {
     wp_register_script( 'cyh-app-main',
-        get_template_directory_uri() . '/javascripts/main.js',
+        get_template_directory_uri() . '/javascripts/dist/main.min.js',
         [
             'cyh-common-methods',
             'jquery-ui-custom',
@@ -316,7 +316,7 @@ function RegisterScripts()
             'jvfloat',
             'js-cookie'
         ],
-        filemtime(get_template_directory() . '/javascripts/main.js'),
+        filemtime(get_template_directory() . '/javascripts/dist/main.min.js'),
         true);
     wp_register_script( 'jquery-ui-custom',
         get_template_directory_uri() . '/javascripts/jquery-ui.1.10.3.min.js',
@@ -329,9 +329,9 @@ function RegisterScripts()
         filemtime(get_template_directory() . '/javascripts/bootstrap.min.js'),
         true);
     wp_register_script( 'fastclick',
-        get_template_directory_uri() . '/javascripts/fastclick.js',
+        get_template_directory_uri() . '/javascripts/dist/fastclick.min.js',
         [],
-        filemtime(get_template_directory() . '/javascripts/fastclick.js'),
+        filemtime(get_template_directory() . '/javascripts/dist/fastclick.min.js'),
         true);
     wp_register_script( 'jvfloat',
         get_template_directory_uri() . '/javascripts/jvfloat.min.js',

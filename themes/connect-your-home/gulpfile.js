@@ -28,7 +28,11 @@ gulp.task('sass', function (cb) {
 
 gulp.task('js', function(cb) {
   pump([
-      gulp.src('javascripts/marketing.js'),
+      gulp.src([
+          'javascripts/marketing.js',
+          'javascripts/main.js',
+          'javascripts/fastclick.js'
+        ]),
       babel({
         presets: ['env']
       }),
@@ -42,5 +46,5 @@ gulp.task('js', function(cb) {
 
 gulp.task('watch', ['sass', 'js'], function() {
     gulp.watch('scss/marketing.scss', ['sass']);
-    gulp.watch('javascripts/marketing.js', ['js']);
+    gulp.watch('javascripts/*.js', ['js']);
 });
