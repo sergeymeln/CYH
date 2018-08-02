@@ -90,8 +90,8 @@ $(document).ready(function() {
 
     var toggle = 0;
 
-    url = "https://expressentry.melissadata.net/";
-    id = "113933534";
+    var url = "https://expressentry.melissadata.net/";
+    var id = "113933534";
     
     jQuery(document).ready(function()
       {
