@@ -182,7 +182,7 @@ $(document).ready(function() {
             }
 
             function suiteSaver(){
-                suiteVal = $('#testing').val();
+               var suiteVal = $('#testing').val();
                 setCookie('suite', suiteVal, 1);
                 $('#testing').change(function(){
                     $('#testing').removeClass('flasher');
