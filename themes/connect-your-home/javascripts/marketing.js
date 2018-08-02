@@ -244,7 +244,7 @@ $(document).on('ready', function() {
 
       var brandId = $(this).attr('data-brand-id'),
           brandsSection = $('#all-available-offers'),
-          brandList = $('#brandsList');
+          brandList = $('#brandsList'),
           new_position = $(brandsSection).offset();
 
       $('html, body').stop().animate({ scrollTop: new_position.top }, 500);
