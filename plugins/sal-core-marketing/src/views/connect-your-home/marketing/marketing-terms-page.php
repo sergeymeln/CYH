@@ -1,6 +1,6 @@
 <?php $showSpectrum=0;?>
 
-<section class="best-offers-tab-section">
+<section class="terms-section">
     <div class="container">
         <div class="row">
             <h2>Terms and Conditions</h2>
@@ -47,7 +47,7 @@
                 }
                 ?>
                 <?php if($tempCounter > 0):?>
-                <ul class="providers-table-slider terms-slider hidden-sm hidden-md hidden-lg">
+                <ul class="terms-table-slider terms-slider hidden-sm hidden-md hidden-lg">
                     <?php foreach($cityData['productListSorted'] as $prod):?>
 
                     <li class="offer-<?php echo $prod->Id;?>">
@@ -103,8 +103,6 @@
                     </li>
                     <?php endforeach;?>
                 </ul>
-                <p class="provider-count hidden-sm hidden-md hidden-lg">
-                </p>
                 <?php else:?>
                     <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
                 <?php endif;?>

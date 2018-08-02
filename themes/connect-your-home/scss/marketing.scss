@@ -81,6 +81,9 @@ section {
   h2 {
     font-family: $font-family-gotham-narrow-bold;
   }
+  &:last-of-type {
+    padding-bottom: 45px;
+  }
 }
 h2 {
   font-size: 30px;
@@ -360,8 +363,12 @@ section {
 /*Map Section End*/
 
 /*Offer section start*/
-.best-offers-tab-section {
+.best-offers-tab-section,
+.terms-section {
   background-color: $section-dark-bg;
+}
+section.terms-section{
+  padding-bottom: 15px;
 }
 .top-providers-section {
   background-color: $section-dark-bg;
@@ -625,7 +632,7 @@ section {
 }
 .terms-slider {
   .slick-prev, .slick-next {
-    top: 1%;
+    top: 150px;
   }
 }
 .not-found-items {
@@ -708,7 +715,8 @@ p.not-found-items {
     }
   }
 }
-.providers-table-slider {
+.providers-table-slider,
+.terms-table-slider {
   margin: 0;
   padding: 0;
   padding: 0 50px;
@@ -843,9 +851,6 @@ p.not-found-items {
     }
   }
 }
-footer {
-  margin-top: 45px;
-}
 @media (min-width: 768px){
   .container {
     width: 730px;
@@ -960,6 +965,10 @@ footer {
 
 }
 @media (max-width: 767px) {
+  header.page-head {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
   section {
     font-size: 14px;
     letter-spacing: 1.2px;
@@ -967,6 +976,9 @@ footer {
   .container {
     padding-left: 30px;
     padding-right: 30px;
+  }
+  section.terms-section {
+    padding-bottom: 0;
   }
   h2 {
     font-size: 30px;
@@ -1207,7 +1219,8 @@ footer {
     margin-top: 0px;
     margin-bottom: 15px;
   }
-  .providers-table-slider {
+  .providers-table-slider,
+  .terms-table-slider{
     padding: 0 20px;
     .slick-prev, .slick-next {
       width: 20px;
@@ -1263,8 +1276,11 @@ footer {
   .nearby-offers  .flex-list li {
     margin-bottom: 5px;
   }
-  footer {
-    margin-top: 30px;
+  section:last-of-type {
+    padding-bottom: 30px;
+  }
+  section.terms-section{
+    padding-bottom: 0;
   }
 }
 .modal-header {
