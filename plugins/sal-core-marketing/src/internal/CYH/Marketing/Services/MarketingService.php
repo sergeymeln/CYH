@@ -389,18 +389,11 @@ class MarketingService extends CacheableService
             $result[$providerId]['speedUnitsAvg'] = $speedData['speedUnitsAvg'];
             $result[$providerId]['speedUnitsMax'] = $speedData['speedUnitsMax'];
 
-            array_multisort(array_map(function($element) {
-                return $element->Price;
-            }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
-
-
-            usort($result, function($a, $b){
-                return ($a['provider']->Rank < $b['provider']->Rank) ? -1 : 1;
-            });
-
             usort($result, function($a, $b){
                 if($a['provider']->Rank == $b['provider']->Rank) {
                    return strcmp($a["provider"]->Name, $b["provider"]->Name);
+                } else {
+                    return ($a['provider']->Rank < $b['provider']->Rank) ? -1 : 1;
                 }
             });
 
