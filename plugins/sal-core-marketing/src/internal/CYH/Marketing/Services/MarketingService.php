@@ -45,14 +45,29 @@ class MarketingService extends CacheableService
             }
         }
 
-        $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
-
-        foreach($relatedCities as $relCity) {
-            $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
+        if (!$this->getCachedRelatedCitiesData($citiesData['city_normal_name'])) {
+            $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
+            foreach($relatedCities as $relCity) {
+                $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
+            }
+            $this->cacheRelatedCitiesData($citiesData['related_cities'],$citiesData['city_normal_name']);
+        } else {
+            $citiesData['related_cities'] = $this->getCachedRelatedCitiesData($citiesData['city_normal_name']);
         }
 
         return $this->getCityFromData($citiesData);
+    }
 
+    private function getCachedRelatedCitiesData($city)
+    {
+        return get_transient(md5('related_'.$city));
+    }
+
+    private function cacheRelatedCitiesData($relatedCities,$city)
+    {
+        $key = md5('related_'.$city);
+
+        return set_transient($key, $relatedCities);
     }
 
     /**
