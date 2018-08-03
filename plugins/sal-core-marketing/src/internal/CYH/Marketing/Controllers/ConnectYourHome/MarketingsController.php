@@ -45,6 +45,7 @@ class MarketingsController extends GenericController
         $productFilter->Zip = $city->Zip;
         if ($collectStats) {
             $statService = StatisticsService::getInstance();
+            $statService->setCity($city->NormalName);
             $statService->addObject(2, microtime(true));
         }
         $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));

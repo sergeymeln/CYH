@@ -10,6 +10,7 @@ class StatisticsService
 {
     private static $instance = null;
     protected static $statisticsRepository = null;
+    protected $city = null;
     const EVENT_TYPES = [
         'page_generation_start' => 1,
         'request_to_sal_start' => 2,
@@ -67,9 +68,19 @@ class StatisticsService
     public function insertStatistics()
     {
         $requestId = $this->generateRequestId();
+        $city = $this->getCity();
         foreach ($this->eventObjects as $stat) {
-            self::$statisticsRepository->insertStatistics($stat, $requestId);
+            self::$statisticsRepository->insertStatistics($stat, $requestId, $city);
         }
     }
 
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
 }

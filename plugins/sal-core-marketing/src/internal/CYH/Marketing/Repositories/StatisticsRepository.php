@@ -27,12 +27,14 @@ class StatisticsRepository
     /**
      * @param $stat
      * @param $requestId
+     * @param $city
      * @return \Zend\Db\Adapter\Driver\ResultInterface
      */
-    public function insertStatistics($stat, $requestId)
+    public function insertStatistics($stat, $requestId, $city)
     {
         $sql = new Sql($this->adapter);
-        $insert = $sql->insert(CYH_TABLE_PREFIX.'cyh_load_statistics')->columns(['request_id','event_type', 'actual_timestamp'])->values([$requestId, $stat->event_type, $stat->actual_timestamp]);
+        $insert = $sql->insert(CYH_TABLE_PREFIX.'cyh_load_statistics')->columns(['request_id','event_type', 'actual_timestamp', 'city'])->
+                values([$requestId, $stat->event_type, $stat->actual_timestamp, $city]);
         $statement = $sql->prepareStatementForSqlObject($insert);
         $result = $statement->execute();
 
