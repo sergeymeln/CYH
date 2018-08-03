@@ -18,6 +18,7 @@ class MarketingService extends CacheableService
     const INTERNET_TV_CATEGORIES = [7];
     const OVERLOAD_MBPS_TO_GBPS_MULTIPLIER = 0.001;
     const OVERLOAD_MBPS_NUMBER = 1024;
+    const CACHE_LIVING_TIME = 86400;
 
     public function __construct()
     {
@@ -65,7 +66,7 @@ class MarketingService extends CacheableService
 
     private function cacheCitiesData($relatedCities,$key)
     {
-        return set_transient($key, $relatedCities);
+        return set_transient($key, $relatedCities, self::CACHE_LIVING_TIME);
     }
 
     /**
@@ -117,16 +118,16 @@ class MarketingService extends CacheableService
             return $matchedCities[0];
         }
 
-        $cities=[];
+        $nearCities=[];
         if (false === $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']))) {
             $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
 
             foreach($result as $city) {
-                $cities[] = $city;
+                $nearCities[] = $city;
             }
-            $this->cacheCitiesData($cities,md5('nearest_published_'.$cities[0]['city_normal_name']));
+            $this->cacheCitiesData($nearCities,md5('nearest_published_'.$cities[0]['city_normal_name']));
         } else {
-            $cities = $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']));
+            $nearCities = $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']));
         }
 
 
