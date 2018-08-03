@@ -45,28 +45,26 @@ class MarketingService extends CacheableService
             }
         }
 
-        if (!$this->getCachedRelatedCitiesData($citiesData['city_normal_name'])) {
+        if (false === $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name']))) {
             $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
             foreach($relatedCities as $relCity) {
                 $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
             }
-            $this->cacheRelatedCitiesData($citiesData['related_cities'],$citiesData['city_normal_name']);
+            $this->cacheCitiesData($citiesData['related_cities'],md5('related_'.$citiesData['city_normal_name']));
         } else {
-            $citiesData['related_cities'] = $this->getCachedRelatedCitiesData($citiesData['city_normal_name']);
+            $citiesData['related_cities'] = $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name']));
         }
 
         return $this->getCityFromData($citiesData);
     }
 
-    private function getCachedRelatedCitiesData($city)
+    private function getCachedCitiesData($key)
     {
-        return get_transient(md5('related_'.$city));
+        return get_transient($key);
     }
 
-    private function cacheRelatedCitiesData($relatedCities,$city)
+    private function cacheCitiesData($relatedCities,$key)
     {
-        $key = md5('related_'.$city);
-
         return set_transient($key, $relatedCities);
     }
 
@@ -119,11 +117,18 @@ class MarketingService extends CacheableService
             return $matchedCities[0];
         }
 
-        $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
         $cities=[];
-        foreach($result as $city) {
-            $cities[] = $city;
+        if (false === $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']))) {
+            $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
+
+            foreach($result as $city) {
+                $cities[] = $city;
+            }
+            $this->cacheCitiesData($cities,md5('nearest_published_'.$cities[0]['city_normal_name']));
+        } else {
+            $cities = $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']));
         }
+
 
         if(count($cities) == 0) {
             return false;
