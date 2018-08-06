@@ -46,14 +46,14 @@ class MarketingService extends CacheableService
             }
         }
 
-        if (false === $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name']))) {
+        if (false === $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name'].$citiesData['state_code']))) {
             $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
             foreach($relatedCities as $relCity) {
                 $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
             }
-            $this->cacheCitiesData($citiesData['related_cities'],md5('related_'.$citiesData['city_normal_name']));
+            $this->cacheCitiesData($citiesData['related_cities'],md5('related_'.$citiesData['city_normal_name'].$citiesData['state_code']));
         } else {
-            $citiesData['related_cities'] = $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name']));
+            $citiesData['related_cities'] = $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name'].$citiesData['state_code']));
         }
 
         return $this->getCityFromData($citiesData);
@@ -66,7 +66,7 @@ class MarketingService extends CacheableService
 
     private function cacheCitiesData($relatedCities,$key)
     {
-        return set_transient($key, $relatedCities, self::CACHE_LIVING_TIME);
+        return set_transient($key, $relatedCities);
     }
 
     /**
@@ -119,15 +119,15 @@ class MarketingService extends CacheableService
         }
 
         $nearCities=[];
-        if (false === $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']))) {
+        if (false === $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name'].$cities[0]['state_code']))) {
             $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
 
             foreach($result as $city) {
                 $nearCities[] = $city;
             }
-            $this->cacheCitiesData($nearCities,md5('nearest_published_'.$cities[0]['city_normal_name']));
+            $this->cacheCitiesData($nearCities,md5('nearest_published_'.$cities[0]['city_normal_name'].$cities[0]['state_code']));
         } else {
-            $nearCities = $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']));
+            $nearCities = $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name'].$cities[0]['state_code']));
         }
 
 

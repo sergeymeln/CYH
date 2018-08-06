@@ -29,6 +29,8 @@ $availableClasses = [
 \CYH\Plugins\SalCore::RegisterControllerActions($availableClasses, $context);
 
 add_action( 'gm_virtual_pages', function( $controller ) {
+    //$urlHelper = new \CYH\Marketing\Helpers\WPSQLImporter();
+    //$urlHelper->saveUsCitiesContent();exit;
 
     $marketingService = new \CYH\Marketing\Services\MarketingService();
     if(preg_match('/\/internet\/[a-z]{1,}\/[a-zA-Z-]{1,}\/{0,1}$/', $_SERVER['REQUEST_URI'])) {
