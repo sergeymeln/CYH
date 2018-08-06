@@ -131,11 +131,11 @@ class MarketingService extends CacheableService
         }
 
 
-        if(count($cities) == 0) {
+        if(count($nearCities) == 0) {
             return false;
         }
 
-        return $cities[0];
+        return $nearCities[0];
     }
 
     /**
