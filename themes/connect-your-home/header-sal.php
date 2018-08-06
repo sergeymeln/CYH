@@ -1,4 +1,11 @@
 <?php
+$marketingService = new \CYH\Marketing\Services\MarketingService();
+$isUnique = $marketingService->isUniquePage();
+if($isUnique) {
+    $phone = '833-273-0762';
+} else {
+    $phone = '855-324-9604';
+}
 //do_action('\\' . CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::class . '::RenderMarketing');
 ?>
 
@@ -135,9 +142,9 @@
                                         <i class="glyphicon glyphicon-earphone"></i>
                                                             <?php echo get_field('phone_number_one_brand');
 
-                                                            }else{ ?><a href="tel:<?php echo get_field('home_phone_number', 'option');?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - Header');" class="phone-number btn btn-success btn-lg">
+                                                            }else{ ?><a href="tel:<?php echo $phone?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - Header');" class="phone-number btn btn-success btn-lg">
                                         <i class="glyphicon glyphicon-earphone"></i>
-                                                                <?php echo get_field('home_phone_number', 'option');
+                                                                <?php echo $phone;
                                                                 } ?>
                                             </a>
                                         </span>

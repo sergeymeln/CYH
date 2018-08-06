@@ -9,11 +9,11 @@ use CYH\Marketing\Repositories\MarketingRepository;
 class SeoMarketingHelper
 {
     const CITIES_STAT_KEY = "cities-stats";
-    const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
+    const DATE_TIME_FORMAT = 'Y-m-d\Th:m:s+00:00';
 
     public static function AddMarketingSitemap()
     {
-        $date = new \DateTime('23.07.18');
+        $date = new \DateTime('2018-08-05T08:00:00+00:00');
         $smp = '';
         $smp .= '<sitemap>' . "\n";
         $smp .= '<loc>' . site_url() . '/' . self::CITIES_STAT_KEY . '-sitemap.xml</loc>' . "\n";
@@ -37,7 +37,7 @@ class SeoMarketingHelper
        $citiesOutput = '';
        foreach ($cities as $city)
        {
-           $citiesOutput .= '<url><loc>' . site_url() . '/internet/' . strtolower($city['state_short_name']) . '/' . strtolower($city['city_name']) . '/</loc><changefreq>Weekly</changefreq><priority>1</priority><lastmod>' . (new \DateTime('23.07.18'))->format(self::DATE_TIME_FORMAT) . '</lastmod></url>';
+           $citiesOutput .= '<url><loc>' . site_url() . '/internet/' . strtolower($city['state_short_name']) . '/' . strtolower($city['city_name']) . '/</loc><changefreq>Weekly</changefreq><priority>1</priority><lastmod>' . (new \DateTime('2018-08-05T08:00:00+00:00'))->format(self::DATE_TIME_FORMAT) . '</lastmod></url>';
        }
 
         //Build the full sitemap

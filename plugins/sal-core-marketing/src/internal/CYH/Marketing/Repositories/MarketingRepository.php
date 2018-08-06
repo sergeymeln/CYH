@@ -163,6 +163,7 @@ class MarketingRepository
         $return['state_name'] = $cityData['state_name'];
         $return['city_name'] = $cityData['city_name'];
         $return['state_short_name'] = $cityData['state_short_name'];
+        $return['section_two_text'] = $cityData['section_two_text'];
 
 
         return $return;

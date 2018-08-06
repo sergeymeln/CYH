@@ -153,7 +153,7 @@ class MarketingService extends CacheableService
      */
     public function getCityDescription($cityData)
     {
-        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call '.get_field('home_phone_number', 'option').' for high-speed internet service providers.';
+        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call 833-585-9178 for high-speed internet service providers.';
     }
 
     /**
@@ -533,5 +533,18 @@ class MarketingService extends CacheableService
     public function getTermsDescription()
     {
         return 'Offers Terms and Conditions';
+    }
+
+    public function isUniquePage()
+    {
+        $url = parse_url($_SERVER['REQUEST_URI']);
+        $parts = explode('/', $url['path']);
+
+        $city = $this->getCityFromUrl($parts);
+        if($city['section_two_text'] != '') {
+            return true;
+        }
+
+        return false;
     }
 }
