@@ -13,6 +13,7 @@ use CYH\Sal\Services\ProductsService;
 use CYH\Marketing\Helpers\WPSQLImporter;
 use CYH\Marketing\Helpers\UrlHelper;
 use CYH\Marketing\Services\MarketingService;
+use CYH\Marketing\Services\StatisticsService;
 
 class MarketingsController extends GenericController
 {
@@ -33,7 +34,7 @@ class MarketingsController extends GenericController
         $this->marketingService = new MarketingService();
     }
 
-    public function RenderMarketing()
+    public function RenderMarketing($collectStats=false)
     {
         $data = $this->urlHelper->getCityFromUrl();
         $city = $this->marketingService->GetCitiesData($data);
@@ -42,7 +43,15 @@ class MarketingsController extends GenericController
 
         $productFilter = new ProductFilter();
         $productFilter->Zip = $city->Zip;
+        if ($collectStats) {
+            $statService = StatisticsService::getInstance();
+            $statService->setCity($city->NormalName);
+            $statService->addObject(2, microtime(true));
+        }
         $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
+        if ($collectStats) {
+            $statService->addObject(3, microtime(true));
+        }
         if(count($productList) ==0) {
             return false;
         }
@@ -56,6 +65,9 @@ class MarketingsController extends GenericController
         //echo '<pre>'; print_r($preparedData['productListSorted']);exit;
 
         $city->Bullets = $this->marketingService->getBulletsData($preparedData['productList'], $city);
+        if ($collectStats) {
+            $statService->addObject(4, microtime(true));
+        }
         $this->View('marketing/marketing-page', [
             'city' => $city,
             'cityData' => $preparedData,

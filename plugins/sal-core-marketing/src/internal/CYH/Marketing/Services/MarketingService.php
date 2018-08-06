@@ -18,6 +18,7 @@ class MarketingService extends CacheableService
     const INTERNET_TV_CATEGORIES = [7];
     const OVERLOAD_MBPS_TO_GBPS_MULTIPLIER = 0.001;
     const OVERLOAD_MBPS_NUMBER = 1024;
+    const CACHE_LIVING_TIME = 86400;
 
     public function __construct()
     {
@@ -45,14 +46,27 @@ class MarketingService extends CacheableService
             }
         }
 
-        $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
-
-        foreach($relatedCities as $relCity) {
-            $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
+        if (false === $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name']))) {
+            $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
+            foreach($relatedCities as $relCity) {
+                $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
+            }
+            $this->cacheCitiesData($citiesData['related_cities'],md5('related_'.$citiesData['city_normal_name']));
+        } else {
+            $citiesData['related_cities'] = $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name']));
         }
 
         return $this->getCityFromData($citiesData);
+    }
 
+    private function getCachedCitiesData($key)
+    {
+        return get_transient($key);
+    }
+
+    private function cacheCitiesData($relatedCities,$key)
+    {
+        return set_transient($key, $relatedCities, self::CACHE_LIVING_TIME);
     }
 
     /**
@@ -104,17 +118,24 @@ class MarketingService extends CacheableService
             return $matchedCities[0];
         }
 
-        $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
-        $cities=[];
-        foreach($result as $city) {
-            $cities[] = $city;
+        $nearCities=[];
+        if (false === $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']))) {
+            $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
+
+            foreach($result as $city) {
+                $nearCities[] = $city;
+            }
+            $this->cacheCitiesData($nearCities,md5('nearest_published_'.$cities[0]['city_normal_name']));
+        } else {
+            $nearCities = $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name']));
         }
 
-        if(count($cities) == 0) {
+
+        if(count($nearCities) == 0) {
             return false;
         }
 
-        return $cities[0];
+        return $nearCities[0];
     }
 
     /**
@@ -389,18 +410,11 @@ class MarketingService extends CacheableService
             $result[$providerId]['speedUnitsAvg'] = $speedData['speedUnitsAvg'];
             $result[$providerId]['speedUnitsMax'] = $speedData['speedUnitsMax'];
 
-            array_multisort(array_map(function($element) {
-                return $element->Price;
-            }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
-
-
-            usort($result, function($a, $b){
-                return ($a['provider']->Rank < $b['provider']->Rank) ? -1 : 1;
-            });
-
             usort($result, function($a, $b){
                 if($a['provider']->Rank == $b['provider']->Rank) {
                    return strcmp($a["provider"]->Name, $b["provider"]->Name);
+                } else {
+                    return ($a['provider']->Rank < $b['provider']->Rank) ? -1 : 1;
                 }
             });
 

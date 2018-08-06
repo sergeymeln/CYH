@@ -94,6 +94,19 @@ class GeneralOptions extends OptionsHandler
                 'placeholder' => 'Default: /no-response'
             ]
         );
+
+        add_settings_field(
+            'sal_enable_statistic', // ID
+            'Enable Page Load Statistics', // Title
+            array($this, 'RenderCheckboxSetting'), // Callback
+            $this->GetMenuSlug(), // Page
+            'sal_general_section', // Section
+            [
+                'name' => 'sal_enable_statistic',
+                'option-name' => self::GetOptionStorageKey(),
+                'description' => 'Enable collecting of page load statistics from different points',
+            ]
+        );
     }
 
     public static function GetSettings()

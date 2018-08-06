@@ -86,11 +86,11 @@
                         <td><span class="big-text"><span class="number"><?php echo ($spCatSorted['products'][0]->Price) ? '$'.$spCatSorted['products'][0]->Price : '-'; ?></span></span> <?php echo $spCatSorted['products'][0]->PriceDescriptionEnd; ?></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['avgSpeed'];?></span> <?php echo $spCatSorted['speedUnitsAvg'];?></span></td>
                         <td><span class="big-text"><span class="number"><?php echo $spCatSorted['maxSpeed'];?></span> <?php echo $spCatSorted['speedUnitsMax'];?></span> </td>
-                        <td class="hidden-xs hidden-sm"><a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a></td>
+                        <td class="hidden-xs hidden-sm"><a class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a></td>
                     </tr>
                     <tr class="hidden-md hidden-lg">
                         <td colspan="4">
-                            <a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
+                            <a class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
                         </td>
                     </tr>
                     <?php $topCounter++;?>
@@ -135,7 +135,7 @@
                             </tr>
                             <tr class="btn-row">
                                 <td colspan="2">
-                                    <a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
+                                    <a class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
                                 </td>
                             </tr>
 
@@ -165,7 +165,7 @@
                             </tr>
                             <tr class="btn-row">
                                 <td>
-                                    <a href="<?php echo $spCatSorted['spCategoryUrl'];?>" target="_blank" class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
+                                    <a class="btn btn-orange" data-brand-id="<?php echo $spCatSorted['provider']->Id?>">See all packages</a>
                                 </td>
                             </tr>
 

@@ -173,7 +173,7 @@ $(document).on('ready', function() {
             var response = $.parseJSON(resp);
             if(response.result == 'success') {
                 window.location.href=response.link;
-                $('#cyh_process_status').removeClass('loading error-message');
+                $('#cyh_process_status').removeClass('error-message');
 
             } else {
                 $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter accurate zip code');
