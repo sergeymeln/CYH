@@ -61,14 +61,13 @@ $(document).on('ready', function() {
   $(window).load(function () {
     if(winWidth < 768 && location.hash) {
       const hash = location.hash.slice(1);
-      const numSlide = $('.'+hash).parent().parent().attr('data-slick-index');
       $('.terms-table-slider').slick({
         dots: false,
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight: true
       });
-
+      const numSlide = $('.'+hash).closest('.slick-slide').attr('data-slick-index');
       $('.terms-table-slider').slick('slickGoTo', parseInt(numSlide));
     }
   })
