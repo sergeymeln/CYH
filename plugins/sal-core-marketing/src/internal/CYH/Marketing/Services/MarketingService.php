@@ -153,7 +153,7 @@ class MarketingService extends CacheableService
      */
     public function getCityDescription($cityData)
     {
-        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call 833-585-9178 for high-speed internet service providers.';
+        return 'Find local cable TV and internet providers in '.$cityData['city_normal_name'].', '.$cityData['state_name'].'. Call (833)585-9178 for high-speed internet service providers.';
     }
 
     /**
@@ -409,6 +409,11 @@ class MarketingService extends CacheableService
             $result[$providerId]['avgSpeed'] = $speedData['avgSpeed'];
             $result[$providerId]['speedUnitsAvg'] = $speedData['speedUnitsAvg'];
             $result[$providerId]['speedUnitsMax'] = $speedData['speedUnitsMax'];
+
+
+            array_multisort(array_map(function($element) {
+                return $element->Price;
+            }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
 
             usort($result, function($a, $b){
                 if($a['provider']->Rank == $b['provider']->Rank) {
