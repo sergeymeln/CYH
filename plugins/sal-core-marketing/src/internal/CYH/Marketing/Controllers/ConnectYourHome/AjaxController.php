@@ -17,6 +17,7 @@ class AjaxController extends GenericController
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
+    const COOKIE_ZIP_NAME = 'cyh_city_zip';
 
     public function __construct(ControllerContext $context)
     {
@@ -90,6 +91,7 @@ class AjaxController extends GenericController
         if (array_key_exists('zip_code', $_POST)) {
             $result = $this->marketingService->getCityByZip($_POST['zip_code']);
             if(is_array($result) && count($result)> 0) {
+                setcookie(self::COOKIE_ZIP_NAME, $_POST['zip_code'], time()+3600, '/');
                 $data = ['result' => 'success', 'link' => '/internet/'.strtolower($result['state_code']).'/'.$result['city_name']];
             } else {
                 $data = ['result' => 'failure', 'link' => ''];
