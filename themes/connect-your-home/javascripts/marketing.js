@@ -152,6 +152,12 @@ $(document).on('ready', function() {
     }
     getTermsInfo();
 
+    $("#zipCode").keypress(function(e) {
+      if (e.keyCode == 13) {
+        $('#cyh_process_zip').trigger('click');
+      }
+    });
+
     $('#cyh_process_zip').on('click', function(e) {
         $('#cyh_process_status').text('').addClass('loading');
 
