@@ -1,4 +1,4 @@
-<div id="internetOffers" class="tab-pane fade in active">
+<div id="internetOffers2" class="tab-pane fade">
     <table class="table providers-table offers-table hidden-xs">
         <thead>
         <tr class="thead-row">
@@ -216,7 +216,7 @@
     <?php endif;?>
 </div>
 
-<div id="internetTvOffers" class="tab-pane fade">
+<div id="internetTvOffers2" class="tab-pane fade">
     <table class="table providers-table offers-table hidden-xs">
         <thead>
         <tr class="thead-row">
