@@ -210,6 +210,7 @@ $(document).on('ready', function() {
         const activeTab = $(this).closest('.offers-navigation').find('li.active > a').attr('href').replace(/[#\d]/g, '');
 
         brandLoader.addClass('loading');
+        navigation.find('li a.disabled').removeClass('disabled');
 
         if (brand == 'all') {
 
@@ -267,7 +268,9 @@ $(document).on('ready', function() {
     const tableArray = currentActiveTab.find('table');
 
     if(tableArray.length === 1 && activeTab != tabsId[0]) {
-      $('a[href=#' + activeTab + numberForId +']').parent().removeClass('active');
+      const oldTab = $('a[href=#' + activeTab + numberForId +']');
+      oldTab.parent().removeClass('active');
+      oldTab.addClass('disabled');
       activeTab = tabsId[0];
       $('a[href=#' + activeTab + numberForId +']').parent().addClass('active');
       currentActiveTab = content.find('div#'+ activeTab + numberForId);
