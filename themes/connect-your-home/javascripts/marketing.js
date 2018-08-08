@@ -201,15 +201,24 @@ $(document).on('ready', function() {
         let zip = $('#currentZipCode').val();
         let hideTab = $('#brandsList option:selected').attr('data-hideTab');
 
+        const tabsId = ['internetOffers', 'internetTvOffers'];
+        const numberForId = 2;
+        const allBrandsTabContent =  $('#allBrandsTab');
+        const oneBrandTabContent =  $('#oneBrandTab');
+        const navigation = $(this).closest('.offers-navigation');
+        const tabsNav = navigation.find('li a');
+        const activeTab = $(this).closest('.offers-navigation').find('li.active > a').attr('href').replace(/[#\d]/g, '');
+
         brandLoader.addClass('loading');
+        navigation.find('li a.disabled').removeClass('disabled');
 
         if (brand == 'all') {
-            $('#allBrandsTab').show();
-            $('#oneBrandTab').hide();
-            $('#allBrandsTab1').show();
-            $('#allBrandsTab1').addClass('active');
-            $('#allBrandsTab2').removeClass('active');
-            $('#allBrandsTab2').show();
+
+            changeTabsNavHref(tabsNav, tabsId);
+            showActiveTab(allBrandsTabContent, activeTab, tabsId);
+
+            allBrandsTabContent.show();
+            oneBrandTabContent.hide();
             brandLoader.removeClass('loading');
             tableSliderDestroy();
             tableSliderInit();
@@ -223,15 +232,17 @@ $(document).on('ready', function() {
 
             $.post(ajax_object.ajax_url, data, function(resp){
                 if(resp.length > 0) {
+                    changeTabsNavHref(tabsNav, tabsId, numberForId);
+
+                    allBrandsTabContent.hide();
+                    oneBrandTabContent.html(resp).promise().done(function(){
+
+                      showActiveTab($(this), activeTab, tabsId, numberForId);
+
+                    });
+
                     brandLoader.removeClass('loading');
-                    $('#allBrandsTab').hide();
-                    document.getElementById('oneBrandTab').innerHTML = resp;
-                    $('#oneBrandTab').show();
-                    /*$('#allBrandsTab1').show();
-                    $('#allBrandsTab2').show();
-                    $('#allBrandsTab1').addClass('active');
-                    $('#allBrandsTab2').addClass('active');
-                    $('#'+hideTab).hide();*/
+                    oneBrandTabContent.show();
                     tableSliderDestroy();
                     tableSliderInit();
                     getTermsInfo();
@@ -242,6 +253,32 @@ $(document).on('ready', function() {
         e.preventDefault();
 
     });
+
+  function changeTabsNavHref(navigation, tabsIdArray, idNumber ) {
+    idNumber = idNumber || '';
+
+    $.each(navigation, function (index, value) {
+      $(value).attr('href',  '#'+tabsIdArray[index] + idNumber);
+    });
+  }
+
+  function showActiveTab(content, activeTab, tabsId, numberForId) {
+    numberForId = numberForId || '';
+    let currentActiveTab = content.find('div#'+ activeTab + numberForId);
+    const tableArray = currentActiveTab.find('table');
+
+    if(tableArray.length === 1 && activeTab != tabsId[0]) {
+      const oldTab = $('a[href=#' + activeTab + numberForId +']');
+      oldTab.parent().removeClass('active');
+      oldTab.addClass('disabled');
+      activeTab = tabsId[0];
+      $('a[href=#' + activeTab + numberForId +']').parent().addClass('active');
+      currentActiveTab = content.find('div#'+ activeTab + numberForId);
+    }
+
+    currentActiveTab.addClass('in active');
+  }
+
 
   $(document).on('click', 'a[data-brand-id]', function (e) {
       e.preventDefault();
