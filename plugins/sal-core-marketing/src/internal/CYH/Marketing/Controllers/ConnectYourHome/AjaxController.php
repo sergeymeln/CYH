@@ -16,6 +16,7 @@ class AjaxController extends GenericController
     protected $marketingService = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
+    const INTERNET_TV_CATEGORIES = [7];
 
     public function __construct(ControllerContext $context)
     {
@@ -43,8 +44,11 @@ class AjaxController extends GenericController
         $this->View('marketing/one-brand', [
             'products' => $productList,
             'brandId' => $brandId,
-            'catIds' => self::INTERNET_CATEGORIES,
-            'city' => $city
+            'city' => $city,
+            'constants' => [
+                'internetCats' => self::INTERNET_CATEGORIES,
+                'internetAndTvCats' => self::INTERNET_TV_CATEGORIES
+            ]
         ]);
     }
 

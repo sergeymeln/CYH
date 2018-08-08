@@ -227,11 +227,11 @@ $(document).on('ready', function() {
                     $('#allBrandsTab').hide();
                     document.getElementById('oneBrandTab').innerHTML = resp;
                     $('#oneBrandTab').show();
-                    $('#allBrandsTab1').show();
+                    /*$('#allBrandsTab1').show();
                     $('#allBrandsTab2').show();
                     $('#allBrandsTab1').addClass('active');
                     $('#allBrandsTab2').addClass('active');
-                    $('#'+hideTab).hide();
+                    $('#'+hideTab).hide();*/
                     tableSliderDestroy();
                     tableSliderInit();
                     getTermsInfo();
