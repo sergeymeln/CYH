@@ -209,6 +209,17 @@ section {
 .form-group {
   margin-bottom: 0;
 }
+.morecontent span {
+  display: none;
+}
+.morelink {
+  display: block;
+  text-align: right;
+  text-decoration: underline;
+  font-weight: 600;
+  margin-top: -30px;
+  margin-bottom: 30px;
+}
 /*Intro section start*/
 .inner-title {
   color: $white;
@@ -1066,9 +1077,6 @@ p.not-found-items {
         margin-bottom: 20px;
       }
     }
-    .loader {
-      order: 2;
-    }
   }
   .offers-navigation {
     .tab-offers {
@@ -1181,6 +1189,8 @@ p.not-found-items {
       margin: 10px 0;
       width: 180px;
       display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
   .intro-section .inner-block {
@@ -1296,4 +1306,8 @@ p.not-found-items {
     margin: 0 auto;
     margin-top: 15px;
   }
+}
+.scroll-back-to-top-wrapper {
+  right: 15px;
+  bottom: 80px;
 }

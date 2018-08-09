@@ -11,7 +11,7 @@ $(document).on('ready', function() {
   $(".providers-slider").slick({
     dots: false,
     accessibility: true,
-    adaptiveHeight: true,
+   /* adaptiveHeight: true,*/
     centerMode: true,
     centerPadding: '0px',
     arrows: true,
@@ -58,7 +58,13 @@ $(document).on('ready', function() {
     ]
   });
 
+
   $(window).load(function () {
+
+    const ellipsestext = "...";
+    const moretext = "read more";
+    const lesstext = "show less";
+
     if(winWidth < 768 && location.hash) {
       const hash = location.hash.slice(1);
       $('.terms-table-slider').slick({
@@ -70,195 +76,228 @@ $(document).on('ready', function() {
       const numSlide = $('.'+hash).closest('.slick-slide').attr('data-slick-index');
       $('.terms-table-slider').slick('slickGoTo', parseInt(numSlide));
     }
-  })
 
-    function getSlideAmount(currentSlickElement) {
-      const $slickElementArray = $(currentSlickElement);
+    if(winWidth < 768) {
 
-      $slickElementArray.each(function (i) {
-        const $currentNumber = $(this).next('.provider-count').find('.current-slide');
-        const $slideCount = $(this).next('.provider-count').find('.slide-count');
+      $('.information-section .content').each(function() {
+        const contentHtml = $(this).html();
+        const firstP = $(this).find('p')[0];
+        const showChar = $(firstP).html().length;
 
-        $(this).on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-          let i = (currentSlide ? currentSlide : 0) + 1;
+        if(contentHtml.length > showChar) {
+          var html = '<p>' + $(firstP).html() + '</p>' +
+            '<span class="morecontent">' +
+            '<span>' + contentHtml + '</span>' +
+            '<a href="#" class="morelink">' + moretext + '</a></span>';
 
-          $currentNumber.text(i);
-          $slideCount.text(slick.slideCount);
-        });
-      })
-    }
-
-    function tableSliderInit() {
-
-      $('.providers-table-slider').slick({
-        dots: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        customPaging :  getSlideAmount('.providers-table-slider')
-      });
-    }
-
-    function tableSliderDestroy() {
-      $('.providers-table-slider.slick-initialized').slick('unslick');
-    }
-
-    tableSliderInit();
-
-
-    $(document).on('click', '.providers-table .slide-cell', function () {
-        const $hiddenRow = $(this).parent().next('.hidden-row ');
-
-        if($hiddenRow.hasClass('open')) {
-            $(this).removeClass('open');
-            $hiddenRow.removeClass('open');
-        } else {
-            $(this).addClass('open');
-            $hiddenRow.addClass('open');
+          $(this).html(html);
         }
-
-        $hiddenRow.find('td .hidden-content').slideToggle();
-    });
-
-    // Tabs
-    $('.tab-offers a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-        $('.providers-table-slider').slick("refresh");
-    });
-
-    $('.map-section a').on('click', function (e) {
-      let currentTab = $('.tab-offers a[href=' + e.target.hash + ']');
-
-      $('html, body').animate({
-        scrollTop: (currentTab.offset().top)
-      },500);
-      currentTab.tab('show');
-      $('.providers-table-slider').slick("refresh");
-    });
-
-    //Modal
-    function getTermsInfo() {
-      var modalLink = $('a[data-target="#legalInfo"]');
-
-      modalLink.on('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var content = $(this).next('.terms-content').text();
-        $('#legalInfo .modal-body .text-left').text(content);
-
-        $('#legalInfo').modal('show');
       });
-
     }
-    getTermsInfo();
-
-    $("#zipCode").keypress(function(e) {
-      if (e.keyCode == 13) {
-        $('#cyh_process_zip').trigger('click');
+    $(".morelink").click(function(){
+      if($(this).hasClass("less")) {
+        $(this).removeClass("less");
+        $(this).html(moretext);
+      } else {
+        $(this).addClass("less");
+        $(this).html(lesstext);
       }
+      $(this).parent().prev().toggle();
+      $(this).prev().toggle();
+      return false;
+    });
+  });
+
+
+
+
+
+  function getSlideAmount(currentSlickElement) {
+    const $slickElementArray = $(currentSlickElement);
+
+    $slickElementArray.each(function (i) {
+      const $currentNumber = $(this).next('.provider-count').find('.current-slide');
+      const $slideCount = $(this).next('.provider-count').find('.slide-count');
+
+      $(this).on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+        let i = (currentSlide ? currentSlide : 0) + 1;
+
+        $currentNumber.text(i);
+        $slideCount.text(slick.slideCount);
+      });
+    })
+  }
+
+  function tableSliderInit() {
+
+    $('.providers-table-slider').slick({
+      dots: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      customPaging :  getSlideAmount('.providers-table-slider')
+    });
+  }
+
+  function tableSliderDestroy() {
+    $('.providers-table-slider.slick-initialized').slick('unslick');
+  }
+
+  tableSliderInit();
+
+
+  $(document).on('click', '.providers-table .slide-cell', function () {
+      const $hiddenRow = $(this).parent().next('.hidden-row ');
+
+      if($hiddenRow.hasClass('open')) {
+          $(this).removeClass('open');
+          $hiddenRow.removeClass('open');
+      } else {
+          $(this).addClass('open');
+          $hiddenRow.addClass('open');
+      }
+
+      $hiddenRow.find('td .hidden-content').slideToggle();
+  });
+
+  // Tabs
+  $('.tab-offers a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+      $('.providers-table-slider').slick("refresh");
+  });
+
+  $('.map-section a').on('click', function (e) {
+    let currentTab = $('.tab-offers a[href=' + e.target.hash + ']');
+
+    $('html, body').animate({
+      scrollTop: (currentTab.offset().top)
+    },500);
+    currentTab.tab('show');
+    $('.providers-table-slider').slick("refresh");
+  });
+
+  //Modal
+  function getTermsInfo() {
+    var modalLink = $('a[data-target="#legalInfo"]');
+
+    modalLink.on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var content = $(this).next('.terms-content').text();
+      $('#legalInfo .modal-body .text-left').text(content);
+
+      $('#legalInfo').modal('show');
     });
 
-    $('#cyh_process_zip').on('click', function(e) {
-        $('#cyh_process_status').text('').addClass('loading');
+  }
+  getTermsInfo();
 
-        var validationResult = validateZip($('#zipCode').val());
-        if(!validationResult) {
-            $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter accurate zip code');
-            setTimeout(function(){
-                $('#cyh_process_status').removeClass('error-message').text('');
-                $('#zipCode').val($('#currentZipCode').val());
-                }, 3000);
-            return;
-        }
-        var data = {
-            'action': 'cyh_find_city',
-            'zip_code': $('#zipCode').val()
-        };
-
-        $.post(ajax_object.ajax_url, data, function(resp){
-            var response = $.parseJSON(resp);
-            if(response.result == 'success') {
-                window.location.href=response.link;
-                $('#cyh_process_status').removeClass('error-message');
-
-            } else {
-                $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter accurate zip code');
-                setTimeout(function(){
-                    $('#cyh_process_status').removeClass('error-message').text('');
-                    $('#zipCode').val($('#currentZipCode').val());
-                }, 3000);
-                e.preventDefault();
-            }
-        });
-
-        e.preventDefault();
-
-    });
-
-    function validateZip(zipCode)
-    {
-        var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
-        return isValidZip;
+  $("#zipCode").keypress(function(e) {
+    if (e.keyCode == 13) {
+      $('#cyh_process_zip').trigger('click');
     }
+  });
 
-    $('#brandsList').on('change', function(e) {
-        let brandLoader = $(this).parent().parent().parent().find('.loader');
-        let brand = $('#brandsList').val();
-        let zip = $('#currentZipCode').val();
-        let hideTab = $('#brandsList option:selected').attr('data-hideTab');
+  $('#cyh_process_zip').on('click', function(e) {
+      $('#cyh_process_status').text('').addClass('loading');
 
-        const tabsId = ['internetOffers', 'internetTvOffers'];
-        const numberForId = 2;
-        const allBrandsTabContent =  $('#allBrandsTab');
-        const oneBrandTabContent =  $('#oneBrandTab');
-        const navigation = $(this).closest('.offers-navigation');
-        const tabsNav = navigation.find('li a');
-        const activeTab = $(this).closest('.offers-navigation').find('li.active > a').attr('href').replace(/[#\d]/g, '');
+      var validationResult = validateZip($('#zipCode').val());
+      if(!validationResult) {
+          $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter accurate zip code');
+          setTimeout(function(){
+              $('#cyh_process_status').removeClass('error-message').text('');
+              $('#zipCode').val($('#currentZipCode').val());
+              }, 3000);
+          return;
+      }
+      var data = {
+          'action': 'cyh_find_city',
+          'zip_code': $('#zipCode').val()
+      };
 
-        brandLoader.addClass('loading');
-        navigation.find('li a.disabled').removeClass('disabled');
+      $.post(ajax_object.ajax_url, data, function(resp){
+          var response = $.parseJSON(resp);
+          if(response.result == 'success') {
+              window.location.href=response.link;
+              $('#cyh_process_status').removeClass('error-message');
 
-        if (brand == 'all') {
+          } else {
+              $('#cyh_process_status').addClass('error-message').removeClass('loading').text('Please enter accurate zip code');
+              setTimeout(function(){
+                  $('#cyh_process_status').removeClass('error-message').text('');
+                  $('#zipCode').val($('#currentZipCode').val());
+              }, 3000);
+              e.preventDefault();
+          }
+      });
 
-            changeTabsNavHref(tabsNav, tabsId);
-            showActiveTab(allBrandsTabContent, activeTab, tabsId);
+      e.preventDefault();
+  });
 
-            allBrandsTabContent.show();
-            oneBrandTabContent.hide();
-            brandLoader.removeClass('loading');
-            tableSliderDestroy();
-            tableSliderInit();
-            getTermsInfo();
-        } else {
-            var data = {
-                'action': 'cyh_show_brand_data',
-                'brand_id': brand,
-                'zip':zip
-            };
+  function validateZip(zipCode)
+  {
+      var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+      return isValidZip;
+  }
 
-            $.post(ajax_object.ajax_url, data, function(resp){
-                if(resp.length > 0) {
-                    changeTabsNavHref(tabsNav, tabsId, numberForId);
+  $('#brandsList').on('change', function(e) {
+      let brandLoader = $(this).parent().parent().parent().find('.loader');
+      let brand = $('#brandsList').val();
+      let zip = $('#currentZipCode').val();
+      let hideTab = $('#brandsList option:selected').attr('data-hideTab');
 
-                    allBrandsTabContent.hide();
-                    oneBrandTabContent.html(resp).promise().done(function(){
+      const tabsId = ['internetOffers', 'internetTvOffers'];
+      const numberForId = 2;
+      const allBrandsTabContent =  $('#allBrandsTab');
+      const oneBrandTabContent =  $('#oneBrandTab');
+      const navigation = $(this).closest('.offers-navigation');
+      const tabsNav = navigation.find('li a');
+      const activeTab = $(this).closest('.offers-navigation').find('li.active > a').attr('href').replace(/[#\d]/g, '');
 
-                      showActiveTab($(this), activeTab, tabsId, numberForId);
+      brandLoader.addClass('loading');
+      navigation.find('li a.disabled').removeClass('disabled');
 
-                    });
+      if (brand == 'all') {
 
-                    brandLoader.removeClass('loading');
-                    oneBrandTabContent.show();
-                    tableSliderDestroy();
-                    tableSliderInit();
-                    getTermsInfo();
-                }
-            });
-        }
+          changeTabsNavHref(tabsNav, tabsId);
+          showActiveTab(allBrandsTabContent, activeTab, tabsId);
 
-        e.preventDefault();
+          allBrandsTabContent.show();
+          oneBrandTabContent.hide();
+          brandLoader.removeClass('loading');
+          tableSliderDestroy();
+          tableSliderInit();
+          getTermsInfo();
+      } else {
+          var data = {
+              'action': 'cyh_show_brand_data',
+              'brand_id': brand,
+              'zip':zip
+          };
 
-    });
+          $.post(ajax_object.ajax_url, data, function(resp){
+              if(resp.length > 0) {
+                  changeTabsNavHref(tabsNav, tabsId, numberForId);
+
+                  allBrandsTabContent.hide();
+                  oneBrandTabContent.html(resp).promise().done(function(){
+
+                    showActiveTab($(this), activeTab, tabsId, numberForId);
+
+                  });
+
+                  brandLoader.removeClass('loading');
+                  oneBrandTabContent.show();
+                  tableSliderDestroy();
+                  tableSliderInit();
+                  getTermsInfo();
+              }
+          });
+      }
+
+      e.preventDefault();
+
+  });
 
   function changeTabsNavHref(navigation, tabsIdArray, idNumber ) {
     idNumber = idNumber || '';
