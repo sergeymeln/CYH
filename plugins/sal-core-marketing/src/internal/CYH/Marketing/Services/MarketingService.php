@@ -19,6 +19,7 @@ class MarketingService extends CacheableService
     const OVERLOAD_MBPS_TO_GBPS_MULTIPLIER = 0.001;
     const OVERLOAD_MBPS_NUMBER = 1024;
     const CACHE_LIVING_TIME = 86400;
+    const COOKIE_APPLY_ZIP_NAME = 'cyh_apply_city_zip';
 
     public function __construct()
     {
@@ -134,6 +135,8 @@ class MarketingService extends CacheableService
         if(count($nearCities) == 0) {
             return false;
         }
+
+        setcookie(self::COOKIE_APPLY_ZIP_NAME, 1, time()+3600, '/');
 
         return $nearCities[0];
     }

@@ -25,6 +25,7 @@ class MarketingsController extends GenericController
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
     const COOKIE_ZIP_NAME = 'cyh_city_zip';
+    const COOKIE_APPLY_ZIP_NAME = 'cyh_apply_city_zip';
 
     public function __construct(ControllerContext $context)
     {
@@ -44,7 +45,7 @@ class MarketingsController extends GenericController
 
         $productFilter = new ProductFilter();
 
-        if (isset($_COOKIE[self::COOKIE_ZIP_NAME])) {
+        if (isset($_COOKIE[self::COOKIE_ZIP_NAME]) && !isset($_COOKIE[self::COOKIE_APPLY_ZIP_NAME])) {
             $city->Zip = $_COOKIE[self::COOKIE_ZIP_NAME];
         }
 
@@ -63,7 +64,9 @@ class MarketingsController extends GenericController
         }
 
         unset($_COOKIE[self::COOKIE_ZIP_NAME]);
-        setcookie(self::COOKIE_ZIP_NAME, '', time() - 3600);
+        setcookie(self::COOKIE_ZIP_NAME, '', time() - 3600, '/');
+        unset($_COOKIE[self::COOKIE_APPLY_ZIP_NAME]);
+        setcookie(self::COOKIE_APPLY_ZIP_NAME, '', time() - 3600, '/');
 
         $preparedData['productList'] = $this->filterProducts($productList);
         $preparedData['providers'] = $this->getProvidersFromProducts($preparedData['productList']);

@@ -171,31 +171,18 @@
                                         <?php
                                         do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
                                         ?>
-                                        <?php /*if($prod->Legal != ''):*/?><!--
-                                                    <a href="" data-toggle="modal" data-target="#legalInfo"> Terms & Conditions</a>
-                                                    <span class="terms-content">
-                                                        <?php /*echo $prod->Legal; */?>
-                                                    </span>
-                                                    --><?php /*endif;*/?>
-                                        <!--Temporary add link-->
                                         <a target="_blank" href="/offers-terms-and-conditions/#offer-<?php echo $prod->Id?>"> Terms & Conditions</a>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                         <tr class="thead-row thead-simple">
-                            <th >Price From</th>
+                            <th >Price</th>
                         </tr>
                         <tr>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                             </td>
-                        </tr>
-                        <tr class="thead-row thead-simple">
-                            <th>Max Speed</th>
-                        </tr>
-                        <tr>
-                            <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span> </td>
                         </tr>
                         <tr class="btn-row">
                             <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -391,18 +378,12 @@
                             </td>
                         </tr>
                         <tr class="thead-row thead-simple">
-                            <th >Price From</th>
+                            <th>Price</th>
                         </tr>
                         <tr>
                             <td><?php echo $prod->PriceDescriptionBegin; ?> <span class="big-text"><span class="number">
                                                     <?php echo ($prod->Price) ? '$'.$prod->Price : '-'; ?></span></span> <?php echo $prod->PriceDescriptionEnd; ?>
                             </td>
-                        </tr>
-                        <tr class="thead-row thead-simple">
-                            <th>Max Speed</th>
-                        </tr>
-                        <tr>
-                            <td><span class="big-text"><span class="number"><?php echo $speedData['speed'];?></span> <?php echo $speedData['speedUnits']?></span> </td>
                         </tr>
                         <tr class="btn-row">
                             <td><a href="tel:<?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($prod->Phone->Number)?>"
@@ -417,7 +398,7 @@
         </ul>
 
         <p class="provider-count hidden-sm hidden-md hidden-lg">
-            <span class="current-slide green-text">3</span> of <span class="slide-count green-text"><?php echo count($cityData['providers']);?></span> providers
+            <span class="current-slide green-text">1</span> of <span class="slide-count green-text"><?php echo count($cityData['providers']);?></span> offers
         </p>
     <?php else:?>
         <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
