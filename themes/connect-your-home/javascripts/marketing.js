@@ -272,15 +272,24 @@ $(document).on('ready', function() {
     numberForId = numberForId || '';
     let currentActiveTab = content.find('div#'+ activeTab + numberForId);
     const tableArray = currentActiveTab.find('table');
+    
+    $.each(tabsId, function (index,value) {
+      const tableCounter = content.find('div#'+ value + numberForId).find('table').length;
 
-    if(tableArray.length === 1 && activeTab != tabsId[0]) {
-      const oldTab = $('a[href=#' + activeTab + numberForId +']');
-      oldTab.parent().removeClass('active');
-      oldTab.addClass('disabled');
-      activeTab = tabsId[0];
-      $('a[href=#' + activeTab + numberForId +']').parent().addClass('active');
-      currentActiveTab = content.find('div#'+ activeTab + numberForId);
-    }
+      if(tableCounter === 1) {
+        const oldTab = $('a[href=#' + value + numberForId +']');
+
+        oldTab.parent().removeClass('active');
+        oldTab.addClass('disabled');
+
+        if(activeTab != tabsId[0]) {
+          activeTab = tabsId[0];
+          $('a[href=#' + activeTab + numberForId + ']').parent().addClass('active');
+        }
+      }
+      currentActiveTab = content.find('div#' + activeTab + numberForId);
+    });
+
 
     currentActiveTab.addClass('in active');
   }
