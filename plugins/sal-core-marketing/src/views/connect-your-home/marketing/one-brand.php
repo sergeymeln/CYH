@@ -196,7 +196,7 @@
             <?php endforeach;?>
         </ul>
         <p class="provider-count hidden-sm hidden-md hidden-lg">
-            <span class="current-slide green-text">3</span> of <span class="slide-count green-text"><?php echo count($cityData['providers']);?></span> providers
+            <span class="current-slide green-text">1</span> of <span class="slide-count green-text"></span> offers
         </p>
     <?php else:?>
         <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
@@ -398,7 +398,7 @@
         </ul>
 
         <p class="provider-count hidden-sm hidden-md hidden-lg">
-            <span class="current-slide green-text">1</span> of <span class="slide-count green-text"><?php echo count($cityData['providers']);?></span> offers
+            <span class="current-slide green-text">1</span> of <span class="slide-count green-text"></span> offers
         </p>
     <?php else:?>
         <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>

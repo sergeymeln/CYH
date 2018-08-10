@@ -30,7 +30,6 @@ class AjaxController extends GenericController
     {
         $brandId = (int)$_POST['brand_id'];
         $zip = $_POST['zip'];
-        $city = $this->marketingService->getCityByZip($zip);
 
         $productFilter = new ProductFilter();
         $productFilter->Zip = $zip;
@@ -38,14 +37,9 @@ class AjaxController extends GenericController
         $productList = $this->filterProducts($productList);
         $productList = $this->sortProducts($productList);
 
-        if(count($productList) == 0) {
-            return false;
-        }
-
         $this->View('marketing/one-brand', [
             'products' => $productList,
             'brandId' => $brandId,
-            'city' => $city,
             'constants' => [
                 'internetCats' => self::INTERNET_CATEGORIES,
                 'internetAndTvCats' => self::INTERNET_TV_CATEGORIES
