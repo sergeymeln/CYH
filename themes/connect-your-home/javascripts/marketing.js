@@ -333,6 +333,16 @@ $(document).on('ready', function() {
     currentActiveTab.addClass('in active');
   }
 
+  $('a.see-all-offers').on('click', function (e) {
+    e.preventDefault();
+
+    var brandList = $('#brandsList');
+
+    if(brandList.val() === 'all') {
+      return;
+    }
+    brandList.val('all').change();
+  });
 
   $(document).on('click', 'a[data-brand-id]', function (e) {
       e.preventDefault();
@@ -348,7 +358,8 @@ $(document).on('ready', function() {
         return;
       }
       brandList.val(brandId).change();
-  })
+  });
+
 
 });
 

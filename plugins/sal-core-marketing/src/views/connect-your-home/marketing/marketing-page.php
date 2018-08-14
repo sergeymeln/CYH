@@ -640,7 +640,7 @@
                 </div>-->
             </div>
             <div class="button-wrap">
-                <a href="#all-available-offers" class="btn btn-big btn-green btn-green-glow">See all Internet offers in <?php echo $city->NormalName?></a>
+                <a href="#all-available-offers" class="btn btn-big btn-green btn-green-glow see-all-offers">See all Internet offers in <?php echo $city->NormalName?></a>
                 <!--<a href="/auth/?groupId=1265743" target="_blank" class="btn btn-orange btn-big btn-orange-glow">Secret Deals</a>-->
             </div>
         </div>
