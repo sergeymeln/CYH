@@ -10,7 +10,6 @@ use CYH\Helpers\HtmlHelper;
 use CYH\Models\Filters\ProductFilter;
 use CYH\Sal\Services\CacheSettingsProvider;
 use CYH\Sal\Services\ProductsService;
-use CYH\Marketing\Helpers\WPSQLImporter;
 use CYH\Marketing\Helpers\UrlHelper;
 use CYH\Marketing\Services\MarketingService;
 use CYH\Marketing\Services\StatisticsService;
@@ -31,7 +30,6 @@ class MarketingsController extends GenericController
     {
         parent::__construct($context);
         $this->prodService = new ProductsService();
-        $this->sqlImporter = new WPSQLImporter();
         $this->urlHelper = new UrlHelper();
         $this->marketingService = new MarketingService();
     }
