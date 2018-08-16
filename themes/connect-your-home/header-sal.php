@@ -6,7 +6,6 @@ if($isUnique) {
 } else {
     $phone = '855-324-9604';
 }
-//do_action('\\' . CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::class . '::RenderMarketing');
 ?>
 
 <!DOCTYPE html>
@@ -160,7 +159,3 @@ if($isUnique) {
             <!-- /row -->
         </div>
     </header>
-
-
-
-

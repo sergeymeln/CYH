@@ -7,6 +7,7 @@ use Zend\Db\ResultSet\ResultSet;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
+use CYH\Marketing\Events\StatisticsServiceEvent;
 
 class StatisticsRepository
 {
@@ -25,7 +26,7 @@ class StatisticsRepository
     }
 
     /**
-     * @param $stat
+     * @param $stat StatisticsServiceEvent
      * @param $requestId
      * @param $city
      * @return \Zend\Db\Adapter\Driver\ResultInterface
@@ -34,7 +35,7 @@ class StatisticsRepository
     {
         $sql = new Sql($this->adapter);
         $insert = $sql->insert(CYH_TABLE_PREFIX.'cyh_load_statistics')->columns(['request_id','event_type', 'actual_timestamp', 'city'])->
-                values([$requestId, $stat->event_type, $stat->actual_timestamp, $city]);
+                values([$requestId, $stat->eventType, $stat->actualTimestamp, $city]);
         $statement = $sql->prepareStatementForSqlObject($insert);
         $result = $statement->execute();
 

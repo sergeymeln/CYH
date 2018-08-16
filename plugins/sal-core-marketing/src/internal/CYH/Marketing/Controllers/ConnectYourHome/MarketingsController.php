@@ -13,12 +13,15 @@ use CYH\Sal\Services\ProductsService;
 use CYH\Marketing\Helpers\UrlHelper;
 use CYH\Marketing\Services\MarketingService;
 use CYH\Marketing\Services\StatisticsService;
+use CYH\Marketing\Types\StatisticsEventType;
 
 class MarketingsController extends GenericController
 {
+    /**@var $prodService ProductsService*/
     protected $prodService = null;
-    protected $dataTransformerHelper;
+    /**@var $marketingService MarketingService*/
     protected $marketingService = null;
+    /**@var $urlHelper UrlHelper*/
     protected $urlHelper = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
@@ -50,12 +53,12 @@ class MarketingsController extends GenericController
         $productFilter->Zip = $city->Zip;
         if ($collectStats) {
             $statService = StatisticsService::getInstance();
-            $statService->setCity($city->NormalName);
-            $statService->addObject(2, microtime(true));
+            $statService->setCity($city);
+            $statService->addObject(StatisticsEventType::SAL_REQUEST_START, microtime(true));
         }
         $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
         if ($collectStats) {
-            $statService->addObject(3, microtime(true));
+            $statService->addObject(StatisticsEventType::SAL_REQUEST_END, microtime(true));
         }
         if(count($productList) ==0) {
             return false;
@@ -72,15 +75,15 @@ class MarketingsController extends GenericController
         $preparedData['productListSortedAll'] = $this->sortAllProducts($preparedData['productList']);
 
         $preparedData['topProvidersData'] = $this->marketingService->getTopProvidersDataFromProducts($preparedData['productList']);
-        //echo '<pre>'; print_r($preparedData['productListSorted']);exit;
 
         $city->Bullets = $this->marketingService->getBulletsData($preparedData['productList'], $city);
         if ($collectStats) {
-            $statService->addObject(4, microtime(true));
+            $statService->addObject(StatisticsEventType::DATA_PREPARE_COMPLETE, microtime(true));
         }
         $this->View('marketing/marketing-page', [
             'city' => $city,
             'cityData' => $preparedData,
+            'urlHelper' => $this->urlHelper,
             'constants' => [
                 'internetCats' => self::INTERNET_CATEGORIES,
                 'internetAndTvCats' => self::INTERNET_TV_CATEGORIES
@@ -135,9 +138,9 @@ class MarketingsController extends GenericController
      */
     private function sortProducts($products)
     {
-        usort($products, function($a, $b){
-            if($a->ServiceProviderCategory->Provider->Rank == $b->ServiceProviderCategory->Provider->Rank) {
-                return strcmp($a->ServiceProviderCategory->Provider->Name, $b->ServiceProviderCategory->Provider->Name);
+        usort($products, function($firstItem, $secondItem){
+            if($firstItem->ServiceProviderCategory->Provider->Rank == $secondItem->ServiceProviderCategory->Provider->Rank) {
+                return strcmp($firstItem->ServiceProviderCategory->Provider->Name, $secondItem->ServiceProviderCategory->Provider->Name);
             }
         });
 

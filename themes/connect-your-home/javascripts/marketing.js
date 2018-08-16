@@ -342,6 +342,11 @@ $(document).on('ready', function() {
       return;
     }
     brandList.val('all').change();
+
+      var brandsSection = $('#all-available-offers'),
+          new_position = $(brandsSection).offset();
+
+      $('html, body').stop().animate({ scrollTop: new_position.top }, 500);
   });
 
   $(document).on('click', 'a[data-brand-id]', function (e) {

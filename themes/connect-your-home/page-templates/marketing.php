@@ -6,22 +6,21 @@
  * @subpackage cyh
  *
  */
+
 use CYH\Marketing\Services\StatisticsService;
 use CYH\WpOptionsHandlers\Pages\GeneralOptions;
+use CYH\Marketing\Types\StatisticsEventType;
+
 $generalOptions = GeneralOptions::GetSettings();
-
-$collectStats = false;
-if (isset($generalOptions['sal_enable_statistic']) && $generalOptions['sal_enable_statistic'] == 'on') {
-    $collectStats = true;
+if ($generalOptions['sal_enable_statistic']) {
     $statService = StatisticsService::getInstance();
-    $statService->addObject(1, microtime(true));
+    $statService->addObject(StatisticsEventType::PAGE_GENERATION_START, microtime(true));
 }
-
 
 get_header('sal');
 
 try{
-    do_action('\\' . CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::class . '::RenderMarketing', $collectStats);
+    do_action('\\' . CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::class . '::RenderMarketing', $generalOptions['sal_enable_statistic']);
 }
 catch (Exception $ex)
 {
@@ -30,7 +29,7 @@ catch (Exception $ex)
 }
 get_footer('sal');
 
-if (isset($generalOptions['sal_enable_statistic']) && $generalOptions['sal_enable_statistic'] == 'on') {
-    $statService->addObject(5, microtime(true));
+if ($generalOptions['sal_enable_statistic']) {
+    $statService->addObject(StatisticsEventType::VIEW_RENDERING_COMPLETE, microtime(true));
     $statService->insertStatistics();
 }

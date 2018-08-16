@@ -1,3 +1,8 @@
+<?php /**@var $cityData array*/?>
+<?php /**@var $city \CYH\Marketing\ViewModels\UI\CityItem*/?>
+<?php /**@var $constants array*/?>
+<?php /**@var $urlHelper \CYH\Marketing\Helpers\UrlHelper*/?>
+
 <?php $showSpectrum=0;?>
 <section class="intro-section">
     <div class="container-fluid">
@@ -1139,7 +1144,7 @@
                             echo '</ul><ul class="flex-list nearby-offers-list">';
                             $counter = 0;
                         }?>
-                        <li><a href="/internet/<?php echo strtolower($relCity['state_code'])?>/<?php echo strtolower($relCity['city_name'])?>/">
+                        <li><a href="<?php echo $urlHelper->getCityUrl($relCity)?>">
                                 <?php echo $relCity['city_normal_name']?>, <?php echo $relCity['state_code']?>
                             </a>
                         </li>
@@ -1170,7 +1175,7 @@
                                 echo '</ul><ul class="flex-list nearby-offers-list">';
                                 $counter = 0;
                             }?>
-                            <li><a href="/internet/<?php echo strtolower($bigCity['state_code'])?>/<?php echo strtolower($bigCity['city_name'])?>/">
+                            <li><a href="<?php echo $urlHelper->getCityUrl($bigCity)?>">
                                     <?php echo $bigCity['city_normal_name']?>, <?php echo $bigCity['state_code']?>
                                 </a>
                             </li>

@@ -2,7 +2,6 @@
 
 namespace CYH\Marketing\Repositories;
 
-
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\ResultSet\ResultSet;
 
@@ -11,6 +10,7 @@ use Zend\Db\Sql\Sql;
 
 class MarketingRepository
 {
+    /**@var $adapter Adapter*/
     protected $adapter;
     private $config = array(
         'driver' => 'Pdo_Mysql',

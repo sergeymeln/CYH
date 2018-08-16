@@ -1,23 +1,22 @@
 <?php
 
-
 namespace CYH\Marketing\Services;
 
 use CYH\Marketing\Repositories\StatisticsRepository;
-use CYH\Sal\Services\Base\CacheableService;
+use CYH\Marketing\ViewModels\UI\CityItem;
+use CYH\Marketing\Events\StatisticsServiceEvent;
+use CYH\Marketing\Helpers\UrlHelper;
 
 class StatisticsService
 {
     private static $instance = null;
-    protected static $statisticsRepository = null;
+    /** @var $statisticsRepository StatisticsRepository*/
+    protected static $statisticsRepository;
+    /** @var $city CityItem*/
     protected $city = null;
-    const EVENT_TYPES = [
-        'page_generation_start' => 1,
-        'request_to_sal_start' => 2,
-        'request_to_sal_stop' => 3,
-        'data_preparation_complete' => 4,
-        'view_rendering_complete' => 5
-    ];
+    /**@var $urlHelper UrlHelper*/
+    protected static $urlHelper = null;
+
     protected $eventObjects = [];
 
 
@@ -27,6 +26,7 @@ class StatisticsService
         {
             self::$instance = new self();
             self::$statisticsRepository = new StatisticsRepository();
+            self::$urlHelper = new UrlHelper();
         }
         return self::$instance;
     }
@@ -46,13 +46,13 @@ class StatisticsService
     /**
      * @param $type
      * @param $time
-     * @return \stdClass
+     * @return StatisticsServiceEvent
      */
     private function createObject($type, $time)
     {
-        $eventObject = new \stdClass();
-        $eventObject->event_type = $type;
-        $eventObject->actual_timestamp = $time;
+        $eventObject = new StatisticsServiceEvent();
+        $eventObject->eventType = $type;
+        $eventObject->actualTimestamp = $time;
 
         return $eventObject;
     }
@@ -68,17 +68,23 @@ class StatisticsService
     public function insertStatistics()
     {
         $requestId = $this->generateRequestId();
-        $city = $this->getCity();
+        $city = self::$urlHelper->getCityUrl($this->getCity());
         foreach ($this->eventObjects as $stat) {
             self::$statisticsRepository->insertStatistics($stat, $requestId, $city);
         }
     }
 
+    /**
+     * @param $city CityItem
+     */
     public function setCity($city)
     {
         $this->city = $city;
     }
 
+    /**
+     * @return CityItem
+     */
     public function getCity()
     {
         return $this->city;

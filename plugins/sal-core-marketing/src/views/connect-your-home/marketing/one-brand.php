@@ -1,3 +1,7 @@
+<?php /**@var $products array*/?>
+<?php /**@var $constants array*/?>
+<?php /**@var $brandId int*/?>
+
 <div id="internetOffers2" class="tab-pane fade">
     <table class="table providers-table offers-table hidden-xs">
         <thead>

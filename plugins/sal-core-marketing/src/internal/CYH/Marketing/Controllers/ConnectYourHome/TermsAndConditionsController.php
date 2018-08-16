@@ -11,8 +11,9 @@ use CYH\Marketing\Services\MarketingService;
 
 class TermsAndConditionsController extends GenericController
 {
+    /**@var $prodService ProductsService*/
     protected $prodService = null;
-    protected $dataTransformerHelper;
+    /**@var $marketingService MarketingService*/
     protected $marketingService = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
 

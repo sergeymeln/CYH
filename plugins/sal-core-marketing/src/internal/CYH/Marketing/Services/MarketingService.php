@@ -10,6 +10,7 @@ use CYH\Marketing\ViewModels\UI\CityItem;
 
 class MarketingService extends CacheableService
 {
+    /**@var $marketingRepository MarketingRepository*/
     protected $marketingRepository = null;
     const INTERNET_USERS_IN_USA = 78.2;
     const TOP_PROVIDERS_COUNT = 5;
@@ -112,8 +113,8 @@ class MarketingService extends CacheableService
         }
 
         if(count($matchedCities)>0) {
-            usort($matchedCities, function($a, $b){
-                return ($a['population'] > $b['population']) ? -1 : 1;
+            usort($matchedCities, function($firstItem, $secondItem){
+                return ($firstItem['population'] > $secondItem['population']) ? -1 : 1;
             });
 
             return $matchedCities[0];
@@ -418,11 +419,11 @@ class MarketingService extends CacheableService
                 return $element->Price;
             }, $result[$providerId]['products']), SORT_ASC, $result[$providerId]['products']);
 
-            usort($result, function($a, $b){
-                if($a['provider']->Rank == $b['provider']->Rank) {
-                   return strcmp($a["provider"]->Name, $b["provider"]->Name);
+            usort($result, function($firstItem, $secondItem){
+                if($firstItem['provider']->Rank == $secondItem['provider']->Rank) {
+                   return strcmp($firstItem["provider"]->Name, $secondItem["provider"]->Name);
                 } else {
-                    return ($a['provider']->Rank < $b['provider']->Rank) ? -1 : 1;
+                    return ($firstItem['provider']->Rank < $secondItem['provider']->Rank) ? -1 : 1;
                 }
             });
 

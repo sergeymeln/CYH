@@ -1,4 +1,4 @@
-<?php $showSpectrum=0;?>
+<?php /**@var $cityData array*/?>
 
 <section class="terms-section">
     <div class="container">

@@ -113,7 +113,8 @@ class GeneralOptions extends OptionsHandler
     {
         //merging actual settings with default ones
         return array_merge([
-            'general_error_page' => '/no-response'
+            'general_error_page' => '/no-response',
+            'sal_enable_statistic' => false,
         ], parent::GetSettings());
     }
 
@@ -122,6 +123,11 @@ class GeneralOptions extends OptionsHandler
         $sanitizedInput = array();
         foreach ($input as $key => $value) {
             $sanitizedInput[$key] = $value;
+        }
+        if (isset($input['sal_enable_statistic']) && $input['sal_enable_statistic'] == 'on') {
+            $sanitizedInput['sal_enable_statistic'] = true;
+        } else {
+            $sanitizedInput['sal_enable_statistic'] = false;
         }
         return $sanitizedInput;
     }
