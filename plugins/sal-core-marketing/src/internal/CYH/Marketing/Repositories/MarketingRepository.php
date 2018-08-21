@@ -237,4 +237,16 @@ class MarketingRepository
 
         return $result;
     }
+
+    public function getBestZip($city)
+    {
+        $sql = new Sql($this->adapter);
+        $select = $sql->select();
+        $select->from(CYH_TABLE_PREFIX.'cyh_zip_providers');
+        $select->where(array('city_id' => $city->Id));
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+
+        return $results->current();
+    }
 }

@@ -5,6 +5,7 @@ namespace CYH\Marketing\ViewModels\UI;
 
 class CityItem
 {
+    public $Id;
     public $Name;
     public $NormalName;
     public $Latitude;

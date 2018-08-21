@@ -361,6 +361,7 @@ class MarketingService extends CacheableService
     private function getCityFromData($data)
     {
         $cityItem = new CityItem();
+        $cityItem->Id = $data['city_id'];
         $cityItem->Name = $data['city_name'];
         $cityItem->NormalName = $data['city_normal_name'];
         $cityItem->Latitude = $data['latitude'];
@@ -552,6 +553,16 @@ class MarketingService extends CacheableService
         $city = $this->getCityFromUrl($parts);
         if($city['section_two_text'] != '') {
             return true;
+        }
+
+        return false;
+    }
+
+    public function getBestZip($city)
+    {
+        $result = $this->marketingRepository->getBestZip($city);
+        if(count($result)>0) {
+            return $result['zip_code'];
         }
 
         return false;

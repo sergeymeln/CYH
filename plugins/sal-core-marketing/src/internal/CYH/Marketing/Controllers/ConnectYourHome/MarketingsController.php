@@ -48,6 +48,8 @@ class MarketingsController extends GenericController
 
         if (isset($_COOKIE[self::COOKIE_ZIP_NAME]) && !isset($_COOKIE[self::COOKIE_APPLY_ZIP_NAME])) {
             $city->Zip = $_COOKIE[self::COOKIE_ZIP_NAME];
+        } elseif($bestZip = $this->marketingService->getBestZip($city)) {
+            $city->Zip = $bestZip;
         }
 
         $productFilter->Zip = $city->Zip;

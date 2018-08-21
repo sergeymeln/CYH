@@ -25,9 +25,6 @@ class WPSQLImporter
     public function __construct()
     {
         $this->prodService = new ProductsService();
-        $this->sqlImporter = new WPSQLImporter();
-        $this->urlHelper = new UrlHelper();
-        $this->marketingService = new MarketingService();
     }
 
     public function saveUsCitiesContent()
@@ -359,16 +356,33 @@ class WPSQLImporter
             $offset = 0;
         }
 
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."cyh_zip_providers", OBJECT);
+        $processedIds = [];
+        foreach($results as $result) {
+            $processedIds[]=$result->city_id;
+        }
+        $processedIds = implode(',',$processedIds);
+
         $results = $wpdb->get_results("SELECT c.id, c.city_name, c.city_normal_name, c.state_code, c.zip_code FROM wp_cyh_city c 
-        INNER JOIN wp_cyh_city_content cc ON c.id=cc.city_id WHERE cc.is_published=1 ORDER BY c.population DESC 
-        LIMIT ".$offset.', '.self::ZIP_CITY_BATCH_LIMIT.';', OBJECT);
+        INNER JOIN ".$wpdb->prefix."cyh_city_content cc ON c.id=cc.city_id WHERE cc.is_published=1 
+         AND c.id NOT IN(".$processedIds.") ORDER BY c.population DESC", OBJECT);
 
         $providersCount = [];
         foreach ($results as $result) {
             $zips = array_map('trim', explode('/', $result->zip_code));
             foreach ($zips as $zip) {
                 //TODO: Invoke real SAL method
-                $providersCount[$result->id][$zip] = rand(1,6);
+                $productFilter = new ProductFilter();
+
+                $productFilter->Zip = $zip;
+                $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheDisabledSettings());
+
+                if(count($productList) ==0) {
+                    continue;
+                }
+                $productList = $this->filterProducts($productList);
+                $cnt = $this->getProvidersCountFromProducts($productList);
+                $providersCount[$result->id][$zip] = $cnt;
             }
 
             $max = 0;
@@ -395,7 +409,7 @@ class WPSQLImporter
             update_option( self::ZIP_OFFSET_OPTION_NAME, $offset );
         }
 
-        echo '<pre>'; print_r($providersCount);exit;
+        echo 'END';exit;
     }
 
     /**
@@ -429,6 +443,6 @@ class WPSQLImporter
             }
         }
 
-        return $uniqueProviderIds;
+        return count($uniqueProviderIds);
     }
 }
