@@ -445,4 +445,24 @@ class WPSQLImporter
 
         return count($uniqueProviderIds);
     }
+
+    public function getBestZipCities()
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT c.id, c.city_name, c.city_normal_name, c.state_code, zp.zip_code FROM wp_cyh_city c 
+        INNER JOIN ".$wpdb->prefix."cyh_zip_providers zp ON c.id=zp.city_id", OBJECT);
+
+        foreach ($results as $res) {
+            $strZip = (string)$res->zip_code;
+            if(strlen($strZip) != 5) {
+                $newZip = '0'.$strZip;
+                $wpdb->query('UPDATE '.$wpdb->prefix."cyh_zip_providers SET zip_code='".$newZip."' 
+                 WHERE city_id=".$res->id.';');
+            }
+
+            echo 'https://staging.connectyourhome.com/internet/'.strtolower($res->state_code).'/'.$res->city_name.'/<br>';
+        }
+
+        exit;
+    }
 }
