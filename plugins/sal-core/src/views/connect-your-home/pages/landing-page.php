@@ -57,7 +57,7 @@
                         <br>
                         <a href="tel: <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?>" class="btn btn-success btn-lg" target="_self">
                             <i class="glyphicon glyphicon-earphone"></i> <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?> </a>
-                        <a href="#" class="disclaimer">View Disclaimer</a>
+                        <span class="disclaimer">View Disclaimer</span>
                     </td>
                 </tr>
                 <tr class="disclaimer-row">

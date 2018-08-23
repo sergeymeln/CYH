@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $(this).parent().hide();
   });
 
-  $('.providers-table  a.disclaimer').on('click', function () {
+  $('.providers-table  span.disclaimer').on('click', function () {
     $(this).parents('tr').next().toggle();
 
     return false;

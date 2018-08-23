@@ -39,7 +39,9 @@ section {
   font-size: 15px;
 }
 .disclaimer {
- display: inline-block;
+  display: inline-block;
+  color: $green;
+  cursor: pointer;
 }
 .click-detail {
   color: $red;
