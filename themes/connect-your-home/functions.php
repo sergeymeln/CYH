@@ -419,6 +419,8 @@ add_action('wp_enqueue_scripts', 'RegisterStyles');
 add_action( 'wp_enqueue_scripts', function() {
 
     global $wp_query;
+    wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/javascripts/dist/landing.min.js', array( 'jquery' ), '1.0.0', true );
+    wp_enqueue_style( 'landing-css', get_template_directory_uri() .'/css/landing.min.css' );
 
     if (is_page() && isset( $wp_query->virtual_page ) && $wp_query->virtual_page instanceof \GM\VirtualPages\PageInterface) {
 
