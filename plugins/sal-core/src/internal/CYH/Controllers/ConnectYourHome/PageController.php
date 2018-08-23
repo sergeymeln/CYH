@@ -25,7 +25,33 @@ class PageController extends GenericController
 
     public function RenderLanding()
     {
+        $plans = $this->getCustomFields();
         $this->View('connect-your-home/pages/landing-page', [
+            'plans' => $plans
         ]);
+    }
+
+    private function getCustomFields()
+    {
+        $plans = [];
+        $counter = 0;
+        if( have_rows('section') ){
+
+            while ( have_rows('section') ) {
+                the_row();
+
+                $plans[$counter]['logo'] = get_sub_field('logo');
+                $plans[$counter]['providerPlanTitle'] = get_sub_field('provider_plan_title');
+                $plans[$counter]['planBullets'] = get_sub_field('plan_bullets');
+                $plans[$counter]['planPrice'] = get_sub_field('plan_price');
+                $plans[$counter]['phoneNumber'] = get_sub_field('phone_number');
+                $plans[$counter]['disclaimer'] = get_sub_field('disclaimer');
+                $plans[$counter]['exclusiveOfferDetails'] = get_sub_field('exclusive_offer_details');
+                $plans[$counter]['giftLink'] = get_sub_field('gift_link');
+                $counter++;
+            }
+        }
+
+        return $plans;
     }
 }

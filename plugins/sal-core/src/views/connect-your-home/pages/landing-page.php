@@ -3,6 +3,15 @@
 <section>
     <div class="container">
         <div class="row">
+        <div class="col-sm-12">
+            <div class="results-headline text-center sgp-page-header">
+                <h1>
+                    Exclusive deals and discounts
+                </h1>
+            </div>
+        </div>
+        </div>
+        <div class="row">
             <table class="table providers-table">
                 <thead class="hidden-xs hidden-sm">
                 <tr class="thead-row">
@@ -12,59 +21,53 @@
                 </tr>
                 </thead>
                 <tbody>
-               <?php if( have_rows('section') ):
-
-
-                    while ( have_rows('section') ) : the_row();
-
-
-                        $logo = get_sub_field('logo');
-                        $provider_plan_title = get_sub_field('provider_plan_title');
-                        $plan_bullets = get_sub_field('plan_bullets');
-                        $plan_price = get_sub_field('plan_price');
-                        $phone_number = get_sub_field('phone_number');
-                        $disclaimer = get_sub_field('disclaimer');
-                        $exclusive_offer_details = get_sub_field('exclusive_offer_details');
-                        $gift_link = get_sub_field('gift_link');
-
-                    ?>
+                <?php if(count($plans) > 0):?>
+               <?php foreach ($plans as $plan):?>
                <tr>
-                    <td><img src="<?php echo $logo; ?>" width="130px" height="50px"></td>
+                    <td><img src="<?php echo $plan['logo']; ?>" width="130px" height="50px">
+                        <?php if($plan['exclusiveOfferDetails'] != ''):?>
+                        <hr><div class="offer-verbiage">Exclusive Offer</div>
+                        <p class="click-detail">Click below for detail</p>
+                        <div>
+                            <button class="btn btn-success btn-lg provider-name">$100 Visa Gift Card</button>
+                            <a href="#" class="btn btn-success btn-lg provider-name">Redeem
+                                Gift</a>
+                        </div>
+                        <div class="instructions-gwp">
+                            <span>x</span>
+                            <?php echo $plan['exclusiveOfferDetails'];?>
+                        </div>
+                            <?php endif;?>
+                    </td>
                     <td>
-                        <h2><?php echo $provider_plan_title ?></h2>
+                        <h2><?php echo $plan['providerPlanTitle']; ?></h2>
+                        <?php $content = \CYH\Helpers\ContentDeserializeHelper::GetDescriptionFromTags($plan['planBullets']);?>
                         <ul class="plus-list">
                             <ul class="plus-list text-left">
-                                <li>165+ Channels</li>
-                                <li>HD Channels</li>
-                                <li>Whole-Home DVR</li>
-                                <li>Speeds start at 20 Mbps</li>
-                                <li>Online shopping and social networking</li>
+                                <?php
+                                do_action('\CYH\Controllers\Common\CommonUIComponents::RenderDescription', $content, 'common', 'common');
+                                ?>
                             </ul>
                         </ul>
                     </td>
                     <td>
                         <p>Starting at</p>
-                        <span class="price-value">$114.99 </span>
+                        <span class="price-value">$<?php echo $plan['planPrice']?> </span>
                         <br>
                         <br>
-                        <a href="tel:888-403-9281" class="btn btn-success btn-lg" target="_self">
-                            <i class="glyphicon glyphicon-earphone"></i> 888-403-9281 </a>
+                        <a href="tel: <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?>" class="btn btn-success btn-lg" target="_self">
+                            <i class="glyphicon glyphicon-earphone"></i> <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?> </a>
                         <a href="#" class="disclaimer">View Disclaimer</a>
                     </td>
                 </tr>
                 <tr class="disclaimer-row">
-                    <td colspan="3">test</td>
+                    <td colspan="3"><?php echo $plan['disclaimer']?></td>
                 </tr>
 
-               <?php
+               <?php endforeach;?>
+               <?php else :?>
 
-                    endwhile;
-
-                    else :
-
-                    ?>
-
-                    test
+                    No items found
                <?php
 
                 endif; ?>
