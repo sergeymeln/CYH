@@ -12,10 +12,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><img src="<?php echo get_stylesheet_directory_uri() .'/images/brands/dish.png'?>" width="130px" height="50px"></td>
+               <?php if( have_rows('section') ):
+
+
+                    while ( have_rows('section') ) : the_row();
+
+
+                        $logo = get_sub_field('logo');
+                        $provider_plan_title = get_sub_field('provider_plan_title');
+                        $plan_bullets = get_sub_field('plan_bullets');
+                        $plan_price = get_sub_field('plan_price');
+                        $phone_number = get_sub_field('phone_number');
+                        $disclaimer = get_sub_field('disclaimer');
+                        $exclusive_offer_details = get_sub_field('exclusive_offer_details');
+                        $gift_link = get_sub_field('gift_link');
+
+                    ?>
+               <tr>
+                    <td><img src="<?php echo $logo; ?>" width="130px" height="50px"></td>
                     <td>
-                        <h2>Prism® Essential TV and High-Speed Internet</h2>
+                        <h2><?php echo $provider_plan_title ?></h2>
                         <ul class="plus-list">
                             <ul class="plus-list text-left">
                                 <li>165+ Channels</li>
@@ -39,45 +55,20 @@
                 <tr class="disclaimer-row">
                     <td colspan="3">test</td>
                 </tr>
-                <tr>
-                    <td>
-                        <img src="<?php echo get_stylesheet_directory_uri() .'/images/brands/dish.png'?>" width="130px" height="50px">
-                        <hr><div class="offer-verbiage">Exclusive Offer</div>
-                        <p class="click-detail">Click below for detail</p>
-                        <div>
-                            <button class="btn btn-success btn-lg provider-name">$100 Visa Gift Card</button>
-                            <a href="#" class="btn btn-success btn-lg provider-name">Redeem
-                                Gift</a>
-                        </div>
-                        <div class="instructions-gwp">
-                            <span>x</span>
-                            Must order AT120 package or higher. Offer only valid for for First-Time New DISH Customers who order
-                            through our program. Cannot be combined with any other DISH incentive offers.
-                        </div>
-                    </td>
-                    <td>
-                        <h2>Prism® Essential TV and High-Speed Internet</h2>
-                        <ul class="plus-list">
-                            <ul class="plus-list text-left">
-                                <li>165+ Channels</li>
-                                <li>HD Channels</li>
-                                <li>Whole-Home DVR</li>
-                                <li>Speeds start at 20 Mbps</li>
-                                <li>Online shopping and social networking</li>
-                            </ul>
-                        </ul>
-                    </td>
-                    <td>
-                        <p>Starting at</p>
-                        <span class="price-value">$114.99 </span>
-                        <br>
-                        <br>
-                        <a href="tel:888-403-9281" class="btn btn-success btn-lg" target="_self">
-                            <i class="glyphicon glyphicon-earphone"></i> 888-403-9281
-                        </a>
-                        <a href='#' class='disclaimer'>View Disclaimer</a>
-                    </td>
-                </tr>
+
+               <?php
+
+                    endwhile;
+
+                    else :
+
+                    ?>
+
+                    test
+               <?php
+
+                endif; ?>
+
                 </tbody>
             </table>
 
