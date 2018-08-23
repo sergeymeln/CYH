@@ -41,6 +41,7 @@ $classesWithActions = [
         '\\' . \CYH\Controllers\ConnectYourHome\UIComponentsController::class,
         '\\' . \CYH\Controllers\ConnectYourHome\ErrorController::class,
         '\\' . \CYH\Controllers\ConnectYourHome\MaintenancePagesController::class,
+        '\\' . \CYH\Controllers\ConnectYourHome\PageController::class,
     ]),
     \CYH\Models\SitesConst::CONNECT_YOUR_BENEFITS => array_merge($commonClasses, $groupPortalClasses),
     \CYH\Models\SitesConst::DISH_SYSTEMS => array_merge($commonClasses, [
