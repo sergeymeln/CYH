@@ -39,17 +39,18 @@
                     </td>
                     <td>
                         <p>Starting at</p>
-                        <span class="price-value">$<?php echo $plan['planPrice']?> </span>
+                        <span class="price-value">$<?php echo $plan['planPrice']?><sup><span class="disclaimer">*</span></sup> </span>
                         <br>
                         <br>
                         <a href="tel: <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?>" class="btn btn-success btn-lg" target="_self">
                             <i class="glyphicon glyphicon-earphone"></i> <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?> </a>
                         <span class="disclaimer">View Disclaimer</span>
+                        <div class="disclaimer-row">
+                            <?php echo $plan['disclaimer']?>
+                        </div>
                     </td>
                 </tr>
-                <tr class="disclaimer-row">
-                    <td colspan="3"><?php echo $plan['disclaimer']?></td>
-                </tr>
+
 
                <?php endforeach;?>
                <?php else :?>

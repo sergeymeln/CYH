@@ -39,7 +39,6 @@ section {
   font-size: 15px;
 }
 .disclaimer {
-  display: inline-block;
   color: $green;
   cursor: pointer;
 }
@@ -141,6 +140,7 @@ section {
       }
       &:first-child {
         text-align: center;
+        vertical-align: middle;
         img {
           width: auto;
           height: auto;
@@ -150,13 +150,15 @@ section {
       &:last-child {
         text-align: center;
       }
+      .disclaimer-row {
+        display: none;
+        margin-top: 20px;
+      }
     }
     tr.hidden-md td {
       border-top: 0;
     }
-    tr.disclaimer-row {
-      display: none;
-    }
+
   }
   .slide-cell {
     cursor: pointer;
@@ -197,9 +199,12 @@ section {
   }
 }
 @media (min-width: 1200px) {
-  .providers-table .provider-th,
-  .providers-table .price-th {
+  .providers-table .provider-th {
     width: 25%;
+  }
+
+  .providers-table .price-th {
+    width: 30%;
   }
 }
 @media (max-width: 992px) {

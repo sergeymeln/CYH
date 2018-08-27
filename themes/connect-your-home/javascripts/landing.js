@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
   });
 
   $('.providers-table  span.disclaimer').on('click', function () {
-    $(this).parents('tr').next().toggle();
+    $(this).parents('td').find('.disclaimer-row').toggle();
 
     return false;
   });
