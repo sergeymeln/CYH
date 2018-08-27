@@ -1,5 +1,5 @@
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
+<?php /**@var $plans array*/?>
 <section>
     <div class="container">
         <div class="row">
@@ -24,20 +24,7 @@
                 <?php if(count($plans) > 0):?>
                <?php foreach ($plans as $plan):?>
                <tr>
-                    <td><img src="<?php echo $plan['logo']; ?>" width="130px" height="50px">
-                        <?php if($plan['exclusiveOfferDetails'] != ''):?>
-                        <hr><div class="offer-verbiage">Exclusive Offer</div>
-                        <p class="click-detail">Click below for detail</p>
-                        <div>
-                            <button class="btn btn-success btn-lg provider-name">$100 Visa Gift Card</button>
-                            <a href="#" class="btn btn-success btn-lg provider-name">Redeem
-                                Gift</a>
-                        </div>
-                        <div class="instructions-gwp">
-                            <span>x</span>
-                            <?php echo $plan['exclusiveOfferDetails'];?>
-                        </div>
-                            <?php endif;?>
+                    <td><img src="<?php echo $plan['logo']; ?>">
                     </td>
                     <td>
                         <h2><?php echo $plan['providerPlanTitle']; ?></h2>
@@ -78,4 +65,6 @@
         </div>
     </div>
 </section><!-- container -->
-<?php wp_deregister_script( 'fastclick' );?>
+<?php wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/javascripts/dist/landing.min.js', array( 'jquery' ), '1.0.0', true );
+wp_enqueue_style( 'landing-css', get_template_directory_uri() .'/css/landing.min.css' );
+?>

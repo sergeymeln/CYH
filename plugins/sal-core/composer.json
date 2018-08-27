@@ -26,6 +26,7 @@
     "google/recaptcha": "~1.1",
     "wsdltophp/packagebase" : "1.0.10",
     "respect/validation" : "1.1.14",
-    "ramsey/uuid" : "3.7.1"
+    "ramsey/uuid" : "3.7.1",
+    "tedivm/stash": "0.14.*"
   }
 }

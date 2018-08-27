@@ -419,23 +419,8 @@ add_action('wp_enqueue_scripts', 'RegisterStyles');
 add_action( 'wp_enqueue_scripts', function() {
 
     global $wp_query;
-    wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/javascripts/dist/landing.min.js', array( 'jquery' ), '1.0.0', true );
-    wp_enqueue_style( 'landing-css', get_template_directory_uri() .'/css/landing.min.css' );
 
     if (is_page() && isset( $wp_query->virtual_page ) && $wp_query->virtual_page instanceof \GM\VirtualPages\PageInterface) {
-
-//        $url = $wp_query->virtual_page->getUrl();
-//
-//        switch ( $url ) {
-//            case '/custom/page' :
-//                wp_enqueue_script( 'a_script', $a_script_url );
-//                wp_enqueue_style( 'a_style', $a_style_url );
-//                break;
-//            case '/custom/page/deep' :
-//                wp_enqueue_script( 'another_script', $another_script_url );
-//                wp_enqueue_style( 'another_style', $another_style_url );
-//                break;
-//        }
         wp_enqueue_style( 'slick', get_template_directory_uri() .'/css/slick.css' );
         wp_enqueue_style( 'slick-theme', get_template_directory_uri() .'/css/slick-theme.css' );
         wp_enqueue_style( 'style-name', get_template_directory_uri() .'/css/marketing.min.css' );

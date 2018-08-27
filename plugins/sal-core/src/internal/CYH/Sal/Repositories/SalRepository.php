@@ -16,6 +16,9 @@ use CYH\Models\RG\Registration;
 use CYH\Sal\Curl\CurlHelper;
 use CYH\Sal\Exceptions\AuthenticationSalException;
 use CYH\Sal\Exceptions\GenericSalException;
+use CYH\Sal\Repositories\Cache\CacheFactory;
+use CYH\Sal\Repositories\Cache\CacheTypes;
+use CYH\Sal\Repositories\Cache\MemcachedCacheProvider;
 use CYH\Sal\Repositories\Cache\WpTransientCacheProvider;
 use CYH\Sal\Settings;
 
@@ -30,7 +33,7 @@ class SalRepository
     public function __construct(array $settings)
     {
         $this->_requestSettings = $settings;
-        $this->_cacheProvider = new WpTransientCacheProvider();
+        $this->_cacheProvider = CacheFactory::GetCacheProvider(CacheTypes::WP_TRANSIENTS);
     }
 
     public function GetProvidersList(ServiceProviderFilter $filter, CacheSettings $cacheSettings): Result
