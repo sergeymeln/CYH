@@ -1,5 +1,6 @@
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <?php /**@var $plans array*/?>
+<?php //echo '<pre>'; print_r($plans);?>
 <section>
     <div class="container">
         <div class="row">
@@ -38,8 +39,15 @@
                         </ul>
                     </td>
                     <td>
-                        <p>Starting at</p>
-                        <span class="price-value">$<?php echo $plan['planPrice']?><sup><span class="disclaimer">*</span></sup> </span>
+                        <p><?php echo $plan['priceStart']?></p>
+                        <span class="price-value">
+                            <?php if(is_numeric($plan['planPrice'])):?>$<?php endif;?>
+                            <?php echo $plan['planPrice']?>
+                            <?php if(is_array($plan['showAsterisk']) && $plan['showAsterisk'][0] == 'yes'):?>
+                            <sup><span class="disclaimer">*</span></sup>
+                            <?php endif;?>
+                            </span>
+                        <p><?php echo $plan['priceEnd']?></p>
                         <br>
                         <br>
                         <a href="tel: <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?>" class="btn btn-success btn-lg" target="_self">
@@ -63,6 +71,11 @@
                 </tbody>
             </table>
 
+        </div>
+        <div class="col-md-12">
+            <small class="mleft20">
+                Disclaimer: The trademarks and brand names displayed on CYH belong to their respective companies or owners. CYH has no association with the trademarks, brands or companies. CYH plans, reviews and comparisons are based on data available to the public on the internet. The use of any third party trademarks on this site in no way indicates any relationship, connection, association, sponsorship, or affiliation between CYH and the holders of said trademarks. Actual prices of services and availability of services may vary according to the physical address of your location.
+            </small>
         </div>
     </div>
 </section><!-- container -->

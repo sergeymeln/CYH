@@ -48,6 +48,9 @@ class PageController extends GenericController
                 $plans[$counter]['disclaimer'] = get_sub_field('disclaimer');
                 $plans[$counter]['exclusiveOfferDetails'] = get_sub_field('exclusive_offer_details');
                 $plans[$counter]['giftLink'] = get_sub_field('gift_link');
+                $plans[$counter]['priceStart'] = get_sub_field('price_start');
+                $plans[$counter]['priceEnd'] = get_sub_field('price_end');
+                $plans[$counter]['showAsterisk'] = get_sub_field('show_asterisk');
                 $counter++;
             }
         }
