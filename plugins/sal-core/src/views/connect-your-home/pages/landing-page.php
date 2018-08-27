@@ -6,7 +6,7 @@
         <div class="col-sm-12">
             <div class="results-headline text-center sgp-page-header">
                 <h1>
-                    Exclusive deals and discounts
+                    Your Search Results Returned the Following Exclusive Deals and Discounts
                 </h1>
             </div>
         </div>

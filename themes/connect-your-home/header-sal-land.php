@@ -100,20 +100,6 @@
 
 <header class="page-head">
     <div class="container">
-        <div class="row cta-block">
-            <div class="col-sm-3">
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" class="brand" alt="Connect Your Home&reg;"></a>
-            </div>
-            <div class="col-md-8 col-md-offset-1 col-sm-offset-0 col-sm-9 double-row">
-                <div class="row mbottom-sm-20" cf>
-                    <div class="col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4">
 
-                    </div>
-                    <!-- col-md-5 col-md-offset-7 -->
-                </div>
-                <!-- /row -->
-            </div>
-        </div>
-        <!-- /row -->
     </div>
 </header>
