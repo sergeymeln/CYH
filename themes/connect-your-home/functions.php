@@ -402,32 +402,37 @@ function RegisterScripts()
         filemtime(get_template_directory() . '/javascripts/lib/table-saw/tablesaw-init.js'),
         true);
     //end Table Saw
+
+    // Marketing statistics  page styles and scripts.
+    global $wp_query;
+
+    if (is_page() && isset( $wp_query->virtual_page ) && $wp_query->virtual_page instanceof \GM\VirtualPages\PageInterface) {
+        wp_enqueue_script( 'cyh-marketing',
+            get_template_directory_uri() . '/javascripts/dist/marketing.min.js',
+            ['jquery'],
+            filemtime(get_template_directory() . '/javascripts/dist/marketing.min.js'),
+            true );
+        wp_enqueue_script( 'slick.min',
+            get_template_directory_uri() . '/javascripts/slick.min.js',
+            ['jquery'],
+            filemtime(get_template_directory() . '/javascripts/slick.min.js'),
+            true );
+        wp_localize_script( 'script-name', 'ajax_object',
+            array( 'ajax_url' => admin_url( 'admin-ajax.php')));
+    }
+    //end Marketing statistics  page styles and scripts.
 }
 
 function RegisterStyles()
 {
-
-}
-
-add_action('wp_enqueue_scripts', 'RegisterScripts');
-add_action('wp_enqueue_scripts', 'RegisterStyles');
-
-
-// Marketing statistics  page styles and scripts.
-
-
-add_action( 'wp_enqueue_scripts', function() {
-
     global $wp_query;
 
     if (is_page() && isset( $wp_query->virtual_page ) && $wp_query->virtual_page instanceof \GM\VirtualPages\PageInterface) {
         wp_enqueue_style( 'slick', get_template_directory_uri() .'/css/slick.css' );
         wp_enqueue_style( 'slick-theme', get_template_directory_uri() .'/css/slick-theme.css' );
         wp_enqueue_style( 'style-name', get_template_directory_uri() .'/css/marketing.min.css' );
-        wp_enqueue_script( 'script-name', get_template_directory_uri() . '/javascripts/dist/marketing.min.js', array( 'jquery' ), '1.0.0', true );
-        wp_enqueue_script( 'slick.min', get_template_directory_uri() . '/javascripts/slick.min.js', array( 'jquery' ), '1.0.0', true );
-        wp_localize_script( 'script-name', 'ajax_object',
-            array( 'ajax_url' => admin_url( 'admin-ajax.php')));
     }
+}
 
-} );
+add_action('wp_enqueue_scripts', 'RegisterScripts');
+add_action('wp_enqueue_scripts', 'RegisterStyles');

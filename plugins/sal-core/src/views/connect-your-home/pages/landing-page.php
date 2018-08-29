@@ -41,12 +41,8 @@
                     <td>
                         <p><?php echo $plan['priceStart']?></p>
                         <span class="price-value">
-                            <?php if(is_numeric($plan['planPrice'])):?>$<?php endif;?>
-                            <?php echo $plan['planPrice']?>
-                            <?php if(is_array($plan['showAsterisk']) && $plan['showAsterisk'][0] == 'yes'):?>
-                            <sup><span class="disclaimer">*</span></sup>
-                            <?php endif;?>
-                            </span>
+                            <?php if(is_numeric($plan['planPrice'])):?>$<?php endif;?><?php echo $plan['planPrice']?><?php if(is_array($plan['showAsterisk']) && $plan['showAsterisk'][0] == 'yes'):?><sup><span class="disclaimer">*</span></sup><?php endif;?>
+                        </span>
                         <p><?php echo $plan['priceEnd']?></p>
                         <br>
                         <br>
@@ -59,26 +55,28 @@
                     </td>
                 </tr>
 
-
                <?php endforeach;?>
                <?php else :?>
-
-                    No items found
-               <?php
-
-                endif; ?>
-
+                    <span>No items found</span>
+               <?php endif; ?>
                 </tbody>
             </table>
 
         </div>
-        <div class="col-md-12">
-            <small class="mleft20">
+        <div class="land-desclaimer">
+            <small>
                 Disclaimer: The trademarks and brand names displayed on CYH belong to their respective companies or owners. CYH has no association with the trademarks, brands or companies. CYH plans, reviews and comparisons are based on data available to the public on the internet. The use of any third party trademarks on this site in no way indicates any relationship, connection, association, sponsorship, or affiliation between CYH and the holders of said trademarks. Actual prices of services and availability of services may vary according to the physical address of your location.
             </small>
         </div>
     </div>
 </section><!-- container -->
-<?php wp_enqueue_script( 'landing-js', get_template_directory_uri() . '/javascripts/dist/landing.min.js', array( 'jquery' ), '1.0.0', true );
+<?php wp_enqueue_script( 'landing-js',
+    get_template_directory_uri() . '/javascripts/dist/landing.min.js',
+    ['jquery'],
+    filemtime(get_template_directory() . '/javascripts/dist/landing.min.js'),
+    true );
 wp_enqueue_style( 'landing-css', get_template_directory_uri() .'/css/landing.min.css' );
+
+remove_action( 'wp_footer', 'ld_embedchat', 5 );
+
 ?>

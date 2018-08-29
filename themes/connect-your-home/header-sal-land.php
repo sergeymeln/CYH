@@ -88,7 +88,7 @@
             left: 0;
         }
     </style>
-
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="cecad52f-6122-4c18-b7a4-697dfa84d210" type="text/javascript" async></script>
 
 
 </head>
