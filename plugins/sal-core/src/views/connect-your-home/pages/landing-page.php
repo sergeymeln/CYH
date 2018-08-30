@@ -1,6 +1,5 @@
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <?php /**@var $plans array*/?>
-<?php //echo '<pre>'; print_r($plans);?>
 <section>
     <div class="container">
         <div class="row">
@@ -46,6 +45,7 @@
                         <p><?php echo $plan['priceEnd']?></p>
                         <br>
                         <br>
+                        <p class="above-phone-text"><?php echo $plan['abovePhoneText']?></p>
                         <a href="tel: <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?>" class="btn btn-success btn-lg" target="_self">
                             <i class="glyphicon glyphicon-earphone"></i> <?php echo \CYH\Helpers\FormatHelper::FormatPhoneNumber($plan['phoneNumber'])?> </a>
                         <span class="disclaimer">View Disclaimer</span>

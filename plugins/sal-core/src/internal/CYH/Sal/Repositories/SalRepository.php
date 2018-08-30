@@ -33,7 +33,7 @@ class SalRepository
     public function __construct(array $settings)
     {
         $this->_requestSettings = $settings;
-        $this->_cacheProvider = CacheFactory::GetCacheProvider(CacheTypes::WP_TRANSIENTS);
+        $this->_cacheProvider = CacheFactory::GetCacheProvider(CacheTypes::WP_FILE_SYSTEM);
     }
 
     public function GetProvidersList(ServiceProviderFilter $filter, CacheSettings $cacheSettings): Result

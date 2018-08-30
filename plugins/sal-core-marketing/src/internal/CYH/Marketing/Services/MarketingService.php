@@ -4,9 +4,13 @@
 namespace CYH\Marketing\Services;
 
 use CYH\Marketing\Repositories\MarketingRepository;
+use CYH\Models\Cache\CacheSettings;
+use CYH\Sal\Repositories\Cache\CacheFactory;
+use CYH\Sal\Repositories\Cache\CacheTypes;
 use CYH\Sal\Services\Base\CacheableService;
 use CYH\Marketing\Helpers\UrlHelper;
 use CYH\Marketing\ViewModels\UI\CityItem;
+use CYH\Sal\Services\CacheSettingsProvider;
 
 class MarketingService extends CacheableService
 {
@@ -21,11 +25,13 @@ class MarketingService extends CacheableService
     const OVERLOAD_MBPS_NUMBER = 1024;
     const CACHE_LIVING_TIME = 86400;
     const COOKIE_APPLY_ZIP_NAME = 'cyh_apply_city_zip';
+    private $_cacheProvider = null;
 
     public function __construct()
     {
         parent::__construct();
         $this->marketingRepository = new MarketingRepository();
+        $this->_cacheProvider = CacheFactory::GetCacheProvider(CacheTypes::WP_FILE_SYSTEM);
     }
 
     public function GetCitiesData($data)
@@ -48,27 +54,27 @@ class MarketingService extends CacheableService
             }
         }
 
-        if (false === $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name'].$citiesData['state_code']))) {
-            $relatedCities = $this->marketingRepository->GetRelatedCities($citiesData,$bigCitiesIds);
-            foreach($relatedCities as $relCity) {
-                $citiesData['related_cities'][] = $this->getRelatedLinkData($relCity);
-            }
-            $this->cacheCitiesData($citiesData['related_cities'],md5('related_'.$citiesData['city_normal_name'].$citiesData['state_code']));
-        } else {
-            $citiesData['related_cities'] = $this->getCachedCitiesData(md5('related_'.$citiesData['city_normal_name'].$citiesData['state_code']));
-        }
+        $citiesData['related_cities'] = $this->getRelatedCities($citiesData, $bigCitiesIds, CacheSettingsProvider::GetCacheDisabledSettings());
 
         return $this->getCityFromData($citiesData);
     }
 
-    private function getCachedCitiesData($key)
+    private function getRelatedCities($cityData, $excludeCityIds, CacheSettings $cacheSettings, $radius = 1500)
     {
-        return get_transient($key);
-    }
+        $cacheKey = $this->_cacheProvider->GetCacheKey(__CLASS__, __FUNCTION__, [$cityData['city_normal_name'], $cityData['state_code'], $excludeCityIds, $radius]);
 
-    private function cacheCitiesData($relatedCities,$key)
-    {
-        return set_transient($key, $relatedCities);
+        if ($cacheSettings->IsEnabled == false || ($cachedData = $this->_cacheProvider->GetCachedData($cacheKey)) === false) {
+            $cachedData = [];
+            $relatedCities = $this->marketingRepository->GetRelatedCities($cityData,$excludeCityIds);
+            foreach($relatedCities as $relCity) {
+                $cachedData[] = $this->getRelatedLinkData($relCity);
+            }
+            if (count($cachedData) > 0 && $cacheSettings->IsEnabled == true) {
+                $this->_cacheProvider->StoreInCache($cacheKey, $cachedData, $cacheSettings->Lifespan);
+            }
+        }
+
+        return $cachedData;
     }
 
     /**
@@ -120,18 +126,7 @@ class MarketingService extends CacheableService
             return $matchedCities[0];
         }
 
-        $nearCities=[];
-        if (false === $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name'].$cities[0]['state_code']))) {
-            $result = $this->marketingRepository->getNearestPublishedCity($cities[0]);
-
-            foreach($result as $city) {
-                $nearCities[] = $city;
-            }
-            $this->cacheCitiesData($nearCities,md5('nearest_published_'.$cities[0]['city_normal_name'].$cities[0]['state_code']));
-        } else {
-            $nearCities = $this->getCachedCitiesData(md5('nearest_published_'.$cities[0]['city_normal_name'].$cities[0]['state_code']));
-        }
-
+        $nearCities = $this->marketingRepository->getNearestPublishedCity($cities[0], CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(2592000));
 
         if(count($nearCities) == 0) {
             return false;

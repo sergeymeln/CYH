@@ -51,6 +51,7 @@ class PageController extends GenericController
                 $plans[$counter]['priceStart'] = get_sub_field('price_start');
                 $plans[$counter]['priceEnd'] = get_sub_field('price_end');
                 $plans[$counter]['showAsterisk'] = get_sub_field('show_asterisk');
+                $plans[$counter]['abovePhoneText'] = get_sub_field('above_phone_text');
                 $counter++;
             }
         }

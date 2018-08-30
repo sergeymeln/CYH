@@ -465,4 +465,16 @@ class WPSQLImporter
 
         exit;
     }
+
+    public function getZeroZipCities()
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT c.* FROM `wp_cyh_city` c inner join `wp_cyh_zip_providers` zp on c.id=zp.city_id where zp.zip_code=0;", OBJECT);
+
+        foreach ($results as $res) {
+            echo 'https://www.connectyourhome.com/internet/'.strtolower($res->state_code).'/'.$res->city_name.'/  ZIP_CODE: '.$res->zip_code.'<br>';
+        }
+
+        exit;
+    }
 }

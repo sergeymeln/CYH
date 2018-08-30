@@ -417,7 +417,7 @@ function RegisterScripts()
             ['jquery'],
             filemtime(get_template_directory() . '/javascripts/slick.min.js'),
             true );
-        wp_localize_script( 'script-name', 'ajax_object',
+        wp_localize_script( 'cyh-marketing', 'ajax_object',
             array( 'ajax_url' => admin_url( 'admin-ajax.php')));
     }
     //end Marketing statistics  page styles and scripts.
