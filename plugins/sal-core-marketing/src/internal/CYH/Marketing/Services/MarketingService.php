@@ -54,7 +54,7 @@ class MarketingService extends CacheableService
             }
         }
 
-        $citiesData['related_cities'] = $this->getRelatedCities($citiesData, $bigCitiesIds, CacheSettingsProvider::GetCacheDisabledSettings());
+        $citiesData['related_cities'] = $this->getRelatedCities($citiesData, $bigCitiesIds, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(2592000));
 
         return $this->getCityFromData($citiesData);
     }
