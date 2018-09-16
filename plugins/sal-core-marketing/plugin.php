@@ -29,13 +29,12 @@ $availableClasses = [
 \CYH\Plugins\SalCore::RegisterControllerActions($availableClasses, $context);
 
 add_action( 'gm_virtual_pages', function( $controller ) {
-    //$urlHelper = new \CYH\Marketing\Helpers\WPSQLImporter();
-    //$urlHelper->setMaximumProvidersZip();exit;
-
     $marketingService = new \CYH\Marketing\Services\MarketingService();
-    if(preg_match('/\/internet\/[a-z]{1,}\/[a-zA-Z-]{1,}\/{0,1}$/', $_SERVER['REQUEST_URI'])) {
-        $urlHelper = new \CYH\Marketing\Helpers\UrlHelper();
-        $cityData = $urlHelper->getCityFromUrl();
+    if(preg_match('/^\/internet\/[a-z]{1,}\/[a-zA-Z-]{1,}\/{0,1}/', $_SERVER['REQUEST_URI'])) {
+        $url = parse_url($_SERVER['REQUEST_URI']);
+        $parts = explode('/', $url['path']);
+
+        $cityData = $marketingService->getCityFromUrl($parts);
         if ($cityData !== false) {
             $title = $marketingService->getCityTitle($cityData);
             $controller->addPage( new \GM\VirtualPages\Page( $_SERVER['REQUEST_URI'] ) )

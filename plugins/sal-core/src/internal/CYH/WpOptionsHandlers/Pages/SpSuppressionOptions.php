@@ -43,7 +43,7 @@ class SpSuppressionOptions extends OptionsHandler
             $this->GetMenuSlug() // Page
         );
 
-        $spList = $this->spService->GetServiceProviderList(new ServiceProviderFilter(), CacheSettingsProvider::GetCacheEnabledSettings());
+        $spList = $this->spService->GetServiceProviderList(new ServiceProviderFilter(), CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
         foreach ($spList as $sp) {
             /* @var $sp ServiceProvider */
             add_settings_field(

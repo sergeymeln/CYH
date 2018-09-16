@@ -8,7 +8,6 @@ use CYH\Sal\Services\ProductsService;
 use CYH\Sal\Services\CacheSettingsProvider;
 use CYH\Models\Filters\ProductFilter;
 use CYH\Marketing\Services\MarketingService;
-use CYH\Marketing\Helpers\UrlHelper;
 
 
 class AjaxController extends GenericController
@@ -17,8 +16,6 @@ class AjaxController extends GenericController
     protected $prodService = null;
     /**@var $marketingService MarketingService*/
     protected $marketingService = null;
-    /**@var $urlHelper UrlHelper*/
-    protected $urlHelper = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
@@ -29,7 +26,6 @@ class AjaxController extends GenericController
         parent::__construct($context);
         $this->prodService = new ProductsService();
         $this->marketingService = new MarketingService();
-        $this->urlHelper = new UrlHelper();
     }
 
     public function GetBrandHtml()
@@ -89,16 +85,14 @@ class AjaxController extends GenericController
     public function GetCityByZip()
     {
         if (array_key_exists('zip_code', $_POST)) {
-            $result = $this->marketingService->getCityByZip($_POST['zip_code']);
-            if(is_array($result) && count($result)> 0) {
-                setcookie(self::COOKIE_ZIP_NAME, $_POST['zip_code'], time()+3600, '/');
-                $data = ['result' => 'success', 'link' => $this->urlHelper->getCityUrl($result)];
-            } else {
-                $data = ['result' => 'failure', 'link' => ''];
-            }
-
-            echo wp_json_encode($data);
-            wp_die();
+            $data = ['result' => 'success', 'link' => $this->marketingService->getCityUrlByZip($_POST['zip_code'])];
         }
+        else
+        {
+            $data = ['result' => 'failure', 'link' => ''];
+        }
+
+        echo wp_json_encode($data);
+        wp_die();
     }
 }

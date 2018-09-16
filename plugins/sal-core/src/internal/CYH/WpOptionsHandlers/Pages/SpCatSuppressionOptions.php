@@ -42,7 +42,7 @@ class SpCatSuppressionOptions extends OptionsHandler
             $this->GetMenuSlug() // Page
         );
 
-        $spCatList = $this->spCatService->GetSpCategoriesList(CacheSettingsProvider::GetCacheEnabledSettings());
+        $spCatList = $this->spCatService->GetSpCategoriesList(CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
         foreach ($spCatList as $spCat) {
             /* @var $spCat ServiceProviderCategory */
             add_settings_field(

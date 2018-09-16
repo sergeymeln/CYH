@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row">
                     <div class="inner-block vertical-align">
-                        <h1 class="inner-title">Best Internet Providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?> </h1>
+                        <h1 class="inner-title">Best Internet Providers in <?php echo $city->NormalName?>, <?php echo $city->StateCode?>&nbsp;<?php echo $city->Zip?> </h1>
                         <p class="inner-text"><?php echo $city->TagLine?></p>
                         <div class="zip-code-form">
                             <div class="form-inline">
@@ -1144,7 +1144,7 @@
                             echo '</ul><ul class="flex-list nearby-offers-list">';
                             $counter = 0;
                         }?>
-                        <li><a href="<?php echo $urlHelper->getCityUrl($relCity)?>">
+                        <li><a href="<?php echo \CYH\Marketing\Helpers\UrlHelper::getCityUrl($relCity)?>">
                                 <?php echo $relCity['city_normal_name']?>, <?php echo $relCity['state_code']?>
                             </a>
                         </li>
@@ -1175,7 +1175,7 @@
                                 echo '</ul><ul class="flex-list nearby-offers-list">';
                                 $counter = 0;
                             }?>
-                            <li><a href="<?php echo $urlHelper->getCityUrl($bigCity)?>">
+                            <li><a href="<?php echo \CYH\Marketing\Helpers\UrlHelper::getCityUrl($bigCity)?>">
                                     <?php echo $bigCity['city_normal_name']?>, <?php echo $bigCity['state_code']?>
                                 </a>
                             </li>

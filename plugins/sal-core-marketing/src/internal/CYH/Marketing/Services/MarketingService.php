@@ -132,8 +132,6 @@ class MarketingService extends CacheableService
             return false;
         }
 
-        setcookie(self::COOKIE_APPLY_ZIP_NAME, 1, time()+3600, '/');
-
         return $nearCities[0];
     }
 
@@ -561,5 +559,11 @@ class MarketingService extends CacheableService
         }
 
         return false;
+    }
+
+    public function getCityUrlByZip($zip)
+    {
+        $result = $this->getCityByZip($zip);
+        return UrlHelper::getCityUrl($result, ['zip' => $zip]);
     }
 }

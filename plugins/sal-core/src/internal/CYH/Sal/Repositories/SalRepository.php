@@ -26,7 +26,7 @@ class SalRepository
 {
     use CurlHelper;
 
-    private $_badResponseCodes = [401, 404, 500];
+    private $_badResponseCodes = [400, 401, 404, 500];
     private $_requestSettings;
     private $_cacheProvider = null;
 

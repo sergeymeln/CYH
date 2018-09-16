@@ -21,33 +21,35 @@ class MarketingsController extends GenericController
     protected $prodService = null;
     /**@var $marketingService MarketingService*/
     protected $marketingService = null;
-    /**@var $urlHelper UrlHelper*/
-    protected $urlHelper = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
-    const COOKIE_ZIP_NAME = 'cyh_city_zip';
-    const COOKIE_APPLY_ZIP_NAME = 'cyh_apply_city_zip';
 
     public function __construct(ControllerContext $context)
     {
         parent::__construct($context);
         $this->prodService = new ProductsService();
-        $this->urlHelper = new UrlHelper();
         $this->marketingService = new MarketingService();
     }
 
     public function RenderMarketing($collectStats=false)
     {
-        $data = $this->urlHelper->getCityFromUrl();
-        $city = $this->marketingService->GetCitiesData($data);
+        $url = parse_url($_SERVER['REQUEST_URI']);
+        $parts = explode('/', $url['path']);
+        $urlCityData = $this->marketingService->getCityFromUrl($parts);
+        if (isset($_REQUEST['zip']) && !in_array($_REQUEST['zip'], $urlCityData['zip_list'])) {
+            wp_redirect($this->marketingService->getCityUrlByZip($_REQUEST['zip']));
+            exit;
+        }
+        $city = $this->marketingService->GetCitiesData($urlCityData);
 
         $preparedData = [];
-
         $productFilter = new ProductFilter();
 
-        if (isset($_COOKIE[self::COOKIE_ZIP_NAME]) && !isset($_COOKIE[self::COOKIE_APPLY_ZIP_NAME])) {
-            $city->Zip = $_COOKIE[self::COOKIE_ZIP_NAME];
+        if (isset($_REQUEST['zip'])) {
+            $city->Zip = $_REQUEST['zip'];
+        }  elseif($bestZip = $this->marketingService->getBestZip($city)) {
+            $city->Zip = $bestZip;
         }
 
         $productFilter->Zip = $city->Zip;
@@ -60,14 +62,9 @@ class MarketingsController extends GenericController
         if ($collectStats) {
             $statService->addObject(StatisticsEventType::SAL_REQUEST_END, microtime(true));
         }
-        if(count($productList) ==0) {
+        if(count($productList) == 0) {
             return false;
         }
-
-        unset($_COOKIE[self::COOKIE_ZIP_NAME]);
-        setcookie(self::COOKIE_ZIP_NAME, '', time() - 3600, '/');
-        unset($_COOKIE[self::COOKIE_APPLY_ZIP_NAME]);
-        setcookie(self::COOKIE_APPLY_ZIP_NAME, '', time() - 3600, '/');
 
         $preparedData['productList'] = $this->filterProducts($productList);
         $preparedData['providers'] = $this->getProvidersFromProducts($preparedData['productList']);
@@ -83,7 +80,6 @@ class MarketingsController extends GenericController
         $this->View('marketing/marketing-page', [
             'city' => $city,
             'cityData' => $preparedData,
-            'urlHelper' => $this->urlHelper,
             'constants' => [
                 'internetCats' => self::INTERNET_CATEGORIES,
                 'internetAndTvCats' => self::INTERNET_TV_CATEGORIES

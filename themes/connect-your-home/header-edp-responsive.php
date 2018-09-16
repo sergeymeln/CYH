@@ -893,7 +893,17 @@ header img{
 
     </style>
 
-
+    <!-- Start of BotEngine (www.botengine.ai) code -->
+    <script type="text/javascript">
+        window.__be = window.__be || {};
+        window.__be.id = "5b85a270dfc8870007caa26c";
+        (function() {
+            var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+            be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.botengine.ai/widget/plugin.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+        })();
+    </script>
+    <!-- End of BotEngine code -->
 </head>
 <body <?php body_class(); ?> style="overflow-x: hidden;">
 <!-- Google Tag Manager (noscript) -->

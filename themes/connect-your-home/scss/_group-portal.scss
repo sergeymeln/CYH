@@ -367,6 +367,14 @@
     border-radius: 0px;
   }
 
+  .address-search-widget
+  {
+    .btn[disabled]{
+      cursor:pointer; 
+    }
+  }
+
+
   @media (min-width: 992px) {
     .top-nav {
       ul {

@@ -68,7 +68,7 @@ class StatisticsService
     public function insertStatistics()
     {
         $requestId = $this->generateRequestId();
-        $city = self::$urlHelper->getCityUrl($this->getCity());
+        $city = UrlHelper::getCityUrl($this->getCity());
         foreach ($this->eventObjects as $stat) {
             self::$statisticsRepository->insertStatistics($stat, $requestId, $city);
         }

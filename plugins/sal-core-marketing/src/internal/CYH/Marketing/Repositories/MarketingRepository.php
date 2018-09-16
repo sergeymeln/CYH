@@ -181,7 +181,12 @@ class MarketingRepository
         $return['city_name'] = $cityData['city_name'];
         $return['state_short_name'] = $cityData['state_short_name'];
         $return['section_two_text'] = $cityData['section_two_text'];
-
+        $availableZips = explode('/', $cityData['zip_code']);
+        foreach ($availableZips as $key => $value)
+        {
+            $availableZips[$key] = trim($value);
+        }
+        $return['zip_list'] = $availableZips;
 
         return $return;
     }

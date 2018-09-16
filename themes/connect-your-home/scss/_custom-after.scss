@@ -320,6 +320,10 @@ header.page-head {
     position: relative;
     top: -1px;
   }
+
+  .btn[disabled]{
+    cursor:pointer;
+  }
 }
 
 .masthead {

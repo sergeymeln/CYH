@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage cyh
-  *
+  * 
  */
 
 ?>
@@ -20,7 +20,7 @@
         <div class="col-md-8 brand-intro hero-holder">
         <div class="masthead">
          <?php $hero_image = get_field('all_brand_hero'); ?>
-
+                   
                     <img src="<?php echo $hero_image['url']; ?>"  alt="" />
             </div>
             <!-- /.masthead -->
@@ -38,26 +38,26 @@
                             <div class="col-md-12 ">
                         <div class="banner-msg">
                             <?php the_field('hero_banner_msg'); ?>
-                        </div>
+                        </div>       
 
                 <?php
                 if(get_field('edp_brand_phone')){ ?>
-                    <a href="tel:<?php echo get_field('edp_brand_phone', 'option');?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - All Brands - Header CTA');" class="phone-number btn btn-success btn-lg"><i class="glyphicon glyphicon-earphone"></i>
+                    <a href="tel:<?php echo get_field('edp_brand_phone', 'option');?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - All Brands - Header CTA');" class="phone-number btn btn-success btn-lg"><i class="glyphicon glyphicon-earphone"></i> 
                     <?php
                         echo get_field('edp_brand_phone');
-                }elseif(get_field('phone_number_one_brand')){ ?><a href="tel:<?php echo get_field('phone_number_one_brand');?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - All Brands - Header CTA');" class="phone-number btn btn-success btn-lg"><i class="glyphicon glyphicon-earphone"></i>
+                }elseif(get_field('phone_number_one_brand')){ ?><a href="tel:<?php echo get_field('phone_number_one_brand');?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - All Brands - Header CTA');" class="phone-number btn btn-success btn-lg"><i class="glyphicon glyphicon-earphone"></i> 
                 <?php
                         echo get_field('phone_number_one_brand');
-                }else{ ?><a href="tel:<?php echo get_field('home_phone_number', 'option');?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - All Brands - Header CTA');" class="phone-number btn btn-success btn-lg"><i class="glyphicon glyphicon-earphone"></i>
+                }else{ ?><a href="tel:<?php echo get_field('home_phone_number', 'option');?>" onClick="ga('send', 'event', 'Call', 'ClicktoCall - All Brands - Header CTA');" class="phone-number btn btn-success btn-lg"><i class="glyphicon glyphicon-earphone"></i> 
                 <?php
                         echo get_field('home_phone_number', 'option');
                 } ?>
-                    </a>
+                    </a> 
                             </div>
                          </div>
-                </div>
-        </div>
-    </div>
+                </div> 
+        </div>            
+    </div>         
     </div>
     <!-- /.row -->
 </section>
@@ -92,8 +92,8 @@
     echo ' <div class="row no-gutter"><div class="row-height">';
 
      if(get_field('brand_details')): ?>
-
-
+   
+    
 
     <?php while(has_sub_field('brand_details')): ?>
 
@@ -113,13 +113,13 @@
                 // loop through the rows of data
                   while ( have_rows('brand_features') ) : the_row();
 
-
-
+                      
+                      
                   ?>
 
 
               <li><?php echo the_sub_field('feature_title'); ?> // <?php echo the_sub_field('feature_body'); ?></li>
-                      <?php
+                      <?php 
                   endwhile;
 
               else :
@@ -134,17 +134,17 @@
               <p><?php the_sub_field('brand_copy'); ?></p>
 	                    <div class="brand-inner">
                   <div class="brand-details clearfix">
-                      <?php $num_details = get_sub_field('numerical_details');
+                      <?php $num_details = get_sub_field('numerical_details'); 
                         foreach ($num_details as $detail) { ?>
-
+                         
                         <div class="brand-detail-item clearfix">
                           <div class="pull-left"><?php echo $detail['title']?></div>
                           <div class="pull-right"><?php echo $detail['value']?></div>
-                        </div>
+                        </div> 
 
                         <?php } ?>
 
-                  </div>
+                  </div>                  
               </div>
               <div class="brand-links">
 		   <?php $btn_color = get_field('color_of_the_button'); ?>
@@ -157,9 +157,9 @@
          <?php  // After every three entries close and open a row
           if($i % 3 == 0) {echo '</div></div><div class="row no-gutter"><div class="row-height">';} ?>
 
+         
 
-
-    <?php
+    <?php 
      $i++;
     endwhile; ?>
 
@@ -170,12 +170,12 @@ echo ' </div></div>';
 
  ?>
 
-
+ 
 </section>
 <!-- /.all-brand-grid -->
-
+      
 </div>
-<!-- /.all-results -->
+<!-- /.all-results -->  
 <?php include 'modal-form-onebrand.php' ?>
 
 <?php get_footer(); ?>
@@ -206,7 +206,7 @@ echo ' </div></div>';
 .brand-inner {
     padding: 0 20px;
 }
-.brand-details {
+.brand-details {	
     padding: 15px 0 20px;
 }
 .brand-detail-item {
@@ -247,7 +247,7 @@ echo ' </div></div>';
     background-color: #f6f6f6;
 }
 .all-brand-grid .brand-module {
-    padding-bottom: 100px !important;
+    padding-bottom: 100px !important;	
 }
 .brand-links {
     position: absolute;

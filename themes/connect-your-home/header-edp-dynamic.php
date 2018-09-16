@@ -27,7 +27,17 @@
     <!-- <script src="<?php echo get_template_directory_uri(); ?>/javascripts/modernizr.min.js" type="text/javascript"></script> -->
     <script src="<?php echo get_template_directory_uri(); ?>/javascripts/modernizr.custom.js" type="text/javascript"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/javascripts/detectizr.min.js" type="text/javascript"></script>
-
+    <!-- Start of BotEngine (www.botengine.ai) code -->
+    <script type="text/javascript">
+        window.__be = window.__be || {};
+        window.__be.id = "5b85a270dfc8870007caa26c";
+        (function() {
+            var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+            be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.botengine.ai/widget/plugin.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+        })();
+    </script>
+    <!-- End of BotEngine code -->
 </head>
 <body id="group-portal" <?php body_class(); ?>>
 <!-- Google Tag Manager (noscript) -->

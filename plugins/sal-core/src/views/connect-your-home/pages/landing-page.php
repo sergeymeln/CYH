@@ -63,9 +63,12 @@
             </table>
 
         </div>
-        <div class="land-desclaimer">
-            <small>
-                Disclaimer: The trademarks and brand names displayed on CYH belong to their respective companies or owners. CYH has no association with the trademarks, brands or companies. CYH plans, reviews and comparisons are based on data available to the public on the internet. The use of any third party trademarks on this site in no way indicates any relationship, connection, association, sponsorship, or affiliation between CYH and the holders of said trademarks. Actual prices of services and availability of services may vary according to the physical address of your location.
+        <div>
+            <p class="text-left">
+                <strong><small>Advertisement Disclosure:</small></strong>
+            </p>
+            <small class="text-left">
+                Disclaimer: Connect your Home has an advertising relationship with the brands or affiliates of the brands included on this page. CYH plans and features are based on data available to the public on the internet. CYH strives to keep its information accurate and up to date. Actual prices of services and availability of services may vary according to the physical address of your location. Terms and Conditions Apply. Additionally, the plans and features outlined above are subject to Change Without Notice. The trademarks and brand names displayed on this page belong to their respective companies or owners. The use of any third-party trademarks on this site in no way indicates any relationship, connection, association, sponsorship, or affiliation between CYH and the holders of said trademarks.
             </small>
         </div>
     </div>

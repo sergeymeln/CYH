@@ -2,9 +2,11 @@
 namespace CYH\Marketing\Helpers;
 
 use CYH\Models\Filters\ProductFilter;
+use CYH\Sal\Exceptions\GenericSalException;
 use CYH\Sal\Services\CacheSettingsProvider;
 use CYH\Sal\Services\ProductsService;
 use CYH\Marketing\Services\MarketingService;
+use Zend\Db\Sql\Sql;
 
 class WPSQLImporter
 {
@@ -15,7 +17,6 @@ class WPSQLImporter
     protected $prodService = null;
     protected $dataTransformerHelper;
     protected $marketingService = null;
-    protected $urlHelper = null;
     const INTERNET_AND_BUNDLES_CATEGORIES = [4,5,7];
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
@@ -375,9 +376,15 @@ class WPSQLImporter
                 $productFilter = new ProductFilter();
 
                 $productFilter->Zip = $zip;
-                $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheDisabledSettings());
+                try{
+                    $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheDisabledSettings());
+                }
+                catch(GenericSalException $ex)
+                {
+                    continue;
+                }
 
-                if(count($productList) ==0) {
+                if(count($productList) == 0) {
                     continue;
                 }
                 $productList = $this->filterProducts($productList);
@@ -466,15 +473,15 @@ class WPSQLImporter
         exit;
     }
 
-    public function getZeroZipCities()
+    public function getBestZip($city)
     {
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT c.* FROM `wp_cyh_city` c inner join `wp_cyh_zip_providers` zp on c.id=zp.city_id where zp.zip_code=0;", OBJECT);
+        $sql = new Sql($this->adapter);
+        $select = $sql->select();
+        $select->from(CYH_TABLE_PREFIX.'cyh_zip_providers');
+        $select->where(array('city_id' => $city->Id));
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
 
-        foreach ($results as $res) {
-            echo 'https://www.connectyourhome.com/internet/'.strtolower($res->state_code).'/'.$res->city_name.'/  ZIP_CODE: '.$res->zip_code.'<br>';
-        }
-
-        exit;
+        return $results->current();
     }
 }
