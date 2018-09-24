@@ -14,6 +14,7 @@ use CYH\Marketing\Helpers\UrlHelper;
 use CYH\Marketing\Services\MarketingService;
 use CYH\Marketing\Services\StatisticsService;
 use CYH\Marketing\Types\StatisticsEventType;
+use CYH\Marketing\WpOptionsHandlers\Pages\GeneralOptions;
 
 class MarketingsController extends GenericController
 {
@@ -77,9 +78,15 @@ class MarketingsController extends GenericController
         if ($collectStats) {
             $statService->addObject(StatisticsEventType::DATA_PREPARE_COMPLETE, microtime(true));
         }
+        $showMap = false;
+        $generalICOptions = GeneralOptions::GetSettings();
+        if ($generalICOptions['internet_city_show_map']) {
+            $showMap = true;
+        }
         $this->View('marketing/marketing-page', [
             'city' => $city,
             'cityData' => $preparedData,
+            'showMap' => $showMap,
             'constants' => [
                 'internetCats' => self::INTERNET_CATEGORIES,
                 'internetAndTvCats' => self::INTERNET_TV_CATEGORIES

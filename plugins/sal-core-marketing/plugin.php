@@ -28,6 +28,22 @@ $availableClasses = [
 \CYH\Plugins\SalCore::RegisterViewDirectories(new \CYH\Models\Core\ViewDirRegistryEntry(\CYH\Marketing\Plugins\SalCoreMarketing::class, __DIR__ . '/src/views/', [CYH\Plugins\SalCore::class]));
 \CYH\Plugins\SalCore::RegisterControllerActions($availableClasses, $context);
 
+//SAL Core Menu initialization
+$internetCityAdminMenuSettings = [new \CYH\Marketing\WpOptionsHandlers\Pages\GeneralOptions()];
+switch ($context->SiteType)
+{
+    case \CYH\Models\SitesConst::CONNECT_YOUR_HOME:
+        $internetCityAdminMenuSettings = array_merge($internetCityAdminMenuSettings,
+            [
+
+            ]);
+        break;
+}
+if (count($internetCityAdminMenuSettings) > 0)
+{
+    (new \CYH\Marketing\WpOptionsHandlers\Menu\InternetCitySettings($internetCityAdminMenuSettings))->EnableMenu();
+}
+
 add_action( 'gm_virtual_pages', function( $controller ) {
     $marketingService = new \CYH\Marketing\Services\MarketingService();
     if(preg_match('/^\/internet\/[a-z]{1,}\/[a-zA-Z-]{1,}\/{0,1}/', $_SERVER['REQUEST_URI'])) {

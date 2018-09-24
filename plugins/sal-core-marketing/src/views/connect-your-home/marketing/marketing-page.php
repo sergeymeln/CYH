@@ -2,6 +2,7 @@
 <?php /**@var $city \CYH\Marketing\ViewModels\UI\CityItem*/?>
 <?php /**@var $constants array*/?>
 <?php /**@var $urlHelper \CYH\Marketing\Helpers\UrlHelper*/?>
+<?php /**@var $showMap boolean*/?>
 
 <?php $showSpectrum=0;?>
 <section class="intro-section">
@@ -214,7 +215,9 @@
             </div>
             <div id="map" class="map">
                 <?php
-                echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
+                if($showMap) {
+                    echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
+                }
                 ?>
             </div>
         </div>
