@@ -126,23 +126,6 @@
     </section> -->
     <?php do_action('\\' . CYH\Controllers\ConnectYourHome\ServiceProviderController::class . '::RenderTopBrandsHome') ?>
 
-    <hr/>    
-<section class="interactive-checklist-cta" style="display:inline-block; padding-bottom: 70px;">
-    <div class="col-md-6" style="margin-top: 30px;">
-        <h2 class="text-center">Interactive Moving Checklist</h2>
-        <p>Here at Connect Your Home&reg;, we want to help you with your move. That's why we built an <a href="/interactive-moving-checklist">interactive moving checklist</a> to let you keep track of some of the steps needed for a successful move.</p>
-        <hr/>
-        <p>This moving application stores your current progress in your browser so you know right where you left off.</p>
-        <hr/>
-        <p class="text-center">
-            <a href="/interactive-moving-checklist" class="btn btn-lg btn-success" style="background-color: #6CB33F; background-image: none; border: none;">Interactive Moving Checklist</a>
-        </p>
-    </div>
-    <div class="col-md-6">
-        <p>
-            <img src="<?php echo get_template_directory_uri(); ?>/images/interactive-moving-checklist.gif"></p>
-    </div>
-</section>    
 
 <div class="clearfix"></div>
 <div class="col-md-12">
