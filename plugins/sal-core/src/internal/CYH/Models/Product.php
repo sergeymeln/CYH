@@ -24,6 +24,7 @@ class Product extends Model
     public $HeroImage;
     public $IsActive;
     public $DownloadSpeed;
+    public $SpeedUnits;
 
     /* @var $Phone \CYH\Models\Phone */
     public $Phone;

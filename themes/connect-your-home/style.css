@@ -9047,6 +9047,9 @@ header.page-head .brand {
   position: relative;
   top: -1px;
 }
+.top-search .btn[disabled] {
+  cursor: pointer;
+}
 
 .masthead {
   position: relative;
@@ -12070,6 +12073,10 @@ img.grid-img {
   white-space: normal;
 }
 
+.cyh-invisible {
+  visibility: hidden;
+}
+
 .text-green {
   color: #6CB33F;
 }
@@ -12845,6 +12852,9 @@ a.text-green:focus {
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 0px;
+}
+#group-portal .address-search-widget .btn[disabled] {
+  cursor: pointer;
 }
 @media (min-width: 992px) {
   #group-portal .top-nav ul.menu > li {

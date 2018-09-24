@@ -68,6 +68,15 @@ add_action( 'wp_ajax_nopriv_cyh_find_city', function(){
     do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetCityByZip' );
 } );
 
+add_action( 'wp_ajax_get_internet_package_data', function(){
+    do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetInternetPackageData' );
+    wp_die();
+} );
+add_action( 'wp_ajax_nopriv_get_internet_package_data', function(){
+    do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetInternetPackageData' );
+    wp_die();
+} );
+
 add_action( 'wp_ajax_cyh_show_brand_data', function(){
     do_action(  '\\' . CYH\Marketing\Controllers\ConnectYourHome\AjaxController::class . '::GetBrandHtml' );
     wp_die();

@@ -38,7 +38,7 @@ class MarketingRepository
      * @param $data
      * @return mixed
      */
-    public function GetCitiesData($data)
+    public function GetCitiesDataByUrlParams($data)
     {
         $sql = new Sql($this->adapter);
         $select = $sql->select();
@@ -47,6 +47,26 @@ class MarketingRepository
         $select->join(array("cc" => CYH_TABLE_PREFIX."cyh_city_content"), CYH_TABLE_PREFIX."cyh_city.id=cc.city_id");
         $select->join(array("tl" => CYH_TABLE_PREFIX."cyh_tag_lines"), "cc.tag_lines_id=tl.id");
         $select->where(array('state_short_name' => $data['state_short_name'], 'city_name' => $data['city_name']));
+        $select->where->in('city_type', self::CITIES_IN);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+
+        return $results->current();
+    }
+
+    /**
+     * @param $cityId int
+     * @return mixed
+     */
+    public function GetCitiesDataById($cityId)
+    {
+        $sql = new Sql($this->adapter);
+        $select = $sql->select();
+        $select->from(CYH_TABLE_PREFIX.'cyh_city');
+        $select->join(array("s" => CYH_TABLE_PREFIX."cyh_state"), "s.id=".CYH_TABLE_PREFIX."cyh_city.state_id");
+        $select->join(array("cc" => CYH_TABLE_PREFIX."cyh_city_content"), CYH_TABLE_PREFIX."cyh_city.id=cc.city_id");
+        $select->join(array("tl" => CYH_TABLE_PREFIX."cyh_tag_lines"), "cc.tag_lines_id=tl.id");
+        $select->where(array('city_id' => $cityId));
         $select->where->in('city_type', self::CITIES_IN);
         $statement = $sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
@@ -262,12 +282,12 @@ class MarketingRepository
         return $cachedData;
     }
 
-    public function getBestZip($city)
+    public function getBestZip($cityId)
     {
         $sql = new Sql($this->adapter);
         $select = $sql->select();
         $select->from(CYH_TABLE_PREFIX.'cyh_zip_providers');
-        $select->where(array('city_id' => $city->Id));
+        $select->where(array('city_id' => $cityId));
         $statement = $sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
 

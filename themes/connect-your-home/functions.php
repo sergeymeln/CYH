@@ -408,14 +408,29 @@ function RegisterScripts()
 
     if (is_page() && isset( $wp_query->virtual_page ) && $wp_query->virtual_page instanceof \GM\VirtualPages\PageInterface) {
         wp_enqueue_script( 'cyh-marketing',
-            get_template_directory_uri() . '/javascripts/dist/marketing.min.js',
+            get_template_directory_uri() . '/javascripts/marketing.js',
             ['jquery'],
-            filemtime(get_template_directory() . '/javascripts/dist/marketing.min.js'),
+            filemtime(get_template_directory() . '/javascripts/marketing.js'),
             true );
         wp_enqueue_script( 'slick.min',
-            get_template_directory_uri() . '/javascripts/slick.min.js',
+            get_template_directory_uri() . '/javascripts/dist/slick.min.js',
             ['jquery'],
-            filemtime(get_template_directory() . '/javascripts/slick.min.js'),
+            filemtime(get_template_directory() . '/javascripts/dist/slick.min.js'),
+            true );
+        wp_enqueue_script( 'knockout',
+            get_template_directory_uri() . '/javascripts/knockout-3.4.2.js',
+            [],
+            filemtime(get_template_directory() . '/javascripts/knockout-3.4.2.js'),
+            true );
+        wp_enqueue_script( 'knockout-mapping',
+            get_template_directory_uri() . '/javascripts/knockout.mapping.js',
+            ['knockout'],
+            filemtime(get_template_directory() . '/javascripts/knockout.mapping.js'),
+            true );
+        wp_enqueue_script( 'knockout-custom',
+            get_template_directory_uri() . '/javascripts/dist/knockout.custom.min.js',
+            ['knockout'],
+            filemtime(get_template_directory() . '/javascripts/dist/knockout.custom.min.js'),
             true );
         wp_localize_script( 'cyh-marketing', 'ajax_object',
             array( 'ajax_url' => admin_url( 'admin-ajax.php')));

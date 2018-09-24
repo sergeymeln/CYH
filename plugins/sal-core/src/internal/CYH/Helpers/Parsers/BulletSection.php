@@ -6,6 +6,12 @@ namespace CYH\Helpers\Parsers;
 
 class BulletSection extends SectionBase
 {
+    public function __construct($elementContent)
+    {
+        parent::__construct($elementContent);
+        $this->type = SectionType::BULLET;
+    }
+
     public static function GetOpeningTag()
     {
         return '{bullets}';
