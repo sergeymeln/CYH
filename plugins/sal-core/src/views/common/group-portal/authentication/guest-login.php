@@ -66,6 +66,13 @@
                                     <span class="glyphicon form-control-feedback"
                                           aria-hidden="true"></span>
                                 </div>
+                                <div class="form-group mtop20 rebateGiftInput has-feedback text-left">
+                                    <label for="Agree" class="text-white cyb-form-label">
+                                        <input type="checkbox" required="required" id="Agree" name="Agree"
+                                               value="1" />
+                                        By checking this box, you agree to receive email correspondence from Connect Your Benefits
+                                    </label>
+                                </div>
                             </div>
                             <div class="form-group rebateGiftInput">
                                 <button type="submit" class="btn btn-success btn-block">

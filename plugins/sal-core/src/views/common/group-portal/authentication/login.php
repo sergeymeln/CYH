@@ -71,6 +71,10 @@
                                 <a href="<?php echo \CYH\Navigation\RebateGiftUrl::GetResetPasswordLink($groupInfo); ?>"
                                    class="forgot-password">Click here if you forgot your password</a>
                             </div>
+                            <div class="form-group rebateGiftInput text-center">
+                                <a href="/cyb/register/?groupId=<?php echo $groupInfo->Id; ?>"
+                                   class="forgot-password">Create New Login</a>
+                            </div>
                         </form>
                     </div>
                 </div>
