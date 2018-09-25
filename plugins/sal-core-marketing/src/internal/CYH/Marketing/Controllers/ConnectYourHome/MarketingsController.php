@@ -78,11 +78,8 @@ class MarketingsController extends GenericController
         if ($collectStats) {
             $statService->addObject(StatisticsEventType::DATA_PREPARE_COMPLETE, microtime(true));
         }
-        $showMap = false;
-        $generalICOptions = GeneralOptions::GetSettings();
-        if ($generalICOptions['internet_city_show_map']) {
-            $showMap = true;
-        }
+        $showMap = GeneralOptions::GetSettings()['internet_city_show_map'];
+
         $this->View('marketing/marketing-page', [
             'city' => $city,
             'cityData' => $preparedData,
