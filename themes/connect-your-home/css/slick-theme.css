@@ -203,7 +203,3 @@
     color: black;
 }
 
-.slick-initialized .slick-track {
-    display: flex;
-    align-items: center;
-}

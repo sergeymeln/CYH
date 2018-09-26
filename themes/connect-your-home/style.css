@@ -12077,6 +12077,20 @@ img.grid-img {
   visibility: hidden;
 }
 
+.center-slider-content.slick-initialized .slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.inner-slide img {
+  max-width: 200px;
+}
+
+.inner-slide img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .text-green {
   color: #6CB33F;
 }

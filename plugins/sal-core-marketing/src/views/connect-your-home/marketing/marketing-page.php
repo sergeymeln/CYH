@@ -47,9 +47,9 @@
                 <h2>In <?php echo $city->NormalName ?> There Are offers from <span
                             data-bind="text: ProviderCount">several</span> providers </h2>
                 <span class="active process-status loading" data-bind="css: {loading: Loading}"></span>
-                <div class="providers-slider"
+                <div class="providers-slider center-slider-content"
                      data-bind="foreach: Providers, slick: { slickOptions: ProviderSliderOptions(), orderNumberHandler: 'HeaderProviderOrderNumber'} ">
-                    <div><img data-bind="attr: {src: Logo}"></div>
+                    <div class="inner-slide"><img data-bind="attr: {src: Logo}"></div>
                 </div>
 
                 <p class="provider-count">

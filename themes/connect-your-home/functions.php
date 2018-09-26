@@ -408,9 +408,9 @@ function RegisterScripts()
 
     if (is_page() && isset( $wp_query->virtual_page ) && $wp_query->virtual_page instanceof \GM\VirtualPages\PageInterface) {
         wp_enqueue_script( 'cyh-marketing',
-            get_template_directory_uri() . '/javascripts/marketing.js',
+            get_template_directory_uri() . '/javascripts/dist/marketing.min.js',
             ['jquery'],
-            filemtime(get_template_directory() . '/javascripts/marketing.js'),
+            filemtime(get_template_directory() . '/javascripts/dist/marketing.min.js'),
             true );
         wp_enqueue_script( 'slick.min',
             get_template_directory_uri() . '/javascripts/dist/slick.min.js',

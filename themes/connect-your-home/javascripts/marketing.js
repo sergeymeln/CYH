@@ -84,7 +84,6 @@ var InternetCities = InternetCities || {};
         inner.Initialize = function (data) {
             ko.mapping.fromJS(data, {}, inner);
             InitCustomComputeds();
-            InitUIComponents();
         };
 
         inner.FormatPrice = function (price) {
@@ -110,6 +109,7 @@ var InternetCities = InternetCities || {};
         };
 
         function InitCustomComputeds() {
+
             inner.ProviderCount = ko.pureComputed(function () {
                 return inner.Providers().length;
             });
@@ -179,14 +179,14 @@ var InternetCities = InternetCities || {};
                         {
                             breakpoint: 991,
                             settings: {
-                                slidesToShow: 3,
+                                slidesToShow: (slideCount < 3) ? slideCount :  3,
                                 slidesToScroll: 1
                             }
                         },
                         {
                             breakpoint: 600,
                             settings: {
-                                slidesToShow: 3,
+                                slidesToShow: (slideCount < 3) ? slideCount : 3,
                                 slidesToScroll: 1
                             }
                         },
@@ -218,93 +218,6 @@ var InternetCities = InternetCities || {};
                 new_position = $(brandsSection).offset();
 
             $('html, body').stop().animate({scrollTop: new_position.top}, 500);
-        }
-
-        function InitUIComponents() {
-
-
-
-            // let slidersAmount = $('.providers-slider li').length;
-            // let amount = slidersAmount;
-            //
-            //
-            // if (slidersAmount > 5) {
-            //     amount = 5;
-            // }
-
-            // $(".providers-slider").owlCarousel({
-            //     loop:true,
-            //     margin:10,
-            //     nav:true,
-            // });
-            //         $(".providers-slider").slick({
-            //             dots: false,
-            //             accessibility: true,
-            //             /* adaptiveHeight: true,*/
-            //             centerMode: true,
-            //             centerPadding: '0px',
-            //             arrows: true,
-            //            // slidesToShow: amount,
-            //             mobileFirst: true,
-            //             slidesToScroll: 1,
-            // //            customPaging: getSlideAmount('.providers-slider'),
-            //             responsive: [
-            //                 {
-            //                     breakpoint: 1020,
-            //                     settings: {
-            //           //              slidesToShow: amount,
-            //                         slidesToScroll: 1
-            //                     }
-            //                 },
-            //                 {
-            //                     breakpoint: 991,
-            //                     settings: {
-            //                         slidesToShow: 3,
-            //                         slidesToScroll: 1
-            //                     }
-            //                 },
-            //                 {
-            //                     breakpoint: 600,
-            //                     settings: {
-            //                         slidesToShow: 3,
-            //                         slidesToScroll: 1
-            //                     }
-            //                 },
-            //                 {
-            //                     breakpoint: 480,
-            //                     settings: {
-            //                         slidesToShow: 1,
-            //                         slidesToScroll: 1
-            //                     }
-            //                 },
-            //                 {
-            //                     breakpoint: 318,
-            //                     settings: {
-            //                         slidesToShow: 1,
-            //                         slidesToScroll: 1
-            //                     }
-            //                 }
-            //             ]
-            //         });
-
-            //tableSliderInit();
-
-            /*
-            $(document).on('click', 'a[data-brand-id]', function (e) {
-                e.preventDefault();
-
-                var brandId = $(this).attr('data-brand-id'),
-                    brandsSection = $('#all-available-offers'),
-                    brandList = $('#brandsList'),
-                    new_position = $(brandsSection).offset();
-
-                $('html, body').stop().animate({scrollTop: new_position.top}, 500);
-
-                if (brandList.val() === brandId) {
-                    return;
-                }
-                brandList.val(brandId).change();
-            });*/
         }
 
         //required to handle all products provider selection
