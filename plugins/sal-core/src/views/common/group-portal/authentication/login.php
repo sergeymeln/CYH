@@ -73,7 +73,7 @@
                             </div>
                             <div class="form-group rebateGiftInput text-center">
                                 <a href="/cyb/register/?groupId=<?php echo $groupInfo->Id; ?>"
-                                   class="forgot-password">Create New Login</a>
+                                   class="forgot-password">Create New Account</a>
                             </div>
                         </form>
                     </div>

@@ -2469,6 +2469,34 @@ img.grid-img {
   white-space: normal;
 }
 
+.cyh-invisible{
+  visibility: hidden;
+}
+
+
+.center-slider-content
+{
+  &.slick-initialized .slick-track {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+
+.inner-slide
+{
+  img{
+    max-width: 200px;
+    @extend %centered-content;
+  }
+}
+
+%centered-content{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @include text-emphasis-variant('.text-green', $green);
 
 @media (max-width: $screen-sm-min) {

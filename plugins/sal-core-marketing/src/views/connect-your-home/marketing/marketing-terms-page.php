@@ -47,10 +47,10 @@
                 }
                 ?>
                 <?php if($tempCounter > 0):?>
-                <ul class="terms-table-slider terms-slider hidden-sm hidden-md hidden-lg">
+                <div class="terms-table-slider terms-slider hidden-sm hidden-md hidden-lg">
                     <?php foreach($cityData['productListSorted'] as $prod):?>
 
-                    <li class="offer-<?php echo $prod->Id;?>">
+                    <div class="offer-<?php echo $prod->Id;?>">
                         <table class="table providers-table terms-table tablet">
                             <thead>
                             <tr class="thead-row">
@@ -100,9 +100,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </li>
+                    </div>
                     <?php endforeach;?>
-                </ul>
+                </div>
                 <?php else:?>
                     <p class="not-found-items hidden-sm hidden-md hidden-lg">No items found</p>
                 <?php endif;?>
@@ -112,7 +112,6 @@
 </section>
 <!-- container -->
 <?php
-//include 'page-templates/modal-form.php';
 wp_enqueue_script('cyh-app-main');
 ?>
 <?php wp_footer(); ?>

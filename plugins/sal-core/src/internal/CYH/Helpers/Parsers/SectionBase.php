@@ -4,10 +4,11 @@
 namespace CYH\Helpers\Parsers;
 
 
-abstract class SectionBase
+abstract class SectionBase implements \JsonSerializable
 {
     protected $elementContent = null;
     protected $elementParsedContent = null;
+    protected $type = null;
 
     public abstract static function GetOpeningTag();
     public abstract static function GetClosingTag();
@@ -16,6 +17,7 @@ abstract class SectionBase
     public function __construct($elementContent)
     {
         $this->elementContent = $elementContent;
+        $this->elementParsedContent = $this->FormatContent();
     }
 
     public function GetTemplateKey()
@@ -38,5 +40,12 @@ abstract class SectionBase
         }
 
         return $this->elementParsedContent;
+    }
+
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+
+        return $vars;
     }
 }

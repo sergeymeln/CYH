@@ -28,25 +28,30 @@ class AjaxController extends GenericController
         $this->marketingService = new MarketingService();
     }
 
-    public function GetBrandHtml()
+    public function GetInternetPackageData()
     {
-        $brandId = (int)$_POST['brand_id'];
-        $zip = $_POST['zip'];
-
         $productFilter = new ProductFilter();
-        $productFilter->Zip = $zip;
-        $productList = $this->prodService->GetAllProducts($productFilter, CacheSettingsProvider::GetCacheEnabledSettingsWithLifespan(86400));
-        $productList = $this->filterProducts($productList);
-        $productList = $this->sortProducts($productList);
+        $productFilter->Zip = $_REQUEST['zip'];
 
-        $this->View('marketing/one-brand', [
-            'products' => $productList,
-            'brandId' => $brandId,
-            'constants' => [
-                'internetCats' => self::INTERNET_CATEGORIES,
-                'internetAndTvCats' => self::INTERNET_TV_CATEGORIES
-            ]
+        $cityDataVm = $this->marketingService->getCityProductsVm($productFilter, $_REQUEST['cityId']);
+
+        $this->View('common/json', [
+            'jsonData' => $cityDataVm
         ]);
+    }
+
+    public function GetCityByZip()
+    {
+        if (array_key_exists('zip_code', $_POST)) {
+            $data = ['result' => 'success', 'link' => $this->marketingService->getCityUrlByZip($_POST['zip_code'])];
+        }
+        else
+        {
+            $data = ['result' => 'failure', 'link' => ''];
+        }
+
+        echo wp_json_encode($data);
+        wp_die();
     }
 
     /**
@@ -80,19 +85,5 @@ class AjaxController extends GenericController
         }, $products), SORT_NUMERIC, $products);
 
         return $products;
-    }
-
-    public function GetCityByZip()
-    {
-        if (array_key_exists('zip_code', $_POST)) {
-            $data = ['result' => 'success', 'link' => $this->marketingService->getCityUrlByZip($_POST['zip_code'])];
-        }
-        else
-        {
-            $data = ['result' => 'failure', 'link' => ''];
-        }
-
-        echo wp_json_encode($data);
-        wp_die();
     }
 }
