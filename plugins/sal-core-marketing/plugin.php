@@ -28,7 +28,7 @@ $availableClasses = [
 \CYH\Plugins\SalCore::RegisterViewDirectories(new \CYH\Models\Core\ViewDirRegistryEntry(\CYH\Marketing\Plugins\SalCoreMarketing::class, __DIR__ . '/src/views/', [CYH\Plugins\SalCore::class]));
 \CYH\Plugins\SalCore::RegisterControllerActions($availableClasses, $context);
 
-//SAL Core Menu initialization
+//Internet+City Menu initialization
 $internetCityAdminMenuSettings = [new \CYH\Marketing\WpOptionsHandlers\Pages\GeneralOptions()];
 switch ($context->SiteType)
 {
