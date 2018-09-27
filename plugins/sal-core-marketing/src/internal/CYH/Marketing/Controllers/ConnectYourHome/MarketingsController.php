@@ -50,6 +50,9 @@ class MarketingsController extends GenericController
         }
         $showMap = GeneralOptions::GetSettings()['internet_city_show_map'];
 
+        $showMap = GeneralOptions::GetSettings()['internet_city_show_map'];
+
+
 //        $preparedData = [];
 //        $productFilter = new ProductFilter();
 //

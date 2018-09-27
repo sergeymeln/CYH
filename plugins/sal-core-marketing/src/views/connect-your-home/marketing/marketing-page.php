@@ -242,7 +242,7 @@
                 <div id="map" class="map">
                     <?php
                     if($showMap) {
-                        echo do_shortcode('[flexiblemap height="600" width="100%" zoom="11" center="' . $city->Latitude . ', ' . $city->Longitude . '" marker="' . $city->Latitude . ', ' . $city->Longitude . '" ]');
+                        echo do_shortcode( '[flexiblemap height="600" width="100%" zoom="11" center="'.$city->Latitude.', '.$city->Longitude.'" marker="'.$city->Latitude.', '.$city->Longitude.'" ]' );
                     }
                     ?>
                 </div>
