@@ -14,6 +14,7 @@ use CYH\Marketing\Helpers\UrlHelper;
 use CYH\Marketing\Services\MarketingService;
 use CYH\Marketing\Services\StatisticsService;
 use CYH\Marketing\Types\StatisticsEventType;
+use CYH\Marketing\WpOptionsHandlers\Pages\GeneralOptions;
 
 class MarketingsController extends GenericController
 {
@@ -47,6 +48,9 @@ class MarketingsController extends GenericController
         }  elseif($bestZip = $this->marketingService->getBestZip($city->Id)) {
             $city->Zip = $bestZip;
         }
+
+        $showMap = GeneralOptions::GetSettings()['internet_city_show_map'];
+
 
 //        $preparedData = [];
 //        $productFilter = new ProductFilter();
@@ -84,6 +88,7 @@ class MarketingsController extends GenericController
 //        }
         $this->View('marketing/marketing-page', [
             'city' => $city,
+            'showMap' => $showMap,
             'constants' => [
                 'internetCats' => self::INTERNET_CATEGORIES,
                 'internetAndTvCats' => self::INTERNET_TV_CATEGORIES
