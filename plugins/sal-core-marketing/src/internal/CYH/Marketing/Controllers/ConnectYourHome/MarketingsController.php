@@ -48,7 +48,6 @@ class MarketingsController extends GenericController
         }  elseif($bestZip = $this->marketingService->getBestZip($city->Id)) {
             $city->Zip = $bestZip;
         }
-        $showMap = GeneralOptions::GetSettings()['internet_city_show_map'];
 
         $showMap = GeneralOptions::GetSettings()['internet_city_show_map'];
 
