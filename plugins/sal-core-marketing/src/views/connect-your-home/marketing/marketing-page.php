@@ -226,6 +226,7 @@
             </div>
         </div>
     </section>
+    <?php var_dump($interactiveTemplate);?>
     <section class="map-section">
         <div class="container">
             <div class="row">
