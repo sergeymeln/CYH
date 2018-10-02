@@ -226,7 +226,11 @@
             </div>
         </div>
     </section>
-    <?php var_dump($interactiveTemplate);?>
+
+    <?php
+        do_action('\CYH\Marketing\Controllers\ConnectYourHome\MarketingsController::RenderMarketingInteractive');
+    ?>
+
     <section class="map-section">
         <div class="container">
             <div class="row">

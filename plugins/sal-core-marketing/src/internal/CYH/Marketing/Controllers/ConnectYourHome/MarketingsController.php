@@ -15,6 +15,7 @@ use CYH\Marketing\Services\MarketingService;
 use CYH\Marketing\Services\StatisticsService;
 use CYH\Marketing\Types\StatisticsEventType;
 use CYH\Marketing\WpOptionsHandlers\Pages\GeneralOptions;
+use CYH\Marketing\Services\SpeedCalculationService;
 
 class MarketingsController extends GenericController
 {
@@ -22,6 +23,8 @@ class MarketingsController extends GenericController
     protected $prodService = null;
     /**@var $marketingService MarketingService*/
     protected $marketingService = null;
+    /**@var $speedCalculationService SpeedCalculationService*/
+    protected $speedCalculationService = null;
     const INTERNET_CATEGORIES = [4,5];
     const INTERNET_TV_CATEGORIES = [7];
 
@@ -30,6 +33,7 @@ class MarketingsController extends GenericController
         parent::__construct($context);
         $this->prodService = new ProductsService();
         $this->marketingService = new MarketingService();
+        $this->speedCalculationService = new SpeedCalculationService();
     }
 
     public function RenderMarketing($collectStats=false)
@@ -93,6 +97,15 @@ class MarketingsController extends GenericController
                 'internetCats' => self::INTERNET_CATEGORIES,
                 'internetAndTvCats' => self::INTERNET_TV_CATEGORIES
             ]
+        ]);
+    }
+
+    public function RenderMarketingInteractive()
+    {
+        $calculationItem = $this->speedCalculationService->getSpeedCalculatorItem();
+
+        $this->View('marketing/interactive', [
+            'calculationItem' => $calculationItem
         ]);
     }
 

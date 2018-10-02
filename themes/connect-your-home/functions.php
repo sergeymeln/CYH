@@ -412,6 +412,11 @@ function RegisterScripts()
             ['jquery'],
             filemtime(get_template_directory() . '/javascripts/dist/marketing.min.js'),
             true );
+        wp_enqueue_script( 'cyh-marketing-interactive',
+            get_template_directory_uri() . '/javascripts/marketing.interactive.js',
+            ['jquery'],
+            filemtime(get_template_directory() . '/javascripts/marketing.interactive.js'),
+            true );
         wp_enqueue_script( 'slick.min',
             get_template_directory_uri() . '/javascripts/dist/slick.min.js',
             ['jquery'],
@@ -446,6 +451,7 @@ function RegisterStyles()
         wp_enqueue_style( 'slick', get_template_directory_uri() .'/css/slick.css' );
         wp_enqueue_style( 'slick-theme', get_template_directory_uri() .'/css/slick-theme.css' );
         wp_enqueue_style( 'style-name', get_template_directory_uri() .'/css/marketing.min.css' );
+        wp_enqueue_style( 'marketing-interactive', get_template_directory_uri() .'/css/marketing.interactive.min.css' );
     }
 }
 

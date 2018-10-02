@@ -13,7 +13,10 @@ gulp.task('default', ['watch']);
 
 gulp.task('sass', function (cb) {
   pump([
-      gulp.src('scss/landing.scss'),
+      gulp.src([
+          'scss/landing.scss',
+          'scss/marketing.interactive.scss'
+      ]),
       sass(),
       autoprefixer({
         browsers: ['last 2 versions']
@@ -30,6 +33,7 @@ gulp.task('js', function(cb) {
   pump([
       gulp.src([
           'javascripts/marketing.js',
+          'javascripts/marketing.interactive.js',
           'javascripts/landing.js',
           'javascripts/main.js',
           'javascripts/fastclick.js'
@@ -47,5 +51,6 @@ gulp.task('js', function(cb) {
 
 gulp.task('watch', ['sass', 'js'], function() {
     gulp.watch('scss/landing.scss', ['sass']);
+    gulp.watch('scss/marketing.interactive.scss', ['sass']);
     gulp.watch('javascripts/*.js', ['js']);
 });
